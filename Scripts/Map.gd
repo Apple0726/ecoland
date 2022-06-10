@@ -1,5 +1,6 @@
 extends Node2D
 signal tile_over
+signal tile_out
 signal tile_clicked
 var wid = 25
 
@@ -12,7 +13,6 @@ enum TileType {
 	LAKE,
 	FOREST,
 	CITY,
-	GRASS
 }
 
 func _ready():
@@ -79,15 +79,17 @@ func _input(event):
 		if hl.x > 0 and hl.x < wid * 64 and hl.y > 0 and hl.y < wid * 64:
 			$Highlight.visible = true
 			$Highlight.position = hl
-			emit_signal("tile_over", id)
+			emit_signal("tile_over", id, tiles)
 		else:
-			$Highlight.visible = false
+			if $Highlight.visible:
+				emit_signal("tile_out")
+				$Highlight.visible = false
 		if event is InputEventMouseMotion and dragging:
 			$Camera2D.position -= event.relative * $Camera2D.zoom.x
 		if event is InputEventMouseButton:
 			if Input.is_action_just_pressed("left_click") and $Highlight.visible:
 				orig_drag_pos = event.position
-				emit_signal("tile_clicked", id)
+				emit_signal("tile_clicked", id, tiles)
 				dragging = true
 			elif Input.is_action_just_released("left_click"):
 				dragging = false
