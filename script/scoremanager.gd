@@ -1,7 +1,7 @@
 extends Node
 
 
-var money
+var money = 0
 var carbone
 var happyness = 7200
 var happy_prct = 100

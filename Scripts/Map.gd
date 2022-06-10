@@ -16,6 +16,7 @@ enum TileType {
 }
 
 func _ready():
+	randomize()
 	var noise = OpenSimplexNoise.new()
 	noise.seed = randi()
 	noise.octaves = 1
