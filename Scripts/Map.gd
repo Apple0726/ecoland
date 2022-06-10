@@ -1,0 +1,97 @@
+extends Node2D
+signal tile_over
+signal tile_clicked
+var wid = 25
+
+
+var orig_drag_pos:Vector2
+var dragging = false
+var mouse_pos:Vector2
+var tiles = []
+enum TileType {
+	LAKE,
+	FOREST,
+	CITY,
+	GRASS
+}
+
+func _ready():
+	var noise = OpenSimplexNoise.new()
+	noise.seed = randi()
+	noise.octaves = 1
+	noise.period = 65
+	var tree_noise = OpenSimplexNoise.new()
+	tree_noise.seed = randi()
+	tree_noise.octaves = 1
+	tree_noise.period = 150
+	var city_noise = OpenSimplexNoise.new()
+	city_noise.seed = randi()
+	city_noise.octaves = 1
+	city_noise.period = 150
+	for j in wid:
+		for i in wid:
+			var level:float = noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
+			var tree_level:float = tree_noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
+			var city_level:float = city_noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
+			var t_id = i % wid + j * wid
+			var tile = {}
+			if level > 0.5:#If lake
+				$TileMap.set_cell(i, j, 1)
+				tile = {"type":TileType.LAKE}
+			else:
+				$TileMap.set_cell(i, j, 0)
+			if tree_level > 0.5 and level < 0.5:
+				var tree = preload("res://Scenes/Trees.tscn").instance()
+				add_child(tree)
+				tree.position = Vector2(i, j) * 64 + Vector2(32, 32)
+				tile = {"type":TileType.FOREST}
+			if city_level > 0.5 and tree_level < 0.5 and level < 0.5:
+				var city = preload("res://Scenes/City.tscn").instance()
+				add_child(city)
+				city.position = Vector2(i, j) * 64 + Vector2(32, 32)
+				tile = {"type":TileType.CITY}
+			tiles.append(tile)
+	$Camera2D.position = Vector2.ONE * wid * 64 / 2.0
+
+func _process(delta):
+	if OS.get_latin_keyboard_variant() == "AZERTY":
+		if Input.is_action_pressed("Z"):
+			$Camera2D.position.y -= 50
+		elif Input.is_action_pressed("Q"):
+			$Camera2D.position.x -= 50
+	else:
+		if Input.is_action_pressed("W"):
+			$Camera2D.position.y -= 50
+		elif Input.is_action_pressed("A"):
+			$Camera2D.position.x -= 50
+	if Input.is_action_pressed("S"):
+		$Camera2D.position.y += 50
+	elif Input.is_action_pressed("D"):
+		$Camera2D.position.x += 50
+
+func _input(event):
+	if event is InputEventMouse:
+		var local_coord = to_local(event.position) - Vector2(512, 300)
+		var hl:Vector2 = Vector2.ZERO
+		hl.x = stepify(local_coord.x * $Camera2D.zoom.x + $Camera2D.position.x - 32, 64) + 32
+		hl.y = stepify(local_coord.y * $Camera2D.zoom.x + $Camera2D.position.y - 32, 64) + 32
+		var id = (hl.x-32)/64 + int((hl.y-32)/64)*wid
+		if hl.x > 0 and hl.x < wid * 64 and hl.y > 0 and hl.y < wid * 64:
+			$Highlight.visible = true
+			$Highlight.position = hl
+			emit_signal("tile_over", id)
+		else:
+			$Highlight.visible = false
+		if event is InputEventMouseMotion and dragging:
+			$Camera2D.position -= event.relative * $Camera2D.zoom.x
+		if event is InputEventMouseButton:
+			if Input.is_action_just_pressed("left_click") and $Highlight.visible:
+				orig_drag_pos = event.position
+				emit_signal("tile_clicked", id)
+				dragging = true
+			elif Input.is_action_just_released("left_click"):
+				dragging = false
+	if Input.is_action_just_pressed("scroll_up"):
+		$Camera2D.zoom /= 1.2
+	if Input.is_action_just_pressed("scroll_down"):
+		$Camera2D.zoom *= 1.2 
