@@ -1,3 +1,7 @@
 [gd_scene format=2]
 
+<<<<<<< HEAD
 [node name="Score" type="Node2D"]
+=======
+[node name="Game" type="Node2D"]
+>>>>>>> parent of ad0b3ae (Main Menu)
