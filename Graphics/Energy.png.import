@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Energy.png-949f9b8738b16b350877dd383b685713.stex"
+path="res://.import/Energy.png-6d1e4031fddc4205d1e4b42d1e1898d6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Energy.png"
-dest_files=[ "res://.import/Energy.png-949f9b8738b16b350877dd383b685713.stex" ]
+source_file="res://graphics/Energy.png"
+dest_files=[ "res://.import/Energy.png-6d1e4031fddc4205d1e4b42d1e1898d6.stex" ]
 
 [params]
 
@@ -28,7 +28,6 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
-process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

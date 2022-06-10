@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Happiness.png-62f2faa841b6a03a4addc57c2625e65e.stex"
+path="res://.import/eolienn.png-7f363a2e87f7a59910f319acefc81a8b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/Happiness.png"
-dest_files=[ "res://.import/Happiness.png-62f2faa841b6a03a4addc57c2625e65e.stex" ]
+source_file="res://sprite_building/eolienn.png"
+dest_files=[ "res://.import/eolienn.png-7f363a2e87f7a59910f319acefc81a8b.stex" ]
 
 [params]
 
