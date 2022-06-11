@@ -24,24 +24,24 @@ func _on_MainMenu_fade_menu(_play_tuto:bool):
 
 func on_bldg_built(id:int, tiles:Array, bldg:String):
 	if bldg == "eolienn":
-		Scoremanager.pollution += 10000
-		Scoremanager.money -= 10000
+		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
+		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
 		if tiles[id].has("wind"):
-			Scoremanager.wind_power += 100*tiles[id].wind
+			Scoremanager.wind_power += Scoremanager.bldg_info[bldg].power * tiles[id].wind
 		else:
-			Scoremanager.wind_power += 100
+			Scoremanager.wind_power += Scoremanager.bldg_info[bldg].power
 	elif bldg == "nuclear_plant":
-		Scoremanager.pollution += 100000
-		Scoremanager.money -= 10000
-		Scoremanager.pilotable_power += 100
+		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
+		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
+		Scoremanager.pilotable_power += Scoremanager.bldg_info[bldg].power
 		Scoremanager.nb_unrenewable += 1
 	elif bldg == "solar_panel":
-		Scoremanager.pollution += 1000
-		Scoremanager.money -= 10000
+		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
+		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
 		if tiles[id].has("sun_beams"):
-			Scoremanager.solar_power += 100*tiles[id].sun_beams
+			Scoremanager.solar_power += Scoremanager.bldg_info[bldg].power * tiles[id].sun_beams
 		else:
-			Scoremanager.solar_power += 100
+			Scoremanager.solar_power += Scoremanager.bldg_info[bldg].power
 	#elif bldg == "geothermal_plant":
 	#	Scoremanager.pollution += 100000
 	#	Scoremanager.money -= 10000
@@ -55,6 +55,10 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 	#	Scoremanager.money -= 10000
 	#	Scoremanager.pilotable_power += 100
 	#	Scoremanager.nb_unrenewable += 1
+
+func trees_destroyed():
+	pass
+	
 func on_map_tile_over(id:int, tiles:Array):
 	if UI.on_panel:
 		tooltip.hide_tooltip()
@@ -101,13 +105,15 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		map.connect("tile_out", self, "on_map_tile_out")
 		map.connect("tile_clicked", self, "on_map_tile_click")
 		map.connect("bldg_built", self, "on_bldg_built")
+		map.connect("trees_destroyed", self, "trees_destroyed")
 		play = true
-
 		if play_tuto:
 			yield(get_tree().create_timer(0.5), "timeout")
 			var tuto = preload("res://Scenes/Tutorial.tscn").instance()
 			UI.get_node("CanvasLayer").add_child(tuto)
 			tuto.connect("tree_exiting", self, "on_tuto_done")
+		else:
+			Scoremanager.set_process(true)
 
 func on_tuto_done():
 	map.tuto = false

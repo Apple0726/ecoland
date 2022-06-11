@@ -36,6 +36,7 @@ func _input(event):
 		building.visible = false
 		building.texture = null
 		get_parent().map.currently_building = ""
+		get_parent().map.current_action = ""
 
 func _on_mouse_exited():
 	on_button = false
@@ -50,30 +51,38 @@ func _on_WindTurbine_pressed():
 func _on_SolarPanel_pressed():
 	set_texture($CanvasLayer/Buildings/VBox/SolarPanel.texture_normal, "solar_panel")
 
-func set_texture(t, st:String):
+func set_texture(t, st:String, bldg = true):
 	if building.visible and get_parent().map.currently_building == st:
 		building.visible = false
 		building.texture = null
-		get_parent().map.currently_building = ""
+		if bldg:
+			get_parent().map.currently_building = ""
+		else:
+			get_parent().map.current_action = ""
 	else:
 		building.visible = true
 		building.texture = t
-		get_parent().map.currently_building = st
+		if bldg:
+			get_parent().map.currently_building = st
+			get_parent().map.current_action = ""
+		else:
+			get_parent().map.currently_building = ""
+			get_parent().map.current_action = st
 		building.rect_position = mouse_pos - Vector2(32, 32)
 
 func _on_Nuclear_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Nuclear power plant")
+	tooltip.show_tooltip("Nuclear power plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(Scoremanager.bldg_info.nuclear_plant.cost), format_num(Scoremanager.bldg_info.nuclear_plant.power), format_num(Scoremanager.bldg_info.nuclear_plant.pollution)])
 
 
 func _on_SolarPanel_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Solar panels")
+	tooltip.show_tooltip("Solar panels\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(Scoremanager.bldg_info.solar_panel.cost), format_num(Scoremanager.bldg_info.solar_panel.power), format_num(Scoremanager.bldg_info.solar_panel.pollution)])
 
 
 func _on_WindTurbine_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Wind turbines")
+	tooltip.show_tooltip("Wind turbines\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(Scoremanager.bldg_info.eolienn.cost), format_num(Scoremanager.bldg_info.eolienn.power), format_num(Scoremanager.bldg_info.eolienn.pollution)])
 
 
 func _on_Buildings_mouse_entered():
@@ -88,9 +97,9 @@ func _on_Money_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("Money")
 
-func _on_pollution_mouse_entered():
+func _on_Pollution_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("pollution")
+	tooltip.show_tooltip("Pollution")
 
 func _on_Energy_mouse_entered():
 	on_button = true
@@ -142,3 +151,11 @@ func format_num(num:float):
 			suff = "Y"
 		return "%.2f%s" % [num / div, suff]
 
+
+
+func _on_ChopTrees_mouse_entered():
+	tooltip.show_tooltip("Chop trees.\nMakes more land for your buildings, but creates pollution.")
+
+
+func _on_ChopTrees_pressed():
+	set_texture($CanvasLayer/Actions/VBox/ChopTrees.texture_normal, "chop_trees", false)
