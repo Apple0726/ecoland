@@ -2,16 +2,10 @@
 extends Node2D
 
 var play = false
-var game_over = false
-var win = false
-const max_pollution = 1000000
 onready var tooltip = $CanvasLayer/Tooltip
 
 func _ready():
 	$MainMenu.tooltip = tooltip
-
-func _process(delta):
-	win_condition()
 
 var UI = preload("res://Scenes/UI.tscn").instance()
 var map = preload("res://Scenes/Map.tscn").instance()
@@ -95,7 +89,6 @@ func bldg_destroyed(id:int, tiles:Array, bldg:String):
 	#	Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution/3
 	#	Scoremanager.money -= Scoremanager.bldg_info[bldg].cost/4
 	#	Scoremanager.pilotable_power += Scoremanager.bldg_info[bldg].power
-	
 
 func on_map_tile_over(id:int, tiles:Array):
 	if UI.on_panel:
@@ -149,6 +142,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		if play_tuto:
 			yield(get_tree().create_timer(0.5), "timeout")
 			var tuto = preload("res://Scenes/Tutorial.tscn").instance()
+			tuto.type = tuto.TUTORIAL
 			UI.get_node("CanvasLayer").add_child(tuto)
 			tuto.connect("tree_exiting", self, "on_tuto_done")
 		else:
@@ -156,15 +150,25 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func on_tuto_done():
 	map.tuto = false
-	
+	#Start doing resource calculations
+	Scoremanager.set_process(true)
 
-func win_condition():
-	if  Scoremanager.pollution>max_pollution:
-		game_over = true
-	if Scoremanager.happy_prct == 0:
-		game_over = true
-	if Scoremanager.nb_unrenewable == 0 and Scoremanager.happy_prct> 80 and Scoremanager.energy_consommation==Scoremanager.energy_production:
-		win= true
-	if Scoremanager.game_time >= 15:
-		win = true
+func _on_game_over():
+	map.tuto = true
+	Scoremanager.set_process(false)
+	var tuto = preload("res://Scenes/Tutorial.tscn").instance()
+	tuto.type = tuto.GAME_OVER
+	UI.get_node("CanvasLayer").add_child(tuto)
+	tuto.connect("tree_exiting", self, "back_to_menu")=
 
+
+func _on_win():
+	map.tuto = true
+	Scoremanager.set_process(false)
+	var tuto = preload("res://Scenes/Tutorial.tscn").instance()
+	tuto.type = tuto.VICTORY
+	UI.get_node("CanvasLayer").add_child(tuto)
+	tuto.connect("tree_exiting", self, "back_to_menu")
+
+func back_to_menu():
+	pass

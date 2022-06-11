@@ -25,9 +25,6 @@ margin_top = -1.33484
 margin_right = 1025.0
 margin_bottom = 598.665
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 margin_left = 338.625

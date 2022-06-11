@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Game.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Tooltip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Tooltip.gd" type="Script" id=4]
+[ext_resource path="res://script/scoremanager.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"
@@ -51,5 +52,10 @@ script = ExtResource( 4 )
 anims/Fade = SubResource( 1 )
 anims/RESET = SubResource( 2 )
 
+[node name="ScoreManager" type="Node" parent="."]
+script = ExtResource( 5 )
+
 [connection signal="fade_menu" from="MainMenu" to="." method="_on_MainMenu_fade_menu"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="game_over" from="ScoreManager" to="." method="_on_game_over"]
+[connection signal="win" from="ScoreManager" to="." method="_on_win"]

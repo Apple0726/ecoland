@@ -1,5 +1,8 @@
 extends Node
-signal bldg_built
+
+signal game_over
+signal win
+
 var bldg_info = {
 	"eolienn":{"cost":55000, "pollution":10000, "power":10000},
 	"nuclear_plant":{"cost":260000000, "pollution":400000, "power":1000000},
@@ -29,6 +32,7 @@ var nbr_thermal = 0
 var nbr_nuclr = 0
 var nb_unrenewable = 0
 var game_time = 0
+const max_pollution = 1000000
 
 func _ready():
 	set_process(false)
@@ -42,6 +46,15 @@ func _process(delta):
 	satisfaction()
 	_money()
 	emmission_pollution()
+	if pollution > max_pollution or happy_prct == 0:
+		emit_signal("game_over")
+		set_process(false)
+	if nb_unrenewable == 0 and happy_prct> 80 and energie_consommation==energie_production:
+		emit_signal("win")
+		set_process(false)
+	if game_time >= 15:
+		emit_signal("win")
+		set_process(false)
 	
 	
 func _money():

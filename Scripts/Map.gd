@@ -183,8 +183,6 @@ func _input(event):
 							emit_signal("bldg_destroyed", id, tiles, tiles[id].bldg)
 							tiles[id].erase("bldg")
 							sprites[str(id)].queue_free()
-							
-							
 					else:
 						emit_signal("tile_clicked", id, tiles)
 

@@ -330,6 +330,20 @@ margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
 
+[node name="Victory" type="Button" parent="CanvasLayer"]
+margin_left = 12.0
+margin_top = 532.0
+margin_right = 96.0
+margin_bottom = 552.0
+text = "victory"
+
+[node name="GameOver" type="Button" parent="CanvasLayer"]
+margin_left = 12.0
+margin_top = 564.0
+margin_right = 96.0
+margin_bottom = 584.0
+text = "game over"
+
 [connection signal="mouse_entered" from="CanvasLayer/Money" to="." method="_on_Money_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Money" to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Pollution" to="." method="_on_Pollution_mouse_entered"]
@@ -360,3 +374,5 @@ mouse_filter = 2
 [connection signal="mouse_entered" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_DestroyBldg_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_DestroyBldg_pressed"]
+[connection signal="pressed" from="CanvasLayer/Victory" to="." method="_on_Victory_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOver" to="." method="_on_GameOver_pressed"]

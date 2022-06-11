@@ -185,3 +185,13 @@ func _on_Actions_mouse_exited():
 	on_panel = false
 
 
+
+
+func _on_GameOver_pressed():
+	tooltip.hide_tooltip()
+	get_parent()._on_game_over()
+
+
+func _on_Victory_pressed():
+	tooltip.hide_tooltip()
+	get_parent()._on_win()
