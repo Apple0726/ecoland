@@ -1,14 +1,15 @@
 extends Node
 
-
+var minute = 60
 var money = 0
 var carbone
 var happyness = 7200
 var happy_prct = 100
+var mean_happy = 0
 var biodiversite
 var energie_consomation
 var energie_production = 12000
-const base_conso = 10000
+var base_conso = 10000
 var  cycle = 0
 
 
@@ -22,8 +23,12 @@ func _process(delta):
 	
 	
 func _money():
-	money = 10 + money
-	
+	if cycle < minute:
+		mean_happy = mean_happy + happy_prct
+	else:
+		money = money + (10000*mean_happy/minute)
+		mean_happy = 0
+		
 func emmission_carbon():
 	pass
 func satisfaction():
@@ -35,7 +40,7 @@ func satisfaction():
 			happyness = happyness + 1
 	print(happy_prct)
 func energie_consom():
-	if cycle < 3600 :
+	if cycle < minute :
 		cycle = cycle +1
 	else:
 		cycle = 0
