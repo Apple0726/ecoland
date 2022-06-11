@@ -1,27 +1,33 @@
 extends Node
 signal bldg_built
+var bldg_info = {
+	"eolienn":{"cost":10000, "pollution":10000, "power":100},
+	"nuclear_plant":{"cost":10000, "pollution":100000, "power":100},
+	"solar_panel":{"cost":10000, "pollution":1000, "power":100},
+}
 var minute = 60
 var money = 0
 var pollution = 0
 var happiness = 7200
 var happy_prct = 100
 var mean_happy = 0
-var moy_happy
-var biodiversite
-var energie_consommation
+var moy_happy = 0
+var biodiversite = 0
+var energie_consommation = 0
 var energie_production = 12000
 var wind_power = 0
 var solar_power = 0
 var pilotable_power = 1000
 var intermittent_power = 20
-var coeff_prod
+var coeff_prod = 0
 var base_conso = 10000
 var cycle = 0
 var nbr_thermal = 0
 var nb_unrenewable = 0
 var game_time = 0
 
-
+func _ready():
+	set_process(false)
 
 
 

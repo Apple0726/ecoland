@@ -27,6 +27,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Begin":
 		set_process(true)
 	elif anim_name == "End":
+		Scoremanager.set_process(true)
 		queue_free()
 
 func _on_Button_pressed():

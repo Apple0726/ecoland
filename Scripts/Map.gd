@@ -3,15 +3,18 @@ signal tile_over
 signal tile_out
 signal tile_clicked
 signal bldg_built
+signal trees_destroyed
 var wid = 25
 
 var nbr_city = 0
 var currently_building = ""
+var current_action = ""
 var orig_drag_pos:Vector2
 var dragging = false
 var mouse_pos:Vector2
 var tiles = []
 var tuto:bool
+var sprites = {}
 
 enum TileType {
 	LAKE,
@@ -51,6 +54,7 @@ func _ready():
 			if tree_level > 0.5 and level < 0.5:
 				var tree = preload("res://Scenes/Trees.tscn").instance()
 				add_child(tree)
+				sprites[str(t_id)] = tree
 				tree.position = Vector2(i, j) * 64 + Vector2(32, 32)
 				tile = {"type":TileType.FOREST}
 			if city_level > 0.5 and tree_level < 0.5 and level < 0.5:
@@ -160,7 +164,6 @@ func _input(event):
 				dragging = true
 			elif Input.is_action_just_released("left_click"):
 				dragging = false
-
 				if mouse_in_map:
 					if currently_building and not tiles[id].has("type"):
 						var bldg = Sprite.new()
@@ -169,6 +172,10 @@ func _input(event):
 						bldg.position = hl
 						tiles[id].bldg = currently_building
 						emit_signal("bldg_built", id, tiles, currently_building)
+					elif current_action and tiles[id].has("type") and tiles[id].type == TileType.FOREST:
+						tiles[id].erase("type")
+						sprites[str(id)].queue_free()
+						emit_signal("trees_destroyed")
 					else:
 						emit_signal("tile_clicked", id, tiles)
 
