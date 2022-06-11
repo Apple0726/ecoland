@@ -30,7 +30,7 @@ func _money():
 	if cycle < minute:
 		mean_happy = mean_happy + happy_prct
 	else:
-		money = money + (10000*mean_happy/minute)
+		money = money + (10000000*mean_happy/minute)
 		moy_happy = round(mean_happy/minute)
 		mean_happy = 0
 func emmission_carbon():
