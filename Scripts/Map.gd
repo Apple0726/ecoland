@@ -58,18 +58,18 @@ func _ready():
 func _process(delta):
 	if OS.get_latin_keyboard_variant() == "AZERTY":
 		if Input.is_action_pressed("Z"):
-			$Camera2D.position.y -= 50
+			$Camera2D.position.y -= 20 * $Camera2D.zoom.x
 		elif Input.is_action_pressed("Q"):
-			$Camera2D.position.x -= 50
+			$Camera2D.position.x -= 20 * $Camera2D.zoom.x
 	else:
 		if Input.is_action_pressed("W"):
-			$Camera2D.position.y -= 50
+			$Camera2D.position.y -= 20 * $Camera2D.zoom.x
 		elif Input.is_action_pressed("A"):
-			$Camera2D.position.x -= 50
+			$Camera2D.position.x -= 20 * $Camera2D.zoom.x
 	if Input.is_action_pressed("S"):
-		$Camera2D.position.y += 50
+		$Camera2D.position.y += 20 * $Camera2D.zoom.x
 	elif Input.is_action_pressed("D"):
-		$Camera2D.position.x += 50
+		$Camera2D.position.x += 20 * $Camera2D.zoom.x
 	if $Highlight.visible:
 		move_child($Highlight, get_child_count())
 
@@ -80,7 +80,8 @@ func _input(event):
 		hl.x = stepify(local_coord.x * $Camera2D.zoom.x + $Camera2D.position.x - 32, 64) + 32
 		hl.y = stepify(local_coord.y * $Camera2D.zoom.x + $Camera2D.position.y - 32, 64) + 32
 		var id = (hl.x-32)/64 + int((hl.y-32)/64)*wid
-		if hl.x > 0 and hl.x < wid * 64 and hl.y > 0 and hl.y < wid * 64:
+		var mouse_in_map:bool = hl.x > 0 and hl.x < wid * 64 and hl.y > 0 and hl.y < wid * 64
+		if mouse_in_map:
 			$Highlight.visible = true
 			$Highlight.position = hl
 			emit_signal("tile_over", id, tiles)
@@ -96,15 +97,16 @@ func _input(event):
 				dragging = true
 			elif Input.is_action_just_released("left_click"):
 				dragging = false
-				if currently_building and not tiles[id].has("type"):
-					var bldg = Sprite.new()
-					bldg.texture = load("res://sprite_building/%s.png" % currently_building)
-					add_child(bldg)
-					bldg.position = hl
-					tiles[id].bldg = currently_building
-					emit_signal("bldg_built", id, tiles, currently_building)
-				else:
-					emit_signal("tile_clicked", id, tiles)
+				if mouse_in_map:
+					if currently_building and not tiles[id].has("type"):
+						var bldg = Sprite.new()
+						bldg.texture = load("res://sprite_building/%s.png" % currently_building)
+						add_child(bldg)
+						bldg.position = hl
+						tiles[id].bldg = currently_building
+						emit_signal("bldg_built", id, tiles, currently_building)
+					else:
+						emit_signal("tile_clicked", id, tiles)
 	if Input.is_action_just_pressed("scroll_up"):
 		$Camera2D.zoom /= 1.2
 	if Input.is_action_just_pressed("scroll_down"):

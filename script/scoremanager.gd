@@ -44,7 +44,6 @@ func satisfaction():
 	else :
 		if happiness < 7200:
 			happiness = happiness + 1
-	
 
 func energie_consom():
 	if cycle < minute :
