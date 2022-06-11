@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Carbon.png-f1549c5e76e6d8402fded9dcd9387399.stex"
+path="res://.import/Carbon.png-a18b763773e7ffddf254c25a3cc2f336.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Carbon.png"
-dest_files=[ "res://.import/Carbon.png-f1549c5e76e6d8402fded9dcd9387399.stex" ]
+source_file="res://graphics/Carbon.png"
+dest_files=[ "res://.import/Carbon.png-a18b763773e7ffddf254c25a3cc2f336.stex" ]
 
 [params]
 

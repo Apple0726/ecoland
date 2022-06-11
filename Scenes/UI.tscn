@@ -52,32 +52,17 @@ anchor_bottom = 1.0
 theme = SubResource( 2 )
 script = ExtResource( 4 )
 __meta__ = {
-<<<<<<< Updated upstream
-"_edit_use_anchors_": false
-=======
 "_edit_lock_": true
->>>>>>> Stashed changes
 }
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-<<<<<<< Updated upstream
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 96.0
-margin_bottom = 80.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-=======
 [node name="Panel" type="Panel" parent="CanvasLayer"]
 margin_left = 32.0
 margin_top = 16.0
 margin_right = 132.0
 margin_bottom = 40.0
 custom_styles/panel = SubResource( 4 )
->>>>>>> Stashed changes
 
 [node name="Panel2" type="Panel" parent="CanvasLayer"]
 margin_left = 432.0
@@ -161,23 +146,6 @@ margin_bottom = 32.0
 size_flags_vertical = 5
 text = "100"
 valign = 1
-
-[node name="Carbon" type="HBoxContainer" parent="CanvasLayer/VBox"]
-margin_top = 108.0
-margin_right = 88.0
-margin_bottom = 140.0
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBox/Carbon"]
-margin_right = 32.0
-margin_bottom = 32.0
-texture = ExtResource( 8 )
-
-[node name="Label" type="Label" parent="CanvasLayer/VBox/Carbon"]
-margin_left = 36.0
-margin_top = 9.0
-margin_right = 60.0
-margin_bottom = 23.0
-text = "100"
 
 [node name="Buildings" type="Panel" parent="CanvasLayer"]
 anchor_left = 1.0
