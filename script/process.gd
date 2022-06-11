@@ -15,7 +15,7 @@ func save_game():
 	save_file.store_var(save_info)
 	save_file.close()
 	
-	func load_game(slot:int):
+func load_game(slot:int):
 	var save_file = File.new()
 	save_file.open("user://Save%s.sav" % [slot], File.READ)
 	var save_info:Dictionary = save_file.get_var()

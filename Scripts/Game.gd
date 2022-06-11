@@ -12,5 +12,5 @@ func _ready():
 
 
 
-func _on_Map_tile_over(id):
-	print(id)
+#func _on_Map_tile_over(id):
+	#print(id)
