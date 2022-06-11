@@ -10,9 +10,10 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	$CanvasLayer/Money/Label.text = format_num(Scoremanager.money)
-	$CanvasLayer/Energy/Label.text = "%s / %s" % [format_num(Scoremanager.energie_production), format_num(Scoremanager.energie_consommation)]
-	$CanvasLayer/Happiness/Label.text = str(Scoremanager.happy_prct)
+	$CanvasLayer/MoneyVBox/Label.text = format_num(Scoremanager.money)
+	$CanvasLayer/CarbonVBox/Label.text = format_num(Scoremanager.carbon)
+	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(Scoremanager.energie_production), format_num(Scoremanager.energie_consommation)]
+	$CanvasLayer/HappinessVBox/Label.text = str(Scoremanager.happy_prct)
 
 var mouse_pos:Vector2 = Vector2.ZERO
 
@@ -77,6 +78,9 @@ func _on_Money_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("Money")
 
+func _on_Carbon_mouse_entered():
+	on_button = true
+	tooltip.show_tooltip("Carbon")
 
 func _on_Energy_mouse_entered():
 	on_button = true
@@ -127,3 +131,4 @@ func format_num(num:float):
 		elif p < 27:
 			suff = "Y"
 		return "%.2f%s" % [num / div, suff]
+
