@@ -11,6 +11,8 @@ var orig_drag_pos:Vector2
 var dragging = false
 var mouse_pos:Vector2
 var tiles = []
+var tuto:bool
+
 enum TileType {
 	LAKE,
 	FOREST,
@@ -113,6 +115,8 @@ func generate_zones(st:String):
 			diff = rand_int(thiccness + 1, wid / 3) * sign(rand_range(-1, 1))
 	
 func _process(delta):
+	if tuto:
+		return
 	if OS.get_latin_keyboard_variant() == "AZERTY":
 		if Input.is_action_pressed("Z"):
 			$Camera2D.position.y -= 20 * $Camera2D.zoom.x
@@ -131,6 +135,8 @@ func _process(delta):
 		move_child($Highlight, get_child_count())
 
 func _input(event):
+	if tuto:
+		return
 	if event is InputEventMouse:
 		var local_coord = to_local(event.position) - Vector2(512, 300)
 		var hl:Vector2 = Vector2.ZERO

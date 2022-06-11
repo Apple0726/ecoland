@@ -11,7 +11,6 @@ func show_tooltip(st:String):
 	rect_min_size.y = min(default_font.get_string_size(text).y, 400)
 	rect_size.x = 0
 	rect_size.y = 0
-	yield(get_tree(), "idle_frame")
 	visible = true
 
 func hide_tooltip():

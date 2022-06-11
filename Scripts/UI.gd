@@ -13,7 +13,17 @@ func _process(delta):
 	$CanvasLayer/MoneyVBox/Label.text = format_num(Scoremanager.money)
 	$CanvasLayer/PollutionVBox/Label.text = format_num(Scoremanager.pollution)
 	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(Scoremanager.energie_production), format_num(Scoremanager.energie_consommation)]
-	$CanvasLayer/HappinessVBox/Label.text = str(Scoremanager.happy_prct)
+	if Scoremanager.energie_production >= Scoremanager.energie_consommation:
+		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.green
+	else:
+		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.red
+	$CanvasLayer/HappinessVBox/Label.text = "%s%%" % str(Scoremanager.happy_prct)
+	if Scoremanager.happy_prct > 70:
+		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.green
+	elif Scoremanager.happy_prct > 40:
+		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.yellow
+	else:
+		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.red
 
 var mouse_pos:Vector2 = Vector2.ZERO
 

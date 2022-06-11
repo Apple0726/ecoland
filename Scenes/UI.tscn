@@ -64,16 +64,20 @@ margin_bottom = 84.0
 custom_styles/panel = SubResource( 4 )
 
 [node name="Energy" type="Panel" parent="CanvasLayer"]
-margin_left = 432.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -80.0
 margin_top = 16.0
-margin_right = 604.0
+margin_right = 92.0
 margin_bottom = 40.0
 custom_styles/panel = SubResource( 4 )
 
 [node name="Happiness" type="Panel" parent="CanvasLayer"]
-margin_left = 904.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -116.0
 margin_top = 16.0
-margin_right = 992.0
+margin_right = -28.0
 margin_bottom = 40.0
 custom_styles/panel = SubResource( 4 )
 
@@ -84,18 +88,21 @@ margin_right = 95.0
 margin_bottom = 44.0
 mouse_filter = 2
 size_flags_vertical = 3
+theme = SubResource( 2 )
+custom_constants/separation = 10
 
 [node name="Money" type="TextureRect" parent="CanvasLayer/MoneyVBox"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="CanvasLayer/MoneyVBox"]
-margin_left = 36.0
-margin_right = 60.0
+margin_left = 42.0
+margin_right = 69.0
 margin_bottom = 32.0
 size_flags_vertical = 5
 text = "100"
@@ -108,6 +115,8 @@ margin_right = 95.0
 margin_bottom = 88.0
 mouse_filter = 2
 size_flags_vertical = 3
+theme = SubResource( 2 )
+custom_constants/separation = 10
 
 [node name="Carbon" type="TextureRect" parent="CanvasLayer/PollutionVBox"]
 margin_right = 32.0
@@ -125,48 +134,58 @@ text = "100"
 valign = 1
 
 [node name="EnergyVBox" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 432.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -80.0
 margin_top = 12.0
-margin_right = 495.0
+margin_right = -17.0
 margin_bottom = 44.0
 mouse_filter = 2
 size_flags_vertical = 3
+theme = SubResource( 2 )
+custom_constants/separation = 10
 
 [node name="Energy" type="TextureRect" parent="CanvasLayer/EnergyVBox"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="CanvasLayer/EnergyVBox"]
-margin_left = 36.0
-margin_right = 60.0
+margin_left = 42.0
+margin_right = 69.0
 margin_bottom = 32.0
 size_flags_vertical = 5
 text = "100"
 valign = 1
 
 [node name="HappinessVBox" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 912.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -120.0
 margin_top = 12.0
-margin_right = 975.0
+margin_right = -57.0
 margin_bottom = 44.0
 mouse_filter = 2
 size_flags_vertical = 3
+theme = SubResource( 2 )
+custom_constants/separation = 10
 
 [node name="Happiness" type="TextureRect" parent="CanvasLayer/HappinessVBox"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="CanvasLayer/HappinessVBox"]
-margin_left = 36.0
-margin_right = 60.0
+margin_left = 42.0
+margin_right = 69.0
 margin_bottom = 32.0
 size_flags_vertical = 5
 text = "100"
@@ -248,6 +267,7 @@ mouse_filter = 2
 [connection signal="mouse_entered" from="CanvasLayer/Energy" to="." method="_on_Energy_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Energy" to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Happiness" to="." method="_on_Happiness_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Happiness" to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Buildings" to="." method="_on_Buildings_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Buildings" to="." method="_on_Buildings_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Buildings/VBox/Nuclear" to="." method="_on_Nuclear_mouse_entered"]

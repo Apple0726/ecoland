@@ -10,8 +10,10 @@ func _ready():
 var UI = preload("res://Scenes/UI.tscn").instance()
 var map = preload("res://Scenes/Map.tscn").instance()
 var mouse_pos:Vector2 = Vector2.ZERO
+var play_tuto:bool
 
-func _on_MainMenu_fade_menu():
+func _on_MainMenu_fade_menu(_play_tuto:bool):
+	play_tuto = _play_tuto
 	$AnimationPlayer.play("Fade")
 
 func on_bldg_built(id:int, tiles:Array, bldg:String):
@@ -75,7 +77,7 @@ func on_map_tile_over(id:int, tiles:Array):
 				tooltip.show_tooltip(txt)
 
 func on_map_tile_out():
-	UI.tooltip.visible = false
+	tooltip.hide_tooltip()
 
 func on_map_tile_click(id:int, tiles:Array):
 	pass
@@ -87,8 +89,17 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$AnimationPlayer.play_backwards("Fade")
 		add_child(UI)
 		add_child(map)
+		map.tuto = play_tuto
 		map.connect("tile_over", self, "on_map_tile_over")
 		map.connect("tile_out", self, "on_map_tile_out")
 		map.connect("tile_clicked", self, "on_map_tile_click")
 		map.connect("bldg_built", self, "on_bldg_built")
 		play = true
+		if play_tuto:
+			yield(get_tree().create_timer(0.5), "timeout")
+			var tuto = preload("res://Scenes/Tutorial.tscn").instance()
+			UI.get_node("CanvasLayer").add_child(tuto)
+			tuto.connect("tree_exiting", self, "on_tuto_done")
+
+func on_tuto_done():
+	map.tuto = false
