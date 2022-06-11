@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Start_button_hover.png-ff3bb54309d978408cdd73cee2dc5d7f.stex"
+path="res://.import/wind_turbine.png-ac46440b53e23b89b12538cdc4d606ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite_main_menu/Start_button_hover.png"
-dest_files=[ "res://.import/Start_button_hover.png-ff3bb54309d978408cdd73cee2dc5d7f.stex" ]
+source_file="res://Graphics/sprite_building/wind_turbine.png"
+dest_files=[ "res://.import/wind_turbine.png-ac46440b53e23b89b12538cdc4d606ce.stex" ]
 
 [params]
 

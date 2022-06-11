@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://Graphics/game_over_bien.png" type="Texture" id=1]
-
-[node name="Node2D" type="Node2D"]
-
-[node name="GameOverBien" type="Sprite" parent="."]
-position = Vector2( 4, -2 )
-texture = ExtResource( 1 )

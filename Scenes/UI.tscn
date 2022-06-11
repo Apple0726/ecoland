@@ -4,14 +4,14 @@
 [ext_resource path="res://Graphics/Happiness.png" type="Texture" id=2]
 [ext_resource path="res://Graphics/Energy.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/UI.gd" type="Script" id=4]
-[ext_resource path="res://sprite_building/nuclear_plant.png" type="Texture" id=5]
-[ext_resource path="res://sprite_building/eolienn.png" type="Texture" id=6]
-[ext_resource path="res://sprite_building/solar_panel.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/sprite_building/nuclear_plant.png" type="Texture" id=5]
+[ext_resource path="res://Graphics/sprite_building/wind_turbine.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/sprite_building/solar_panel.png" type="Texture" id=7]
 [ext_resource path="res://Graphics/pollution.png" type="Texture" id=8]
 [ext_resource path="res://Graphics/Axe.png" type="Texture" id=9]
 [ext_resource path="res://Arimo-Regular.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Graphics/Destroy.png" type="Texture" id=11]
-[ext_resource path="res://sprite_building/centrale charbon.png" type="Texture" id=12]
+[ext_resource path="res://Graphics/sprite_building/centrale_charbon.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=5]
 use_mipmaps = true

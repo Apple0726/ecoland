@@ -10,17 +10,17 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	$CanvasLayer/MoneyVBox/Label.text = format_num(Scoremanager.money)
-	$CanvasLayer/PollutionVBox/Label.text = format_num(round(Scoremanager.pollution))
-	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(Scoremanager.energy_production), format_num(Scoremanager.energy_consommation)]
-	if Scoremanager.energy_production >= Scoremanager.energy_consommation:
+	$CanvasLayer/MoneyVBox/Label.text = format_num(ScoreManager.money)
+	$CanvasLayer/PollutionVBox/Label.text = format_num(round(ScoreManager.pollution))
+	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(ScoreManager.energy_production), format_num(ScoreManager.energy_consommation)]
+	if ScoreManager.energy_production >= ScoreManager.energy_consommation:
 		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.green
 	else:
 		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.red
-	$CanvasLayer/HappinessVBox/Label.text = "%s%%" % str(Scoremanager.happy_prct)
-	if Scoremanager.happy_prct > 70:
+	$CanvasLayer/HappinessVBox/Label.text = "%s%%" % str(ScoreManager.happy_percentage)
+	if ScoreManager.happy_percentage > 70:
 		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.green
-	elif Scoremanager.happy_prct > 40:
+	elif ScoreManager.happy_percentage > 40:
 		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.yellow
 	else:
 		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.red
@@ -43,13 +43,13 @@ func _on_mouse_exited():
 	tooltip.hide_tooltip()
 
 func _on_CoalPlant_pressed():
-	set_texture($CanvasLayer/Buildings/VBox/CoalPlant.texture_normal, "centrale charbon")
+	set_texture($CanvasLayer/Buildings/VBox/CoalPlant.texture_normal, "centrale_charbon")
 
 func _on_Nuclear_pressed():
 	set_texture($CanvasLayer/Buildings/VBox/Nuclear.texture_normal, "nuclear_plant")
 
 func _on_WindTurbine_pressed():
-	set_texture($CanvasLayer/Buildings/VBox/WindTurbine.texture_normal, "eolienn")
+	set_texture($CanvasLayer/Buildings/VBox/WindTurbine.texture_normal, "wind_turbine")
 
 func _on_SolarPanel_pressed():
 	set_texture($CanvasLayer/Buildings/VBox/SolarPanel.texture_normal, "solar_panel")
@@ -58,10 +58,11 @@ func set_texture(t, st:String, bldg = true):
 	if building.visible and get_parent().map.currently_building == st:
 		building.visible = false
 		building.texture = null
-		if bldg:
-			get_parent().map.currently_building = ""
-		else:
-			get_parent().map.current_action = ""
+		get_parent().map.currently_building = ""
+	elif building.visible and get_parent().map.current_action == st:
+		building.visible = false
+		building.texture = null
+		get_parent().map.current_action = ""
 	else:
 		building.visible = true
 		building.texture = t
@@ -75,21 +76,21 @@ func set_texture(t, st:String, bldg = true):
 
 func _on_Nuclear_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Nuclear power plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(Scoremanager.bldg_info.nuclear_plant.cost), format_num(Scoremanager.bldg_info.nuclear_plant.power), format_num(Scoremanager.bldg_info.nuclear_plant.pollution)])
+	tooltip.show_tooltip("Nuclear power plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info.nuclear_plant.cost), format_num(ScoreManager.bldg_info.nuclear_plant.power), format_num(ScoreManager.bldg_info.nuclear_plant.pollution)])
 
 
 func _on_SolarPanel_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Solar panels\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(Scoremanager.bldg_info.solar_panel.cost), format_num(Scoremanager.bldg_info.solar_panel.power), format_num(Scoremanager.bldg_info.solar_panel.pollution)])
+	tooltip.show_tooltip("Solar panels\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info.solar_panel.cost), format_num(ScoreManager.bldg_info.solar_panel.power), format_num(ScoreManager.bldg_info.solar_panel.pollution)])
 
 
 func _on_WindTurbine_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Wind turbines\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(Scoremanager.bldg_info.eolienn.cost), format_num(Scoremanager.bldg_info.eolienn.power), format_num(Scoremanager.bldg_info.eolienn.pollution)])
+	tooltip.show_tooltip("Wind turbines\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info.wind_turbine.cost), format_num(ScoreManager.bldg_info.wind_turbine.power), format_num(ScoreManager.bldg_info.wind_turbine.pollution)])
 
 func _on_CoalPlant_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Coal plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(Scoremanager.bldg_info["centrale charbon"].cost), format_num(Scoremanager.bldg_info["centrale charbon"].power), format_num(Scoremanager.bldg_info["centrale charbon"].pollution)])
+	tooltip.show_tooltip("Coal plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["centrale_charbon"].cost), format_num(ScoreManager.bldg_info["centrale_charbon"].power), format_num(ScoreManager.bldg_info["centrale_charbon"].pollution)])
 
 func _on_Buildings_mouse_entered():
 	on_panel = true
@@ -183,9 +184,6 @@ func _on_Actions_mouse_entered():
 
 func _on_Actions_mouse_exited():
 	on_panel = false
-
-
-
 
 func _on_GameOver_pressed():
 	tooltip.hide_tooltip()

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/help_button.png-b9102e88b3e6b902224684018c7f3ddd.stex"
+path="res://.import/solar_panel.png-4615bd7505fc9958f0a5aa68b2646fa4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite_main_menu/help_button.png"
-dest_files=[ "res://.import/help_button.png-b9102e88b3e6b902224684018c7f3ddd.stex" ]
+source_file="res://Graphics/sprite_building/solar_panel.png"
+dest_files=[ "res://.import/solar_panel.png-4615bd7505fc9958f0a5aa68b2646fa4.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/centrale charbon.png-179aedf9f45ee35d9f047de36674b5ca.stex"
+path="res://.import/Start_button.png-234afa4df2ed8a1285bcb6d59ba57b3d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite_building/centrale charbon.png"
-dest_files=[ "res://.import/centrale charbon.png-179aedf9f45ee35d9f047de36674b5ca.stex" ]
+source_file="res://Graphics/sprite_main_menu/Start_button.png"
+dest_files=[ "res://.import/Start_button.png-234afa4df2ed8a1285bcb6d59ba57b3d.stex" ]
 
 [params]
 

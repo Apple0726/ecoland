@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/eolienn.png-7f363a2e87f7a59910f319acefc81a8b.stex"
+path="res://.import/help_button.png-36b4421cb031c04efcdf754204464b98.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite_building/eolienn.png"
-dest_files=[ "res://.import/eolienn.png-7f363a2e87f7a59910f319acefc81a8b.stex" ]
+source_file="res://Graphics/sprite_main_menu/help_button.png"
+dest_files=[ "res://.import/help_button.png-36b4421cb031c04efcdf754204464b98.stex" ]
 
 [params]
 

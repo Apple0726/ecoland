@@ -16,7 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Scoremanager="*res://Scripts/scoremanager.gd"
+ScoreManager="*res://Scripts/ScoreManager.gd"
 
 [display]
 

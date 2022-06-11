@@ -47,7 +47,7 @@ func _ready():
 			var city_level:float = city_noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
 			var t_id = i % wid + j * wid
 			var tile = {}
-			if level > 0.5:#If lake
+			if level > 0.5:
 				$TileMap.set_cell(i, j, 1)
 				tile = {"type":TileType.LAKE}
 			else:
@@ -166,9 +166,9 @@ func _input(event):
 			elif Input.is_action_just_released("left_click"):
 				dragging = false
 				if mouse_in_map:
-					if currently_building and not tiles[id].has("type") and Scoremanager.money >= Scoremanager.bldg_info[currently_building].cost:
+					if currently_building and not tiles[id].has("type") and not tiles[id].has("bldg") and ScoreManager.money >= ScoreManager.bldg_info[currently_building].cost:
 						var bldg = Sprite.new()
-						bldg.texture = load("res://sprite_building/%s.png" % currently_building)
+						bldg.texture = load("res://Graphics/sprite_building/%s.png" % currently_building)
 						add_child(bldg)
 						bldg.position = hl
 						sprites[str(id)] = bldg
