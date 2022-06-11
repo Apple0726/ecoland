@@ -32,6 +32,7 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 		Scoremanager.carbon += 100000
 	elif bldg == "solar_panel":
 		Scoremanager.carbon += 1000
+
 		
 
 func on_map_tile_over(id:int, tiles:Array):
