@@ -42,6 +42,10 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 			Scoremanager.solar_power += Scoremanager.bldg_info[bldg].power * tiles[id].sun_beams
 		else:
 			Scoremanager.solar_power += Scoremanager.bldg_info[bldg].power
+	elif bldg == "centrale charbon":
+		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
+		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
+		Scoremanager.pilotable_power += Scoremanager.bldg_info[bldg].power
 	#elif bldg == "geothermal_plant":
 	#	Scoremanager.pollution += 100000
 	#	Scoremanager.money -= 10000
@@ -58,7 +62,10 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 
 func trees_destroyed():
 	pass
-	
+
+func bldg_destroyed():
+	pass
+
 func on_map_tile_over(id:int, tiles:Array):
 	if UI.on_panel:
 		tooltip.hide_tooltip()
@@ -106,6 +113,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		map.connect("tile_clicked", self, "on_map_tile_click")
 		map.connect("bldg_built", self, "on_bldg_built")
 		map.connect("trees_destroyed", self, "trees_destroyed")
+		map.connect("bldg_destroyed", self, "bldg_destroyed")
 		play = true
 		if play_tuto:
 			yield(get_tree().create_timer(0.5), "timeout")

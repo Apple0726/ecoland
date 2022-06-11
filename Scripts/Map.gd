@@ -4,6 +4,7 @@ signal tile_out
 signal tile_clicked
 signal bldg_built
 signal trees_destroyed
+signal bldg_destroyed
 var wid = 25
 
 var nbr_city = 0
@@ -165,17 +166,23 @@ func _input(event):
 			elif Input.is_action_just_released("left_click"):
 				dragging = false
 				if mouse_in_map:
-					if currently_building and not tiles[id].has("type"):
+					if currently_building and not tiles[id].has("type") and Scoremanager.money >= Scoremanager.bldg_info[currently_building].cost:
 						var bldg = Sprite.new()
 						bldg.texture = load("res://sprite_building/%s.png" % currently_building)
 						add_child(bldg)
 						bldg.position = hl
+						sprites[str(id)] = bldg
 						tiles[id].bldg = currently_building
 						emit_signal("bldg_built", id, tiles, currently_building)
-					elif current_action and tiles[id].has("type") and tiles[id].type == TileType.FOREST:
-						tiles[id].erase("type")
-						sprites[str(id)].queue_free()
-						emit_signal("trees_destroyed")
+					elif current_action:
+						if current_action == "chop_trees" and tiles[id].has("type") and tiles[id].type == TileType.FOREST:
+							tiles[id].erase("type")
+							sprites[str(id)].queue_free()
+							emit_signal("trees_destroyed")
+						elif current_action == "destroy_bldg" and tiles[id].has("bldg"):
+							tiles[id].erase("bldg")
+							sprites[str(id)].queue_free()
+							emit_signal("bldg_destroyed")
 					else:
 						emit_signal("tile_clicked", id, tiles)
 

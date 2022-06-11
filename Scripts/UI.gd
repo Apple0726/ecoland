@@ -42,6 +42,9 @@ func _on_mouse_exited():
 	on_button = false
 	tooltip.hide_tooltip()
 
+func _on_CoalPlant_pressed():
+	set_texture($CanvasLayer/Buildings/VBox/CoalPlant.texture_normal, "centrale charbon")
+
 func _on_Nuclear_pressed():
 	set_texture($CanvasLayer/Buildings/VBox/Nuclear.texture_normal, "nuclear_plant")
 
@@ -84,6 +87,9 @@ func _on_WindTurbine_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("Wind turbines\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(Scoremanager.bldg_info.eolienn.cost), format_num(Scoremanager.bldg_info.eolienn.power), format_num(Scoremanager.bldg_info.eolienn.pollution)])
 
+func _on_CoalPlant_mouse_entered():
+	on_button = true
+	tooltip.show_tooltip("Coal plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(Scoremanager.bldg_info["centrale charbon"].cost), format_num(Scoremanager.bldg_info["centrale charbon"].power), format_num(Scoremanager.bldg_info["centrale charbon"].pollution)])
 
 func _on_Buildings_mouse_entered():
 	on_panel = true
@@ -154,8 +160,28 @@ func format_num(num:float):
 
 
 func _on_ChopTrees_mouse_entered():
+	on_button = true
 	tooltip.show_tooltip("Chop trees.\nMakes more land for your buildings, but creates pollution.")
 
 
 func _on_ChopTrees_pressed():
 	set_texture($CanvasLayer/Actions/VBox/ChopTrees.texture_normal, "chop_trees", false)
+
+
+func _on_DestroyBldg_pressed():
+	set_texture($CanvasLayer/Actions/VBox/DestroyBldg.texture_normal, "destroy_bldg", false)
+
+
+func _on_DestroyBldg_mouse_entered():
+	on_button = true
+	tooltip.show_tooltip("Destroy a building.\nCreates pollution.")
+
+
+func _on_Actions_mouse_entered():
+	on_panel = true
+
+
+func _on_Actions_mouse_exited():
+	on_panel = false
+
+

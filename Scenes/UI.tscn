@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Graphics/Money.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/Happiness.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Graphics/pollution.png" type="Texture" id=8]
 [ext_resource path="res://Graphics/Axe.png" type="Texture" id=9]
 [ext_resource path="res://Arimo-Regular.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Graphics/Destroy.png" type="Texture" id=11]
+[ext_resource path="res://sprite_building/centrale charbon.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=5]
 use_mipmaps = true
@@ -227,30 +229,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Nuclear" type="TextureButton" parent="CanvasLayer/Buildings/VBox"]
-margin_top = 49.0
+[node name="CoalPlant" type="TextureButton" parent="CanvasLayer/Buildings/VBox"]
+margin_top = 21.0
 margin_right = 40.0
-margin_bottom = 89.0
+margin_bottom = 61.0
 rect_min_size = Vector2( 0, 40 )
-texture_normal = ExtResource( 5 )
+texture_normal = ExtResource( 12 )
 expand = true
 stretch_mode = 5
 
 [node name="WindTurbine" type="TextureButton" parent="CanvasLayer/Buildings/VBox"]
-margin_top = 104.0
+margin_top = 76.0
 margin_right = 40.0
-margin_bottom = 144.0
+margin_bottom = 116.0
 rect_min_size = Vector2( 0, 40 )
 texture_normal = ExtResource( 6 )
 expand = true
 stretch_mode = 5
 
 [node name="SolarPanel" type="TextureButton" parent="CanvasLayer/Buildings/VBox"]
-margin_top = 159.0
+margin_top = 131.0
 margin_right = 40.0
-margin_bottom = 199.0
+margin_bottom = 171.0
 rect_min_size = Vector2( 0, 40 )
 texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="Nuclear" type="TextureButton" parent="CanvasLayer/Buildings/VBox"]
+margin_top = 186.0
+margin_right = 40.0
+margin_bottom = 226.0
+rect_min_size = Vector2( 0, 40 )
+texture_normal = ExtResource( 5 )
 expand = true
 stretch_mode = 5
 
@@ -285,11 +296,20 @@ custom_constants/separation = 15
 alignment = 1
 
 [node name="ChopTrees" type="TextureButton" parent="CanvasLayer/Actions/VBox"]
-margin_top = 104.0
+margin_top = 76.0
 margin_right = 40.0
-margin_bottom = 144.0
+margin_bottom = 116.0
 rect_min_size = Vector2( 0, 40 )
 texture_normal = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="DestroyBldg" type="TextureButton" parent="CanvasLayer/Actions/VBox"]
+margin_top = 131.0
+margin_right = 40.0
+margin_bottom = 171.0
+rect_min_size = Vector2( 0, 40 )
+texture_normal = ExtResource( 11 )
 expand = true
 stretch_mode = 5
 
@@ -320,17 +340,23 @@ mouse_filter = 2
 [connection signal="mouse_exited" from="CanvasLayer/Happiness" to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Buildings" to="." method="_on_Buildings_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Buildings" to="." method="_on_Buildings_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/Buildings/VBox/Nuclear" to="." method="_on_Nuclear_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Buildings/VBox/Nuclear" to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer/Buildings/VBox/Nuclear" to="." method="_on_Nuclear_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/Buildings/VBox/CoalPlant" to="." method="_on_CoalPlant_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Buildings/VBox/CoalPlant" to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/Buildings/VBox/CoalPlant" to="." method="_on_CoalPlant_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/Buildings/VBox/WindTurbine" to="." method="_on_WindTurbine_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Buildings/VBox/WindTurbine" to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/Buildings/VBox/WindTurbine" to="." method="_on_WindTurbine_pressed"]
 [connection signal="mouse_entered" from="CanvasLayer/Buildings/VBox/SolarPanel" to="." method="_on_SolarPanel_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Buildings/VBox/SolarPanel" to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/Buildings/VBox/SolarPanel" to="." method="_on_SolarPanel_pressed"]
-[connection signal="mouse_entered" from="CanvasLayer/Actions" to="." method="_on_Buildings_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Actions" to="." method="_on_Buildings_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Buildings/VBox/Nuclear" to="." method="_on_Nuclear_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Buildings/VBox/Nuclear" to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/Buildings/VBox/Nuclear" to="." method="_on_Nuclear_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/Actions" to="." method="_on_Actions_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Actions" to="." method="_on_Actions_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Actions/VBox/ChopTrees" to="." method="_on_ChopTrees_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Actions/VBox/ChopTrees" to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/Actions/VBox/ChopTrees" to="." method="_on_ChopTrees_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_DestroyBldg_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_DestroyBldg_pressed"]

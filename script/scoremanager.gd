@@ -4,6 +4,7 @@ var bldg_info = {
 	"eolienn":{"cost":55000, "pollution":10000, "power":10000},
 	"nuclear_plant":{"cost":260000000, "pollution":400000, "power":1000000},
 	"solar_panel":{"cost":100000, "pollution":20000, "power":10},
+	"centrale charbon":{"cost":100000, "pollution":20000, "power":10},
 }
 var minute = 60
 var money = 200000000
