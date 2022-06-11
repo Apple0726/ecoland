@@ -11,7 +11,7 @@ func _ready():
 
 func _process(delta):
 	$CanvasLayer/Money/Label.text = format_num(Scoremanager.money)
-	$CanvasLayer/Energy/Label.text = "%s / %s" % [format_num(Scoremanager.energie_production), format_num(Scoremanager.energie_consomation)]
+	$CanvasLayer/Energy/Label.text = "%s / %s" % [format_num(Scoremanager.energie_production), format_num(Scoremanager.energie_consommation)]
 	$CanvasLayer/Happiness/Label.text = str(Scoremanager.happy_prct)
 
 var mouse_pos:Vector2 = Vector2.ZERO

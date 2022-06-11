@@ -11,8 +11,9 @@ var moy_happy
 var biodiversite
 var energie_consommation
 var energie_production = 12000
-var pilotable_power = 3540546
-var intermittent_power = 12300
+var pilotable_power = 10000
+var intermittent_power = 2000
+var coeff_prod
 var base_conso = 10000
 var cycle = 0
 var nbr_thermal = 0
@@ -23,7 +24,7 @@ var nbr_thermal = 0
 
 func _process(delta):
 	energie_consom()
-	energie_production()
+	_energie_product()
 	satisfaction()
 	_money()
 	emmission_carbon()
@@ -69,11 +70,18 @@ func energie_consom():
 	
 func _energie_product():
 	var diff
-	energie_production = pilotable_power
-	if energie_consommation < energie production:
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	intermittent_power += random.randi_range(-1000, 1000)
+	energie_production = intermittent_power
+	if energie_consommation < energie_production:
 		energie_production = energie_consommation
 	else:
-		diff =
-		
+		diff = energie_consommation - energie_production
+		if diff>pilotable_power:
+			energie_production += pilotable_power
+		else:
+			coeff_prod = diff/pilotable_power
+			energie_production = energie_consommation
 	
 
