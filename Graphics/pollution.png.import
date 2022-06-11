@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Arrow.png-c6c447c5f832493dacdcc3f2b6e035f1.stex"
+path="res://.import/pollution.png-2bc00babf1b0199a6bbea4f77bd15a63.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Arrow.png"
-dest_files=[ "res://.import/Arrow.png-c6c447c5f832493dacdcc3f2b6e035f1.stex" ]
+source_file="res://Graphics/pollution.png"
+dest_files=[ "res://.import/pollution.png-2bc00babf1b0199a6bbea4f77bd15a63.stex" ]
 
 [params]
 
