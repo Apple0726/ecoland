@@ -63,14 +63,14 @@ __meta__ = {
 [node name="Money" type="Panel" parent="CanvasLayer"]
 margin_left = 32.0
 margin_top = 16.0
-margin_right = 132.0
+margin_right = 140.0
 margin_bottom = 40.0
 custom_styles/panel = SubResource( 4 )
 
 [node name="Pollution" type="Panel" parent="CanvasLayer"]
 margin_left = 32.0
 margin_top = 60.0
-margin_right = 132.0
+margin_right = 140.0
 margin_bottom = 84.0
 custom_styles/panel = SubResource( 4 )
 

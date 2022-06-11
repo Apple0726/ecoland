@@ -57,5 +57,3 @@ script = ExtResource( 5 )
 
 [connection signal="fade_menu" from="MainMenu" to="." method="_on_MainMenu_fade_menu"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="game_over" from="ScoreManager" to="." method="_on_game_over"]
-[connection signal="win" from="ScoreManager" to="." method="_on_win"]

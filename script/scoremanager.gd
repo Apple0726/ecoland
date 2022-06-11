@@ -49,7 +49,7 @@ func _process(delta):
 	if pollution > max_pollution or happy_prct == 0:
 		emit_signal("game_over")
 		set_process(false)
-	if nb_unrenewable == 0 and happy_prct> 80 and energie_consommation==energie_production:
+	if nb_unrenewable == 0 and happy_prct> 80 and energy_consommation==energy_production:
 		emit_signal("win")
 		set_process(false)
 	if game_time >= 15:

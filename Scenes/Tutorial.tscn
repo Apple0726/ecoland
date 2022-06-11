@@ -420,7 +420,7 @@ anchor_bottom = 1.0
 margin_left = -204.0
 margin_top = -168.0
 margin_right = 204.0
-margin_bottom = -52.0
+margin_bottom = -52.0001
 custom_styles/panel = SubResource( 9 )
 
 [node name="Label" type="RichTextLabel" parent="Panel"]
@@ -462,8 +462,8 @@ anims/RESET = SubResource( 7 )
 [node name="Arrow" type="TextureRect" parent="."]
 visible = false
 material = SubResource( 11 )
-margin_left = 684.0
-margin_top = 524.0
+margin_left = 680.0
+margin_top = 520.0
 margin_right = 700.0
 margin_bottom = 536.0
 texture = ExtResource( 4 )

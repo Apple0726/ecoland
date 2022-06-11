@@ -159,7 +159,7 @@ func _on_game_over():
 	var tuto = preload("res://Scenes/Tutorial.tscn").instance()
 	tuto.type = tuto.GAME_OVER
 	UI.get_node("CanvasLayer").add_child(tuto)
-	tuto.connect("tree_exiting", self, "back_to_menu")=
+	tuto.connect("tree_exiting", self, "back_to_menu")
 
 
 func _on_win():

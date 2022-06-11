@@ -11,7 +11,7 @@ func _ready():
 
 func _process(delta):
 	$CanvasLayer/MoneyVBox/Label.text = format_num(Scoremanager.money)
-	$CanvasLayer/PollutionVBox/Label.text = format_num(Scoremanager.pollution)
+	$CanvasLayer/PollutionVBox/Label.text = format_num(round(Scoremanager.pollution))
 	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(Scoremanager.energy_production), format_num(Scoremanager.energy_consommation)]
 	if Scoremanager.energy_production >= Scoremanager.energy_consommation:
 		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.green
@@ -174,7 +174,7 @@ func _on_DestroyBldg_pressed():
 
 func _on_DestroyBldg_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Destroy a building.\nCreates pollution.")
+	tooltip.show_tooltip("Destroy a building.\nCosts money and creates pollution.")
 
 
 func _on_Actions_mouse_entered():
