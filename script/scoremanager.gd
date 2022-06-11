@@ -32,7 +32,7 @@ var nbr_thermal = 0
 var nbr_nuclr = 0
 var nb_unrenewable = 0
 var game_time = 0
-const max_pollution = 1000000
+const max_pollution = 100000000
 
 func _ready():
 	set_process(false)
@@ -72,11 +72,11 @@ func satisfaction():
 	happy_prct = happiness*100/21600 
 	if energy_consommation > energy_production:
 		if happy_prct >= 70:
-			happiness -= 30
+			happiness -= 3
 		if happy_prct > 10 and happy_prct<70:
-			happiness -= 20
+			happiness -= 2
 		if happy_prct <=10:
-			happiness -=10
+			happiness -=1
 	else :
 		if happiness < 21600:
 			if happy_prct >= 80:
