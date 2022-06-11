@@ -17,10 +17,13 @@ func _on_MainMenu_fade_menu():
 func on_bldg_built(id:int, tiles:Array, bldg:String):
 	if bldg == "eolienn":
 		Scoremanager.carbon += 10000
+		Scoremanager.money -= 10000
 	elif bldg == "nuclear_plant":
 		Scoremanager.carbon += 100000
+		Scoremanager.money -= 10000
 	elif bldg == "solar_panel":
 		Scoremanager.carbon += 1000
+		Scoremanager.money -= 10000
 
 		
 
