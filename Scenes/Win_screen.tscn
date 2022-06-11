@@ -5,5 +5,5 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="GameOverBien" type="Sprite" parent="."]
-position = Vector2( -3, 2 )
+position = Vector2( 4, -2 )
 texture = ExtResource( 1 )

@@ -24,6 +24,7 @@ var coeff_prod = 0
 var base_conso = 600000
 var cycle = 0
 var nbr_thermal = 0
+var nbr_nuclr = 0
 var nb_unrenewable = 0
 var game_time = 0
 
@@ -49,13 +50,13 @@ func _money():
 		moy_happy = round(mean_happy/minute)
 		mean_happy = 0
 func emmission_pollution():
-	if nbr_thermal != 0:
-		pollution += nbr_thermal*14 # CO2 rejeté par les centrales thermiques
+	nb_unrenewable=nbr_nuclr+nbr_thermal	
+	pollution += nbr_thermal*0.5 + nbr_nuclr*0.025 # CO2 rejeté par les centrales thermiques+pollution nucléaire
 
 func satisfaction():
 	happy_prct = happiness*100/7200 
 	if energie_consommation > energie_production:
-		happiness = happiness - 1
+		happiness = happiness - 10
 	else :
 		if happiness < 7200:
 			happiness = happiness + 1
