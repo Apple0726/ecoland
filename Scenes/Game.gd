@@ -55,11 +55,7 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 	#	Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
 	#	Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
 	#	Scoremanager.pilotable_power += Scoremanager.bldg_info[bldg].power
-	elif bldg == "thermal_plant":
-		Scoremanager.pollution += 100000
-		Scoremanager.money -= 10000
-		Scoremanager.pilotable_power += 100
-		Scoremanager.nbr_nuclr += 1
+	
 		
 
 func trees_destroyed():
@@ -68,42 +64,38 @@ func trees_destroyed():
 
 func bldg_destroyed(id:int, tiles:Array, bldg:String):
 	if bldg == "eolienn":
-		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
-		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
+		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution/3
+		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost/4
 		if tiles[id].has("wind"):
 			Scoremanager.wind_power -= Scoremanager.bldg_info[bldg].power * tiles[id].wind
 		else:
 			Scoremanager.wind_power -= Scoremanager.bldg_info[bldg].power
 	elif bldg == "nuclear_plant":
-		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
-		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
+		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution/3
+		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost/4
 		Scoremanager.pilotable_power -= Scoremanager.bldg_info[bldg].power
 		Scoremanager.nb_unrenewable -= 1
 	elif bldg == "solar_panel":
-		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
-		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
+		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution/3
+		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost/4
 		if tiles[id].has("sun_beams"):
 			Scoremanager.solar_power -= Scoremanager.bldg_info[bldg].power * tiles[id].sun_beams
 		else:
 			Scoremanager.solar_power -= Scoremanager.bldg_info[bldg].power
 	elif bldg == "centrale charbon":
-		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
-		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
+		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution/3
+		Scoremanager.money -= Scoremanager.bldg_info[bldg].cost/4
 		Scoremanager.pilotable_power -= Scoremanager.bldg_info[bldg].power
-		Scoremanager.nbr_thermal
+		Scoremanager.nbr_thermal -= 1
 	#elif bldg == "geothermal_plant":
-	#	Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
-	#	Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
+	#	Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution/3
+	#	Scoremanager.money -= Scoremanager.bldg_info[bldg].cost/4
 	#	Scoremanager.pilotable_power += Scoremanager.bldg_info[bldg].power
 	#elif bldg == "hydrolic_central":
-	#	Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
-	#	Scoremanager.money -= Scoremanager.bldg_info[bldg].cost
+	#	Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution/3
+	#	Scoremanager.money -= Scoremanager.bldg_info[bldg].cost/4
 	#	Scoremanager.pilotable_power += Scoremanager.bldg_info[bldg].power
-	elif bldg == "thermal_plant":
-		Scoremanager.pollution += Scoremanager.bldg_info[bldg].pollution
-		Scoremanager.money -=  Scoremanager.bldg_info[bldg].cost
-		Scoremanager.pilotable_power -= Scoremanager.bldg_info[bldg].power
-		Scoremanager.nbr_nuclr -= 1
+	
 
 func on_map_tile_over(id:int, tiles:Array):
 	if UI.on_panel:

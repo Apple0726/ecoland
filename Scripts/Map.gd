@@ -180,9 +180,11 @@ func _input(event):
 							sprites[str(id)].queue_free()
 							emit_signal("trees_destroyed")
 						elif current_action == "destroy_bldg" and tiles[id].has("bldg"):
+							emit_signal("bldg_destroyed", id, tiles, tiles[id].bldg)
 							tiles[id].erase("bldg")
 							sprites[str(id)].queue_free()
-							emit_signal("bldg_destroyed")
+							
+							
 					else:
 						emit_signal("tile_clicked", id, tiles)
 
