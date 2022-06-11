@@ -17,6 +17,9 @@ enum TileType {
 	CITY,
 }
 
+func rand_int(low:int, high:int):
+	return randi() % (high - low + 1) + low
+
 func _ready():
 	randomize()
 	var noise = OpenSimplexNoise.new()
@@ -55,8 +58,60 @@ func _ready():
 				tile = {"type":TileType.CITY}
 				nbr_city += 1
 			tiles.append(tile)
+	generate_zones("sun_beams")
+	randomize()
+	generate_zones("wind")
 	$Camera2D.position = Vector2.ONE * wid * 64 / 2.0
 
+func generate_zones(st:String):
+	var diff:int = 0
+	var rand:float = randf()
+	var thiccness:int = ceil(rand_int(1, 3) * wid / 50.0)
+	var pulsation:float = rand_range(0.4, 1)
+	var amplitude:float = 0.85
+	var num_beams:int = 2
+	var tile_from:int = -1
+	var tile_to:int = -1
+	for i in num_beams:
+		var intensity = rand_range(1.8, 2.5)
+		if tile_from == -1:
+			tile_from = rand_int(0, wid)
+			tile_to = rand_int(0, wid)
+		if rand < 0.5:#Vertical
+			for j in wid:
+				var x_pos:int = lerp(tile_from, tile_to, j / float(wid)) + diff + thiccness * amplitude * sin(j / float(wid) * 4 * pulsation * PI)
+				for k in range(x_pos - int(thiccness / 2) + diff, x_pos + int(ceil(thiccness / 2.0)) + diff):
+					if k < 0 or k > wid - 1:
+						continue
+					tiles[k + j * wid][st] = intensity
+					if st == "sun_beams":
+						var sun_beams = preload("res://Scenes/SunBeams.tscn").instance()
+						add_child(sun_beams)
+						sun_beams.position = Vector2(k, j) * 64 + Vector2(32, 32)
+					elif st == "wind":
+						var wind = preload("res://Scenes/Wind.tscn").instance()
+						add_child(wind)
+						wind.position = Vector2(k, j) * 64 + Vector2(32, 32)
+		else:#Horizontal
+			for j in wid:
+				var y_pos:int = lerp(tile_from, tile_to, j / float(wid)) + diff + thiccness * amplitude * sin(j / float(wid) * 4 * pulsation * PI)
+				for k in range(y_pos - int(thiccness / 2) + diff, y_pos + int(ceil(thiccness / 2.0)) + diff):
+					if k < 0 or k > wid - 1:
+						continue
+					tiles[j + k * wid][st] = intensity
+					if st == "sun_beams":
+						var sun_beams = preload("res://Scenes/SunBeams.tscn").instance()
+						add_child(sun_beams)
+						sun_beams.position = Vector2(j, k) * 64 + Vector2(32, 32)
+					elif st == "wind":
+						var wind = preload("res://Scenes/Wind.tscn").instance()
+						add_child(wind)
+						wind.position = Vector2(j, k) * 64 + Vector2(32, 32)
+		if wid / 3 == 1:
+			diff = thiccness + 1
+		else:
+			diff = rand_int(thiccness + 1, wid / 3) * sign(rand_range(-1, 1))
+	
 func _process(delta):
 	if OS.get_latin_keyboard_variant() == "AZERTY":
 		if Input.is_action_pressed("Z"):

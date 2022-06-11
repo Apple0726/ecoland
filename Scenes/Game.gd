@@ -43,7 +43,17 @@ func on_map_tile_over(id:int, tiles:Array):
 				txt = "City"
 			tooltip.show_tooltip(txt)
 		else:
-			tooltip.hide_tooltip()
+			var txt = ""
+			if tiles[id].has("sun_beams"):
+				txt = "Sunny area (solar panel production multiplied by %.2f)" % tiles[id].sun_beams
+			if tiles[id].has("wind"):
+				if txt != "":
+					txt += "\n"
+				txt += "Windy area (wind turbine production multiplied by %.2f)" % tiles[id].wind
+			if txt == "":
+				tooltip.hide_tooltip()
+			else:
+				tooltip.show_tooltip(txt)
 
 func on_map_tile_out():
 	UI.tooltip.visible = false

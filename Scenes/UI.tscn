@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Graphics/Money.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/Happiness.png" type="Texture" id=2]
@@ -7,8 +7,8 @@
 [ext_resource path="res://sprite_building/nuclear_plant.png" type="Texture" id=5]
 [ext_resource path="res://sprite_building/eolienn.png" type="Texture" id=6]
 [ext_resource path="res://sprite_building/solar_panel.png" type="Texture" id=7]
-[ext_resource path="res://graphics/Carbon.png" type="Texture" id=8]
 [ext_resource path="res://Arimo-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://graphics/Carbon.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 use_mipmaps = true
@@ -57,35 +57,43 @@ __meta__ = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="Money" type="Panel" parent="CanvasLayer"]
 margin_left = 32.0
 margin_top = 16.0
 margin_right = 132.0
 margin_bottom = 40.0
 custom_styles/panel = SubResource( 4 )
 
-[node name="Panel2" type="Panel" parent="CanvasLayer"]
+[node name="Carbon" type="Panel" parent="CanvasLayer"]
+margin_left = 32.0
+margin_top = 60.0
+margin_right = 132.0
+margin_bottom = 84.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="Energy" type="Panel" parent="CanvasLayer"]
 margin_left = 432.0
 margin_top = 16.0
 margin_right = 604.0
 margin_bottom = 40.0
 custom_styles/panel = SubResource( 4 )
 
-[node name="Panel3" type="Panel" parent="CanvasLayer"]
+[node name="Happiness" type="Panel" parent="CanvasLayer"]
 margin_left = 904.0
 margin_top = 16.0
 margin_right = 992.0
 margin_bottom = 40.0
 custom_styles/panel = SubResource( 4 )
 
-[node name="Money" type="HBoxContainer" parent="CanvasLayer"]
+[node name="MoneyVBox" type="HBoxContainer" parent="CanvasLayer"]
 margin_left = 32.0
 margin_top = 12.0
 margin_right = 95.0
 margin_bottom = 44.0
+mouse_filter = 2
 size_flags_vertical = 3
 
-[node name="Money" type="TextureRect" parent="CanvasLayer/Money"]
+[node name="Money" type="TextureRect" parent="CanvasLayer/MoneyVBox"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
@@ -93,7 +101,7 @@ texture = ExtResource( 1 )
 expand = true
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="CanvasLayer/Money"]
+[node name="Label" type="Label" parent="CanvasLayer/MoneyVBox"]
 margin_left = 36.0
 margin_right = 60.0
 margin_bottom = 32.0
@@ -101,14 +109,39 @@ size_flags_vertical = 5
 text = "100"
 valign = 1
 
-[node name="Energy" type="HBoxContainer" parent="CanvasLayer"]
+[node name="CarbonVBox" type="HBoxContainer" parent="CanvasLayer"]
+margin_left = 32.0
+margin_top = 56.0
+margin_right = 95.0
+margin_bottom = 88.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Carbon" type="TextureRect" parent="CanvasLayer/CarbonVBox"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="CanvasLayer/CarbonVBox"]
+margin_left = 36.0
+margin_right = 60.0
+margin_bottom = 32.0
+size_flags_vertical = 5
+text = "100"
+valign = 1
+
+[node name="EnergyVBox" type="HBoxContainer" parent="CanvasLayer"]
 margin_left = 432.0
 margin_top = 12.0
 margin_right = 495.0
 margin_bottom = 44.0
+mouse_filter = 2
 size_flags_vertical = 3
 
-[node name="Energy" type="TextureRect" parent="CanvasLayer/Energy"]
+[node name="Energy" type="TextureRect" parent="CanvasLayer/EnergyVBox"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
@@ -116,7 +149,7 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="CanvasLayer/Energy"]
+[node name="Label" type="Label" parent="CanvasLayer/EnergyVBox"]
 margin_left = 36.0
 margin_right = 60.0
 margin_bottom = 32.0
@@ -124,14 +157,15 @@ size_flags_vertical = 5
 text = "100"
 valign = 1
 
-[node name="Happiness" type="HBoxContainer" parent="CanvasLayer"]
+[node name="HappinessVBox" type="HBoxContainer" parent="CanvasLayer"]
 margin_left = 912.0
 margin_top = 12.0
 margin_right = 975.0
 margin_bottom = 44.0
+mouse_filter = 2
 size_flags_vertical = 3
 
-[node name="Happiness" type="TextureRect" parent="CanvasLayer/Happiness"]
+[node name="Happiness" type="TextureRect" parent="CanvasLayer/HappinessVBox"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
@@ -139,7 +173,7 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="CanvasLayer/Happiness"]
+[node name="Label" type="Label" parent="CanvasLayer/HappinessVBox"]
 margin_left = 36.0
 margin_right = 60.0
 margin_bottom = 32.0
@@ -216,12 +250,13 @@ margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
 
-[connection signal="mouse_entered" from="CanvasLayer/Money/Money" to="." method="_on_Money_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Money/Money" to="." method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/Energy/Energy" to="." method="_on_Energy_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Energy/Energy" to="." method="_on_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/Happiness/Happiness" to="." method="_on_Happiness_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Happiness/Happiness" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Money" to="." method="_on_Money_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Money" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Carbon" to="." method="_on_Carbon_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Carbon" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Energy" to="." method="_on_Energy_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Energy" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Happiness" to="." method="_on_Happiness_mouse_entered"]
 [connection signal="mouse_entered" from="CanvasLayer/Buildings" to="." method="_on_Buildings_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Buildings" to="." method="_on_Buildings_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Buildings/VBox/Nuclear" to="." method="_on_Nuclear_mouse_entered"]
