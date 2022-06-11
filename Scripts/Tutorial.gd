@@ -8,8 +8,15 @@ var texts = [
 	"Your job is to make the population rely less on fossil fuels and more on renewable sources of energy.",
 	"Most of us know by now that fossil fuels are one of the big dangers to biodiversity and pollution.",
 	"And it is a challenge to smooth the transition from fossil fuels to cleaner alternatives, because we need to keep the population happy!",
+	"Be carrefull pollution have irreversible effects. You can reach a point of no return",
 	"I am confident that in 15 years, Ecoland will fully make that transition. [wave amp=20 freq=7]I believe in you![/wave]",
 	"Press one of the buttons at the right to start building. See you in 15 years!"
+]
+var text2 = [
+	"Horray,",
+	"Your enregetic transition was a sucess",
+	"you haven't got reach the no retun point and the renewable energie are dominant",
+	"you can be proud of you!",
 ]
 func _ready():
 	$Panel/Label.bbcode_text = texts[0]
@@ -43,3 +50,7 @@ func _on_Button_pressed():
 				return
 			$Panel/Label.bbcode_text = texts[current_text]
 			$Panel/Label.visible_characters = 0
+
+func happy_end():
+	pass
+	

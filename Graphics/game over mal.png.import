@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GrassBackground.png-38613ed3e66bb5eab8a67844ddabe699.stex"
+path="res://.import/game over mal.png-969a5b4819885c30f2ca01168b02e677.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/GrassBackground.png"
-dest_files=[ "res://.import/GrassBackground.png-38613ed3e66bb5eab8a67844ddabe699.stex" ]
+source_file="res://Graphics/game over mal.png"
+dest_files=[ "res://.import/game over mal.png-969a5b4819885c30f2ca01168b02e677.stex" ]
 
 [params]
 

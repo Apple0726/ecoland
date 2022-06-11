@@ -10,6 +10,9 @@ onready var tooltip = $CanvasLayer/Tooltip
 func _ready():
 	$MainMenu.tooltip = tooltip
 
+func _process(delta):
+	win_condition()
+
 var UI = preload("res://Scenes/UI.tscn").instance()
 var map = preload("res://Scenes/Map.tscn").instance()
 var mouse_pos:Vector2 = Vector2.ZERO
@@ -108,4 +111,15 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func on_tuto_done():
 	map.tuto = false
+	
+
+func win_condition():
+	if  Scoremanager.pollution>max_pollution:
+		game_over = true
+	if Scoremanager.happy_prct == 0:
+		game_over = false
+	if Scoremanager.nb_unrenewable == 0 and Scoremanager.happy_prct> 80 and Scoremanager.energie_consommation==Scoremanager.energie_production:
+		win= true
+	if Scoremanager.game_time >= 15:
+		win = true
 
