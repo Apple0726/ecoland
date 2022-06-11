@@ -131,7 +131,7 @@ func win_condition():
 	if  Scoremanager.pollution>max_pollution:
 		game_over = true
 	if Scoremanager.happy_prct == 0:
-		game_over = false
+		game_over = true
 	if Scoremanager.nb_unrenewable == 0 and Scoremanager.happy_prct> 80 and Scoremanager.energie_consommation==Scoremanager.energie_production:
 		win= true
 	if Scoremanager.game_time >= 15:
