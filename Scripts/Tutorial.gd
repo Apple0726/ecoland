@@ -15,7 +15,7 @@ var texts = [
 var text2 = [
 	"Horray,",
 	"Your enregetic transition was a sucess",
-	"you haven't got reach the no retun point and the renewable energie are dominant",
+	"you haven't got reach the no retun point and the renewable energy are dominant",
 	"you can be proud of you!",
 ]
 func _ready():

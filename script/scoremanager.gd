@@ -11,13 +11,13 @@ var bldg_info = {
 var minute = 60
 var money = 200000000
 var pollution = 0
-var happiness = 7200
+var happiness = 21600
 var happy_prct = 100
 var mean_happy = 0
 var moy_happy = 0
 var biodiversite = 0
-var energie_consommation = 0
-var energie_production = 0
+var energy_consommation = 0
+var energy_production = 0
 var wind_power = 0
 var solar_power = 0
 var pilotable_power = 0
@@ -36,9 +36,9 @@ func _ready():
 
 
 func _process(delta):
-	energie_consom()
-	_energie_intermittent()
-	_energie_product()
+	energy_consom()
+	_energy_intermittent()
+	_energy_product()
 	satisfaction()
 	_money()
 	emmission_pollution()
@@ -48,55 +48,66 @@ func _money():
 	if cycle < minute:
 		mean_happy = mean_happy + happy_prct
 	else:
-		money = money + (10000*mean_happy/minute)
+		money = money + (1000*mean_happy/minute)
 		moy_happy = round(mean_happy/minute)
 		mean_happy = 0
 func emmission_pollution():
 	nb_unrenewable=nbr_nuclr+nbr_thermal	
-	pollution += nbr_thermal*0.5 + nbr_nuclr*0.025 # CO2 rejeté par les centrales thermiques+pollution nucléaire
+	pollution += nbr_thermal*0.5*coeff_prod + nbr_nuclr*0.025*coeff_prod # CO2 rejeté par les centrales thermiques+pollution nucléaire
 
 func satisfaction():
-	happy_prct = happiness*100/7200 
-	if energie_consommation > energie_production:
-		happiness = happiness - 10
+	happy_prct = happiness*100/21600 
+	if energy_consommation > energy_production:
+		if happy_prct >= 70:
+			happiness -= 3
+		if happy_prct > 10 and happy_prct<70:
+			happiness -= 2
+		if happy_prct <=10:
+			happiness -=1
 	else :
-		if happiness < 7200:
-			happiness = happiness + 1
+		if happiness < 21600:
+			if happy_prct >= 80:
+				happiness += 1
+		if happy_prct > 10 and happy_prct<70:
+			happiness += 2
+		if happy_prct <= 10:
+			happiness += 3
+		
 
-func energie_consom():
+func energy_consom():
 	if cycle < minute :
 		cycle = cycle +1
 	else:
 		game_time += 1
 		if moy_happy >= 99:
-			base_conso = base_conso + 10
+			base_conso += 10
 		if moy_happy > 80 and mean_happy < 99:
-			base_conso = base_conso + 5
+			base_conso +=  5
 		if moy_happy<50 and moy_happy > 10:
-			base_conso = base_conso - 5
+			base_conso -=  5
 		if moy_happy <= 10:
-			base_conso = base_conso - 10
+			base_conso -= 10
 		moy_happy = 0
 		cycle = 0
 	var random = RandomNumberGenerator.new()
 	random.randomize()
-	energie_consommation = base_conso + random.randi_range(-100, 100) + round(1000*sin(2*PI*cycle/3600))
+	energy_consommation = base_conso + random.randi_range(-100, 100) + round(1000*sin(2*PI*cycle/3600))
 	
-func _energie_intermittent():
-	
+func _energy_intermittent():
 	intermittent_power= round(solar_power*(randf()+0.1) + wind_power*(randf()+0.1))
 	
-func _energie_product():
+func _energy_product():
 	var diff
-	energie_production = intermittent_power
-	if energie_consommation < energie_production:
-		energie_production = energie_consommation
+	energy_production = intermittent_power
+	if energy_consommation < energy_production:
+		energy_production = energy_consommation
 	else:
-		diff = energie_consommation - energie_production
+		diff = energy_consommation - energy_production
 		if diff>pilotable_power:
-			energie_production += pilotable_power
+			energy_production += pilotable_power
+			coeff_prod = 1
 		else:
 			coeff_prod = diff/pilotable_power
-			energie_production = energie_consommation
+			energy_production = energy_consommation
 	
 

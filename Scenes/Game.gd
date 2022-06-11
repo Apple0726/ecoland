@@ -163,7 +163,7 @@ func win_condition():
 		game_over = true
 	if Scoremanager.happy_prct == 0:
 		game_over = true
-	if Scoremanager.nb_unrenewable == 0 and Scoremanager.happy_prct> 80 and Scoremanager.energie_consommation==Scoremanager.energie_production:
+	if Scoremanager.nb_unrenewable == 0 and Scoremanager.happy_prct> 80 and Scoremanager.energy_consommation==Scoremanager.energy_production:
 		win= true
 	if Scoremanager.game_time >= 15:
 		win = true
