@@ -72,11 +72,11 @@ func satisfaction():
 	happy_prct = happiness*100/21600 
 	if energy_consommation > energy_production:
 		if happy_prct >= 70:
-			happiness -= 3
+			happiness -= 30
 		if happy_prct > 10 and happy_prct<70:
-			happiness -= 2
+			happiness -= 20
 		if happy_prct <=10:
-			happiness -=1
+			happiness -=10
 	else :
 		if happiness < 21600:
 			if happy_prct >= 80:

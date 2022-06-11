@@ -161,7 +161,6 @@ func _on_game_over():
 	UI.get_node("CanvasLayer").add_child(tuto)
 	tuto.connect("tree_exiting", self, "back_to_menu")
 
-
 func _on_win():
 	map.tuto = true
 	Scoremanager.set_process(false)
