@@ -11,7 +11,7 @@ func _ready():
 
 func _process(delta):
 	$CanvasLayer/MoneyVBox/Label.text = format_num(Scoremanager.money)
-	$CanvasLayer/CarbonVBox/Label.text = format_num(Scoremanager.carbon)
+	$CanvasLayer/PollutionVBox/Label.text = format_num(Scoremanager.pollution)
 	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(Scoremanager.energie_production), format_num(Scoremanager.energie_consommation)]
 	$CanvasLayer/HappinessVBox/Label.text = str(Scoremanager.happy_prct)
 
@@ -78,9 +78,9 @@ func _on_Money_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("Money")
 
-func _on_Carbon_mouse_entered():
+func _on_pollution_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Carbon")
+	tooltip.show_tooltip("pollution")
 
 func _on_Energy_mouse_entered():
 	on_button = true
