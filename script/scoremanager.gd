@@ -2,8 +2,7 @@ extends Node
 signal bldg_built
 var minute = 60
 var money = 0
-
-var carbon = 0
+var pollution = 0
 var happiness = 7200
 var happy_prct = 100
 var mean_happy = 0
@@ -19,6 +18,8 @@ var coeff_prod
 var base_conso = 10000
 var cycle = 0
 var nbr_thermal = 0
+var nb_unrenewable = 0
+var game_time = 0
 
 
 
@@ -30,7 +31,7 @@ func _process(delta):
 	_energie_product()
 	satisfaction()
 	_money()
-	emmission_carbon()
+	emmission_pollution()
 	
 	
 func _money():
@@ -40,9 +41,9 @@ func _money():
 		money = money + (10000000*mean_happy/minute)
 		moy_happy = round(mean_happy/minute)
 		mean_happy = 0
-func emmission_carbon():
+func emmission_pollution():
 	if nbr_thermal != 0:
-		carbon += nbr_thermal*14 # CO2 rejeté par les centrales thermiques
+		pollution += nbr_thermal*14 # CO2 rejeté par les centrales thermiques
 
 func satisfaction():
 	happy_prct = happiness*100/7200 
@@ -56,6 +57,7 @@ func energie_consom():
 	if cycle < minute :
 		cycle = cycle +1
 	else:
+		game_time += 1
 		if moy_happy >= 99:
 			base_conso = base_conso + 10
 		if moy_happy > 80 and mean_happy < 99:

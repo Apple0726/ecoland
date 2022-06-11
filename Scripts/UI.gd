@@ -11,9 +11,19 @@ func _ready():
 
 func _process(delta):
 	$CanvasLayer/MoneyVBox/Label.text = format_num(Scoremanager.money)
-	$CanvasLayer/CarbonVBox/Label.text = format_num(Scoremanager.carbon)
+	$CanvasLayer/PollutionVBox/Label.text = format_num(Scoremanager.pollution)
 	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(Scoremanager.energie_production), format_num(Scoremanager.energie_consommation)]
-	$CanvasLayer/HappinessVBox/Label.text = str(Scoremanager.happy_prct)
+	if Scoremanager.energie_production >= Scoremanager.energie_consommation:
+		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.green
+	else:
+		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.red
+	$CanvasLayer/HappinessVBox/Label.text = "%s%%" % str(Scoremanager.happy_prct)
+	if Scoremanager.happy_prct > 70:
+		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.green
+	elif Scoremanager.happy_prct > 40:
+		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.yellow
+	else:
+		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.red
 
 var mouse_pos:Vector2 = Vector2.ZERO
 
@@ -78,9 +88,9 @@ func _on_Money_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("Money")
 
-func _on_Carbon_mouse_entered():
+func _on_pollution_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Carbon")
+	tooltip.show_tooltip("pollution")
 
 func _on_Energy_mouse_entered():
 	on_button = true

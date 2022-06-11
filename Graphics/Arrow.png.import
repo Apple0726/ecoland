@@ -2,15 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
+<<<<<<< HEAD:graphics/Carbon.png.import
 path="res://.import/Carbon.png-f1549c5e76e6d8402fded9dcd9387399.stex"
+=======
+path="res://.import/Arrow.png-c6c447c5f832493dacdcc3f2b6e035f1.stex"
+>>>>>>> 281d6cd6d7803a77b89ac57e1156b6bb52f8a626:Graphics/Arrow.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<< HEAD:graphics/Carbon.png.import
 source_file="res://Graphics/Carbon.png"
 dest_files=[ "res://.import/Carbon.png-f1549c5e76e6d8402fded9dcd9387399.stex" ]
+=======
+source_file="res://Graphics/Arrow.png"
+dest_files=[ "res://.import/Arrow.png-c6c447c5f832493dacdcc3f2b6e035f1.stex" ]
+>>>>>>> 281d6cd6d7803a77b89ac57e1156b6bb52f8a626:Graphics/Arrow.png.import
 
 [params]
 
