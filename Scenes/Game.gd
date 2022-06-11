@@ -2,6 +2,9 @@
 extends Node2D
 
 var play = false
+var game_over = false
+var win = false
+const max_pollution = 1000000
 onready var tooltip = $CanvasLayer/Tooltip
 
 func _ready():
@@ -28,6 +31,7 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 		Scoremanager.pollution += 100000
 		Scoremanager.money -= 10000
 		Scoremanager.pilotable_power += 100
+		Scoremanager.nb_unrenewable += 1
 	elif bldg == "solar_panel":
 		Scoremanager.pollution += 1000
 		Scoremanager.money -= 10000
@@ -47,7 +51,7 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 	#	Scoremanager.pollution += 100000
 	#	Scoremanager.money -= 10000
 	#	Scoremanager.pilotable_power += 100
-
+	#	Scoremanager.nb_unrenewable += 1
 func on_map_tile_over(id:int, tiles:Array):
 	if UI.on_panel:
 		tooltip.hide_tooltip()
@@ -95,6 +99,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		map.connect("tile_clicked", self, "on_map_tile_click")
 		map.connect("bldg_built", self, "on_bldg_built")
 		play = true
+
 		if play_tuto:
 			yield(get_tree().create_timer(0.5), "timeout")
 			var tuto = preload("res://Scenes/Tutorial.tscn").instance()
@@ -103,3 +108,4 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func on_tuto_done():
 	map.tuto = false
+

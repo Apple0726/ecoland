@@ -18,6 +18,8 @@ var coeff_prod
 var base_conso = 10000
 var cycle = 0
 var nbr_thermal = 0
+var nb_unrenewable = 0
+var game_time = 0
 
 
 
@@ -55,6 +57,7 @@ func energie_consom():
 	if cycle < minute :
 		cycle = cycle +1
 	else:
+		game_time += 1
 		if moy_happy >= 99:
 			base_conso = base_conso + 10
 		if moy_happy > 80 and mean_happy < 99:
