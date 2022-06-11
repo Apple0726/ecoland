@@ -1,12 +1,12 @@
 extends Node
 signal bldg_built
 var bldg_info = {
-	"eolienn":{"cost":10000, "pollution":10000, "power":100},
-	"nuclear_plant":{"cost":10000, "pollution":100000, "power":100},
-	"solar_panel":{"cost":10000, "pollution":1000, "power":100},
+	"eolienn":{"cost":55000, "pollution":10000, "power":10000},
+	"nuclear_plant":{"cost":260000000, "pollution":400000, "power":1000000},
+	"solar_panel":{"cost":100000, "pollution":20000, "power":10},
 }
 var minute = 60
-var money = 0
+var money = 200000000
 var pollution = 0
 var happiness = 7200
 var happy_prct = 100
@@ -14,13 +14,13 @@ var mean_happy = 0
 var moy_happy = 0
 var biodiversite = 0
 var energie_consommation = 0
-var energie_production = 12000
+var energie_production = 0
 var wind_power = 0
 var solar_power = 0
-var pilotable_power = 1000
-var intermittent_power = 20
+var pilotable_power = 0
+var intermittent_power = 0
 var coeff_prod = 0
-var base_conso = 10000
+var base_conso = 600000
 var cycle = 0
 var nbr_thermal = 0
 var nb_unrenewable = 0
@@ -44,7 +44,7 @@ func _money():
 	if cycle < minute:
 		mean_happy = mean_happy + happy_prct
 	else:
-		money = money + (10000000*mean_happy/minute)
+		money = money + (10000*mean_happy/minute)
 		moy_happy = round(mean_happy/minute)
 		mean_happy = 0
 func emmission_pollution():

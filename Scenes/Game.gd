@@ -50,11 +50,11 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 	#	Scoremanager.pollution += 100000
 	#	Scoremanager.money -= 10000
 	#	Scoremanager.pilotable_power += 100
-	#elif bldg == "thermal_plant":
-	#	Scoremanager.pollution += 100000
-	#	Scoremanager.money -= 10000
-	#	Scoremanager.pilotable_power += 100
-	#	Scoremanager.nb_unrenewable += 1
+	elif bldg == "thermal_plant":
+		Scoremanager.pollution += 100000
+		Scoremanager.money -= 10000
+		Scoremanager.pilotable_power += 100
+		Scoremanager.nb_unrenewable += 1
 
 func trees_destroyed():
 	pass
