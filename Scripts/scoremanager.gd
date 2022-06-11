@@ -11,7 +11,7 @@ var bldg_info = {
 	"geothermal_plant":{"cost":40000000, "pollution":20000, "power":200000},
 	"hydrolic_central":{"cost":40000000, "pollution":20000, "power":200000},
 }
-var minute = 60
+var second = 60
 var money = 200000000
 var pollution = 0
 var happiness = 21600
@@ -52,17 +52,17 @@ func _process(delta):
 	if nb_unrenewable == 0 and happy_prct> 80 and energy_consommation==energy_production:
 		emit_signal("win")
 		set_process(false)
-	if game_time >= 15:
+	if game_time >= 900:
 		emit_signal("win")
 		set_process(false)
 	
 	
 func _money():
-	if cycle < minute:
+	if cycle < second:
 		mean_happy = mean_happy + happy_prct
 	else:
-		money = money + (1000*mean_happy/minute)
-		moy_happy = round(mean_happy/minute)
+		money = money + (1000*mean_happy/second)
+		moy_happy = round(mean_happy/second)
 		mean_happy = 0
 func emmission_pollution():
 	nb_unrenewable=nbr_nuclr+nbr_thermal	
@@ -88,7 +88,7 @@ func satisfaction():
 		
 
 func energy_consom():
-	if cycle < minute :
+	if cycle < second :
 		cycle = cycle +1
 	else:
 		game_time += 1
