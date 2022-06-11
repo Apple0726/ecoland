@@ -43,7 +43,7 @@ func satisfaction():
 	else :
 		if happiness < 7200:
 			happiness = happiness + 1
-	print(happy_prct)
+	
 
 func energie_consom():
 	if cycle < minute :
@@ -57,7 +57,7 @@ func energie_consom():
 			base_conso = base_conso - 5
 		if moy_happy <= 10:
 			base_conso = base_conso - 10
-		print()
+		print(base_conso)
 		moy_happy = 0
 		cycle = 0
 	var random = RandomNumberGenerator.new()

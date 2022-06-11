@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lake.png-2bd3ae0409efa9e4a566a32d7d5b6e3e.stex"
+path="res://.import/Lake.png-c63ca6b9d44a1105ea9cc8d7a64b4bac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/Lake.png"
-dest_files=[ "res://.import/Lake.png-2bd3ae0409efa9e4a566a32d7d5b6e3e.stex" ]
+source_file="res://Graphics/Lake.png"
+dest_files=[ "res://.import/Lake.png-c63ca6b9d44a1105ea9cc8d7a64b4bac.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
