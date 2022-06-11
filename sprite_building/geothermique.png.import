@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GrassBackground.png-7bdcca30c2525bab32d70bbd200e31ab.stex"
+path="res://.import/geothermique.png-76eb4f58a7e9c1486da415038e2f4b48.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/GrassBackground.png"
-dest_files=[ "res://.import/GrassBackground.png-7bdcca30c2525bab32d70bbd200e31ab.stex" ]
+source_file="res://sprite_building/geothermique.png"
+dest_files=[ "res://.import/geothermique.png-76eb4f58a7e9c1486da415038e2f4b48.stex" ]
 
 [params]
 
