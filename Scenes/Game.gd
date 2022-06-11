@@ -18,13 +18,21 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 	if bldg == "eolienn":
 		Scoremanager.carbon += 10000
 		Scoremanager.money -= 10000
+		if tiles[id].has("wind"):
+			Scoremanager.wind_power += 100*tiles[id].wind
+		else:
+			Scoremanager.wind_power += 100
 	elif bldg == "nuclear_plant":
 		Scoremanager.carbon += 100000
 		Scoremanager.money -= 10000
+		Scoremanager.pilotable_power += 100
 	elif bldg == "solar_panel":
 		Scoremanager.carbon += 1000
 		Scoremanager.money -= 10000
-
+		if tiles[id].has("sun_beams"):
+			Scoremanager.solar_power += 100*tiles[id].sun_beams
+		else:
+			Scoremanager.solar_power += 100
 		
 
 func on_map_tile_over(id:int, tiles:Array):
