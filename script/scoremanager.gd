@@ -2,6 +2,7 @@ extends Node
 
 var minute = 60
 var money = 0
+
 var carbon
 var happiness = 7200
 var happy_prct = 100
@@ -56,6 +57,7 @@ func energie_consom():
 			base_conso = base_conso - 5
 		if moy_happy <= 10:
 			base_conso = base_conso - 10
+		print()
 		moy_happy = 0
 		cycle = 0
 	var random = RandomNumberGenerator.new()

@@ -1,3 +1,4 @@
+
 extends Node2D
 
 var play = false
@@ -29,8 +30,10 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 		pass
 	elif bldg == "nuclear_plant":
 		pass
+		
 	elif bldg == "solar_panel":
 		pass
+		
 
 func on_map_tile_over(id:int, tiles:Array):
 	if UI.on_panel:
