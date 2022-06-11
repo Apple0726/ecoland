@@ -2,9 +2,10 @@ extends Node2D
 signal tile_over
 signal tile_out
 signal tile_clicked
+signal bldg_built
 var wid = 25
 
-
+var currently_building = ""
 var orig_drag_pos:Vector2
 var dragging = false
 var mouse_pos:Vector2
@@ -69,6 +70,8 @@ func _process(delta):
 		$Camera2D.position.y += 50
 	elif Input.is_action_pressed("D"):
 		$Camera2D.position.x += 50
+	if $Highlight.visible:
+		move_child($Highlight, get_child_count())
 
 func _input(event):
 	if event is InputEventMouse:
@@ -90,10 +93,18 @@ func _input(event):
 		if event is InputEventMouseButton:
 			if Input.is_action_just_pressed("left_click") and $Highlight.visible:
 				orig_drag_pos = event.position
-				emit_signal("tile_clicked", id, tiles)
 				dragging = true
 			elif Input.is_action_just_released("left_click"):
 				dragging = false
+				if currently_building and not tiles[id].has("type"):
+					var bldg = Sprite.new()
+					bldg.texture = load("res://sprite_building/%s.png" % currently_building)
+					add_child(bldg)
+					bldg.position = hl
+					tiles[id].bldg = currently_building
+					emit_signal("bldg_built", id, tiles, currently_building)
+				else:
+					emit_signal("tile_clicked", id, tiles)
 	if Input.is_action_just_pressed("scroll_up"):
 		$Camera2D.zoom /= 1.2
 	if Input.is_action_just_pressed("scroll_down"):
