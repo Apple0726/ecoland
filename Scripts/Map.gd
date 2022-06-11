@@ -5,6 +5,7 @@ signal tile_clicked
 signal bldg_built
 var wid = 25
 
+var nbr_city = 0
 var currently_building = ""
 var orig_drag_pos:Vector2
 var dragging = false
@@ -52,6 +53,7 @@ func _ready():
 				add_child(city)
 				city.position = Vector2(i, j) * 64 + Vector2(32, 32)
 				tile = {"type":TileType.CITY}
+				nbr_city += 1
 			tiles.append(tile)
 	$Camera2D.position = Vector2.ONE * wid * 64 / 2.0
 
@@ -97,6 +99,7 @@ func _input(event):
 				dragging = true
 			elif Input.is_action_just_released("left_click"):
 				dragging = false
+
 				if mouse_in_map:
 					if currently_building and not tiles[id].has("type"):
 						var bldg = Sprite.new()
@@ -107,6 +110,7 @@ func _input(event):
 						emit_signal("bldg_built", id, tiles, currently_building)
 					else:
 						emit_signal("tile_clicked", id, tiles)
+
 	if Input.is_action_just_pressed("scroll_up"):
 		$Camera2D.zoom /= 1.2
 	if Input.is_action_just_pressed("scroll_down"):
