@@ -27,12 +27,11 @@ func _on_MainMenu_fade_menu():
 
 func on_bldg_built(id:int, tiles:Array, bldg:String):
 	if bldg == "eolienn":
-		pass
+		Scoremanager.carbon += 10000
 	elif bldg == "nuclear_plant":
-		pass
-		
+		Scoremanager.carbon += 100000
 	elif bldg == "solar_panel":
-		pass
+		Scoremanager.carbon += 1000
 		
 
 func on_map_tile_over(id:int, tiles:Array):

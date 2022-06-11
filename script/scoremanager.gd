@@ -1,9 +1,9 @@
 extends Node
-
+signal bldg_built
 var minute = 60
 var money = 0
 
-var carbon
+var carbon = 0
 var happiness = 7200
 var happy_prct = 100
 var mean_happy = 0
@@ -23,6 +23,7 @@ func _process(delta):
 	energie_consom()
 	satisfaction()
 	_money()
+	emmission_carbon()
 	
 	
 func _money():
