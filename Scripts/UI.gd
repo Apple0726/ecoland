@@ -94,34 +94,34 @@ func set_texture(t, st:String, bldg = true):
 
 func _on_Nuclear_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Nuclear power plant\nCost: € %s\n+%s controllable power\n+%s pollution" % [ScoreManager.format_num(ScoreManager.bldg_info.nuclear_plant.cost), ScoreManager.format_num(ScoreManager.bldg_info.nuclear_plant.power), ScoreManager.format_num(ScoreManager.bldg_info.nuclear_plant.pollution)])
+	tooltip.show_tooltip("Nuclear power plant\nCost: € %s\n+%s controllable power\n+%s PP + 174 PP/s" % [ScoreManager.format_num(ScoreManager.bldg_info.nuclear_plant.cost), ScoreManager.format_num(ScoreManager.bldg_info.nuclear_plant.power), ScoreManager.format_num(ScoreManager.bldg_info.nuclear_plant.pollution)])
 
 
 func _on_SolarPanel_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Solar panels\nProduces continuous power that fluctuates with time.\nCost: € %s\n+%s controllable power\n+%s pollution" % [ScoreManager.format_num(ScoreManager.bldg_info.solar_panel.cost), ScoreManager.format_num(ScoreManager.bldg_info.solar_panel.power), ScoreManager.format_num(ScoreManager.bldg_info.solar_panel.pollution)])
+	tooltip.show_tooltip("Solar panels\nProduces continuous power that fluctuates with time.\nCost: € %s\n+%s controllable power\n+%s PP" % [ScoreManager.format_num(ScoreManager.bldg_info.solar_panel.cost), ScoreManager.format_num(ScoreManager.bldg_info.solar_panel.power), ScoreManager.format_num(ScoreManager.bldg_info.solar_panel.pollution)])
 
 
 func _on_WindTurbine_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Wind turbines\nProduces continuous power that fluctuates with time.\nCost: € %s\n+%s controllable power\n+%s pollution" % [ScoreManager.format_num(ScoreManager.bldg_info.wind_turbine.cost), ScoreManager.format_num(ScoreManager.bldg_info.wind_turbine.power), ScoreManager.format_num(ScoreManager.bldg_info.wind_turbine.pollution)])
+	tooltip.show_tooltip("Wind turbines\nProduces continuous power that fluctuates with time.\nCost: € %s\n+%s controllable power\n+%s PP" % [ScoreManager.format_num(ScoreManager.bldg_info.wind_turbine.cost), ScoreManager.format_num(ScoreManager.bldg_info.wind_turbine.power), ScoreManager.format_num(ScoreManager.bldg_info.wind_turbine.pollution)])
 
 func _on_CoalPlant_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Coal plant\nProduces cheap, dirty but controllable power that adapts to demand.\nCost: € %s\n+%s controllable power\n+%s pollution" % [ScoreManager.format_num(ScoreManager.bldg_info["centrale_charbon"].cost), ScoreManager.format_num(ScoreManager.bldg_info["centrale_charbon"].power), ScoreManager.format_num(ScoreManager.bldg_info["centrale_charbon"].pollution)])
+	tooltip.show_tooltip("Coal plant\nProduces cheap, dirty but controllable power that adapts to demand.\nCost: € %s\n+%s controllable power\n+%s PP + 108 PP/s" % [ScoreManager.format_num(ScoreManager.bldg_info["centrale_charbon"].cost), ScoreManager.format_num(ScoreManager.bldg_info["centrale_charbon"].power), ScoreManager.format_num(ScoreManager.bldg_info["centrale_charbon"].pollution)])
 
 func _on_Geothermal_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Geothermal plant\nAn expensive, cleaner alternative for controllable power.\nCost: € %s\n+%s controllable power\n+%s pollution" % [ScoreManager.format_num(ScoreManager.bldg_info["geothermal_plant"].cost), ScoreManager.format_num(ScoreManager.bldg_info["geothermal_plant"].power), ScoreManager.format_num(ScoreManager.bldg_info["geothermal_plant"].pollution)])
+	tooltip.show_tooltip("Geothermal plant\nAn expensive, cleaner alternative for controllable power.\nCost: € %s\n+%s controllable power\n+%s PP" % [ScoreManager.format_num(ScoreManager.bldg_info["geothermal_plant"].cost), ScoreManager.format_num(ScoreManager.bldg_info["geothermal_plant"].power), ScoreManager.format_num(ScoreManager.bldg_info["geothermal_plant"].pollution)])
 
 func _on_Hydro_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Tidal turbines\nProduces clean controllable power. Must be built on water.\nCost: € %s\n+%s controllable power\n+%s pollution" % [ScoreManager.format_num(ScoreManager.bldg_info["hydro"].cost), ScoreManager.format_num(ScoreManager.bldg_info["hydro"].power), ScoreManager.format_num(ScoreManager.bldg_info["hydro"].pollution)])
+	tooltip.show_tooltip("Tidal turbines\nProduces clean controllable power. Must be built on water.\nCost: € %s\n+%s controllable power\n+%s PP" % [ScoreManager.format_num(ScoreManager.bldg_info["hydro"].cost), ScoreManager.format_num(ScoreManager.bldg_info["hydro"].power), ScoreManager.format_num(ScoreManager.bldg_info["hydro"].pollution)])
 
 
 func _on_City_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("City\nConstruct buildings where residents live their lives.\nCannot be destroyed once placed.\nCost: € %s\n+%s power consumption of population\n+%s pollution" % [ScoreManager.format_num(ScoreManager.bldg_info["city"].cost), ScoreManager.format_num(ScoreManager.bldg_info["city"].power_consumption), ScoreManager.format_num(ScoreManager.bldg_info["city"].pollution)])
+	tooltip.show_tooltip("City\nConstruct buildings where residents live their lives.\nCannot be destroyed once placed.\nCost: € %s\n+%s power consumption of population\n+%s PP" % [ScoreManager.format_num(ScoreManager.bldg_info["city"].cost), ScoreManager.format_num(ScoreManager.bldg_info["city"].power_consumption), ScoreManager.format_num(ScoreManager.bldg_info["city"].pollution)])
 
 
 func _on_Hydro_pressed():

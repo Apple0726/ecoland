@@ -2,7 +2,7 @@ extends Node
 
 var bldg_info = {
 	"wind_turbine":{"cost":8000, "pollution":4000, "power":2000},
-	"nuclear_plant":{"cost":100000, "pollution":13000, "power":10000},
+	"nuclear_plant":{"cost":100000, "pollution":10000, "power":10000},
 	"solar_panel":{"cost":8000, "pollution":2000, "power":2000},
 	"centrale_charbon":{"cost":10000, "pollution":7000, "power":6000},
 	"geothermal_plant":{"cost":30000, "pollution":5000, "power":6000},
