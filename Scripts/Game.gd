@@ -50,7 +50,6 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 	elif bldg == "city":
 		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
-		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
 		ScoreManager.nbr_city += 1
 func plant_tree():
 	ScoreManager.nbr_tree +=1

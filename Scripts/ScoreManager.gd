@@ -37,7 +37,7 @@ var nbr_field = 0
 var nbr_tree = 0
 var game_time = 0
 var count_victoire = 0
-const point_vicoitre = 10000
+const point_vicoitre = 360
 const max_pollution = 100000
 
 func _ready():
@@ -46,6 +46,7 @@ func _ready():
 
 
 func _process(delta):
+	print(count_victoire)
 	update_consumption()
 	update_intermittent_power()
 	update_power()
@@ -63,8 +64,7 @@ func _process(delta):
 	if game_time >= 300:
 		get_node("/root/Game")._on_win()
 		#emit_signal("win")
-	else:
-		count_victoire = 0
+	
 	
 func update_money():
 	if cycle < second:
