@@ -61,7 +61,7 @@ func _process(delta):
 	if nb_nonrenewable == 0 and happy_percentage> 90 and energy_consommation<=energy_production:
 		count_victoire +=1
 		if count_victoire>=point_vicoitre:
-			score += (300-game_time)*80 + money/1000 
+			score += (300-game_time)*100 + money/10000 
 			get_node("/root/Game")._on_win()
 		#emit_signal("win")
 	if game_time >= 300:
@@ -76,7 +76,7 @@ func update_money():
 	if cycle < second:
 		mean_happy = mean_happy + happy_percentage
 	else:
-		money += 100 + (50*mean_happy/second)*nbr_city
+		money +=  (8*mean_happy/second)*nbr_city
 		moy_happy = round(mean_happy/second)
 		mean_happy = 0
 
@@ -152,5 +152,5 @@ func update_power():
 			coeff_prod = diff/pilotable_power
 			energy_production = energy_consommation
 func update_score():
-	score +=  (max_pollution - pollution)/100000  + happy_percentage/10000 
+	score +=  (max_pollution - pollution)/1000000  + happy_percentage/100000 
 
