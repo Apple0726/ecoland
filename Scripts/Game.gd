@@ -102,6 +102,8 @@ func on_map_tile_over(id:int, tiles:Array):
 				txt = "Forest"
 			elif tiles[id].type == 2:
 				txt = "City"
+			elif tiles[id].type == 3:
+				txt = "Farmland"
 			tooltip.show_tooltip(txt)
 		else:
 			var txt = ""

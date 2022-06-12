@@ -27,6 +27,16 @@ expand_margin_bottom = 5.0
 shadow_size = 1
 shadow_offset = Vector2( 2, 2 )
 
+[sub_resource type="Shader" id=10]
+code = "shader_type canvas_item;
+
+void vertex() {
+  VERTEX += vec2(0, 1.5 * sin(12.0 * TIME));
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+
 [sub_resource type="Animation" id=8]
 length = 1.5
 tracks/0/type = "value"
@@ -295,16 +305,6 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Shader" id=10]
-code = "shader_type canvas_item;
-
-void vertex() {
-  VERTEX += vec2(0, 1.5 * sin(12.0 * TIME));
-}"
-
-[sub_resource type="ShaderMaterial" id=11]
-shader = SubResource( 10 )
-
 [sub_resource type="Animation" id=13]
 resource_name = "MovePerson"
 length = 0.4
@@ -527,6 +527,17 @@ margin_right = 204.0
 margin_bottom = -52.0001
 custom_styles/panel = SubResource( 9 )
 
+[node name="Arrow" type="TextureRect" parent="Panel"]
+visible = false
+material = SubResource( 11 )
+margin_left = 372.0
+margin_top = 88.0
+margin_right = 392.0
+margin_bottom = 104.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
 [node name="Label" type="RichTextLabel" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -563,17 +574,6 @@ custom_styles/panel = SubResource( 5 )
 autoplay = "Blink"
 anims/Blink = SubResource( 6 )
 anims/RESET = SubResource( 7 )
-
-[node name="Arrow" type="TextureRect" parent="."]
-visible = false
-material = SubResource( 11 )
-margin_left = 680.0
-margin_top = 520.0
-margin_right = 700.0
-margin_bottom = 536.0
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 6
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="."]
 anims/MovePerson = SubResource( 13 )

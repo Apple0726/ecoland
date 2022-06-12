@@ -1,8 +1,5 @@
 extends Node
 
-signal game_over
-signal win
-
 var bldg_info = {
 	"wind_turbine":{"cost":4000, "pollution":5000, "power":2000},
 	"nuclear_plant":{"cost":20000, "pollution":15000, "power":10000},

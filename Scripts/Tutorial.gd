@@ -47,7 +47,7 @@ func _ready():
 
 func _process(delta):
 	$Panel/Label.visible_characters += delta * 60.0
-	$Arrow.visible = $Panel/Label.visible_characters >= len($Panel/Label.text)
+	$Panel/Arrow.visible = $Panel/Label.visible_characters >= len($Panel/Label.text)
 	if not moved:#Move the presenter up and down at various points in dialogue
 		if type == TUTORIAL and current_text == 4 and $Panel/Label.visible_characters >= 75:
 			moved = true
