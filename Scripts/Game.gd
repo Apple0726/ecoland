@@ -1,10 +1,9 @@
-
 extends Node2D
 
 onready var tooltip = $CanvasLayer/Tooltip
 var play = false
-var UI = preload("res://Scenes/UI.tscn").instance()
-var map = preload("res://Scenes/Map.tscn").instance()
+var UI 
+var map
 var mouse_pos:Vector2 = Vector2.ZERO
 var play_tuto:bool
 
@@ -146,6 +145,8 @@ func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if not play:
 		remove_child($MainMenu)
+		UI = preload("res://Scenes/UI.tscn").instance()
+		map = preload("res://Scenes/Map.tscn").instance()
 		$AnimationPlayer.play_backwards("Fade")
 		add_child(UI)
 		add_child(map)
