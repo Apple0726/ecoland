@@ -46,7 +46,6 @@ func _ready():
 
 
 func _process(delta):
-	print(score)
 	update_consumption()
 	update_intermittent_power()
 	update_power()
