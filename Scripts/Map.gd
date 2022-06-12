@@ -144,7 +144,7 @@ func _input(event):
 		return
 	if event is InputEventMouse:
 		var local_coord = to_local(event.position) - Vector2(512, 300)
-		var hl:Vector2 = Vector2.ZERO
+		var hl:Vector2 = Vector2.ZERO#Position of higlighted tile
 		hl.x = stepify(local_coord.x * $Camera2D.zoom.x + $Camera2D.position.x - 32, 64) + 32
 		hl.y = stepify(local_coord.y * $Camera2D.zoom.x + $Camera2D.position.y - 32, 64) + 32
 		var id = (hl.x-32)/64 + int((hl.y-32)/64)*wid
@@ -166,25 +166,7 @@ func _input(event):
 			elif Input.is_action_just_released("left_click"):
 				dragging = false
 				if mouse_in_map:
-					if currently_building and not tiles[id].has("type") and not tiles[id].has("bldg") and ScoreManager.money >= ScoreManager.bldg_info[currently_building].cost:
-						var bldg = Sprite.new()
-						bldg.texture = load("res://Graphics/sprite_building/%s.png" % currently_building)
-						add_child(bldg)
-						bldg.position = hl
-						sprites[str(id)] = bldg
-						tiles[id].bldg = currently_building
-						emit_signal("bldg_built", id, tiles, currently_building)
-					elif current_action:
-						if current_action == "chop_trees" and tiles[id].has("type") and tiles[id].type == TileType.FOREST:
-							tiles[id].erase("type")
-							sprites[str(id)].queue_free()
-							emit_signal("trees_destroyed")
-						elif current_action == "destroy_bldg" and tiles[id].has("bldg"):
-							emit_signal("bldg_destroyed", id, tiles, tiles[id].bldg)
-							tiles[id].erase("bldg")
-							sprites[str(id)].queue_free()
-					else:
-						emit_signal("tile_clicked", id, tiles)
+					emit_signal("tile_clicked", id, tiles, hl)
 
 	if Input.is_action_just_pressed("scroll_up"):
 		$Camera2D.zoom /= 1.2

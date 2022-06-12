@@ -195,3 +195,12 @@ func _on_GameOver_pressed():
 func _on_Victory_pressed():
 	tooltip.hide_tooltip()
 	get_parent()._on_win()
+
+
+func _on_Timer_timeout():
+	if ScoreManager.happy_percentage > 70:
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Happiness.png")
+	elif ScoreManager.happy_percentage > 40:
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/neutral.png")
+	else:
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/unhappiness.png")
