@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Graphics/Money.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/Happiness.png" type="Texture" id=2]
@@ -43,6 +43,18 @@ border_color = Color( 0.376471, 0.176471, 0, 1 )
 border_blend = true
 shadow_size = 2
 shadow_offset = Vector2( 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.27451, 0.168627, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_color = Color( 0.384314, 0.25098, 0, 1 )
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+shadow_size = 1
+shadow_offset = Vector2( 2, 2 )
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -392,6 +404,18 @@ margin_right = 44.0
 margin_bottom = 32.0
 color = Color( 0, 0.631373, 0.854902, 1 )
 
+[node name="PauseSimu" type="Button" parent="CanvasLayer"]
+margin_left = 880.0
+margin_top = 560.0
+margin_right = 1005.0
+margin_bottom = 581.0
+grow_horizontal = 0
+theme = SubResource( 2 )
+custom_styles/hover = SubResource( 20 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+text = "Pause simulation"
+
 [node name="UpdateTexture" type="Timer" parent="."]
 autostart = true
 
@@ -433,4 +457,5 @@ autostart = true
 [connection signal="pressed" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_DestroyBldg_pressed"]
 [connection signal="pressed" from="CanvasLayer/Victory" to="." method="_on_Victory_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver" to="." method="_on_GameOver_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseSimu" to="." method="_on_PauseSimu_pressed"]
 [connection signal="timeout" from="UpdateTexture" to="." method="_on_Timer_timeout"]

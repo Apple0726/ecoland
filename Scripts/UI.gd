@@ -10,7 +10,11 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	$CanvasLayer/Progress/Label.text = "%s years left!" % (int(5 - ScoreManager.game_time / 60))
+	var years_left:int = 5 - ScoreManager.game_time / 60
+	if years_left == 1:
+		$CanvasLayer/Progress/Label.text = "%s year left!" % (years_left)
+	else:
+		$CanvasLayer/Progress/Label.text = "%s years left!" % (years_left)
 	$CanvasLayer/Progress/Bar.rect_size.x = clamp(range_lerp(ScoreManager.game_time, 0.0, 300.0, 0.0, 1.0), 0, 1) * 104
 	$CanvasLayer/MoneyVBox/Label.text = format_num(ScoreManager.money)
 	$CanvasLayer/PollutionVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.pollution)), format_num(ScoreManager.max_pollution)]
@@ -222,3 +226,12 @@ func _on_Timer_timeout():
 	else:
 		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Unhappiness.png")
 
+
+
+func _on_PauseSimu_pressed():
+	if ScoreManager.is_processing():
+		ScoreManager.set_process(false)
+		$CanvasLayer/PauseSimu.text = "Resume simulation"
+	else:
+		ScoreManager.set_process(true)
+		$CanvasLayer/PauseSimu.text = "Pause simulation"

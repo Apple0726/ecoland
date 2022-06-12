@@ -129,16 +129,17 @@ func on_map_tile_out():
 func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 	if UI.on_panel or UI.on_button:
 		return
-	var currently_building = map.currently_building
-	var current_action = map.current_action
+	var currently_building:String = map.currently_building
+	var current_action:String = map.current_action
 	if currently_building and not tiles[id].has("type") and not tiles[id].has("bldg") and ScoreManager.money >= ScoreManager.bldg_info[currently_building].cost:
-		var bldg = Sprite.new()
-		bldg.texture = load("res://Graphics/sprite_building/%s.png" % currently_building)
-		add_child(bldg)
-		bldg.position = pos
-		map.sprites[str(id)] = bldg
-		tiles[id].bldg = currently_building
-		map.emit_signal("bldg_built", id, tiles, currently_building)
+		if currently_building == "hydro" and tiles[id].type == map.TileType.LAKE or currently_building != "hydro":
+			var bldg = Sprite.new()
+			bldg.texture = load("res://Graphics/sprite_building/%s.png" % currently_building)
+			add_child(bldg)
+			bldg.position = pos
+			map.sprites[str(id)] = bldg
+			tiles[id].bldg = currently_building
+			map.emit_signal("bldg_built", id, tiles, currently_building)
 	elif current_action:
 		if current_action == "chop_trees" and tiles[id].has("type"):
 			if tiles[id].type == map.TileType.FOREST:
@@ -210,3 +211,12 @@ func back_to_menu():
 	menu.tooltip = tooltip
 	menu.name = "MainMenu"
 	menu.connect("fade_menu", self, "_on_MainMenu_fade_menu")
+
+func _input(event):
+	if Input.is_action_just_released("spacebar"):
+		if ScoreManager.is_processing():
+			ScoreManager.set_process(false)
+			UI.get_node("CanvasLayer/PauseSimu").text = "Resume simulation"
+		else:
+			ScoreManager.set_process(true)
+			UI.get_node("CanvasLayer/PauseSimu").text = "Pause simulation"
