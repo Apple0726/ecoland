@@ -4,6 +4,7 @@ signal tile_out
 signal tile_clicked
 signal bldg_built
 signal trees_destroyed
+signal field_destroyed
 signal bldg_destroyed
 var wid = 15
 
@@ -45,6 +46,10 @@ func _ready():
 	field_noise.seed = randi()
 	field_noise.octaves = 1
 	field_noise.period = 150
+	var lake_threshold = 0.5# Threshold values between -1 and 1.
+	var tree_threshold = 0.2# Closer to -1: more of that zone. Closer to 1: less of it
+	var city_threshold = 0.5
+	var field_threshold = 0.55
 	for j in wid:
 		for i in wid:
 			var level:float = noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
@@ -53,27 +58,28 @@ func _ready():
 			var field_level:float = field_noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
 			var t_id = i % wid + j * wid
 			var tile = {}
-			if level > 0.5:
+			if level > lake_threshold:
 				$TileMap.set_cell(i, j, 1)
 				tile = {"type":TileType.LAKE}
 			else:
 				$TileMap.set_cell(i, j, 0)
-			if tree_level > 0.5 and level < 0.5:
+			if tree_level > tree_threshold and level < lake_threshold:
 				var tree = preload("res://Scenes/Trees.tscn").instance()
 				add_child(tree)
 				sprites[str(t_id)] = tree
 				tree.position = Vector2(i, j) * 64 + Vector2(32, 32)
 				tile = {"type":TileType.FOREST}
-			if city_level > 0.5 and tree_level < 0.5 and level < 0.5:
+			if city_level > city_threshold and tree_level < tree_threshold and level < lake_threshold:
 				var city = preload("res://Scenes/City.tscn").instance()
 				add_child(city)
 				city.position = Vector2(i, j) * 64 + Vector2(32, 32)
 				tile = {"type":TileType.CITY}
 				nbr_city += 1
-			if field_level> 0.5 and city_level < 0.5 and tree_level < 0.5 and level < 0.5:
+			if field_level> field_threshold and city_level < city_threshold and tree_level < tree_threshold and level < lake_threshold:
 				var field = preload("res://Scenes/Field.tscn").instance()
 				add_child(field)
 				field.position = Vector2(i, j) * 64 + Vector2(32, 32)
+				sprites[str(t_id)] = field
 				tile = {"type":TileType.FIELD}
 				nbr_field += 1
 			tiles.append(tile)

@@ -87,7 +87,9 @@ func _on_Button_pressed():
 					return
 				$Panel/Label.bbcode_text = text_victory[current_text]
 			elif type == GAME_OVER:
-				if current_text == 5:
+				if current_text == 3:
+					$TextureRect.texture = preload("res://Graphics/fille tuto sad.png")
+				elif current_text == 5:
 					$AnimationPlayer.play("End")
 					set_process(false)
 					return

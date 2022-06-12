@@ -52,7 +52,10 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 
 func trees_destroyed():
 	pass
-	
+
+func field_destroyed():
+	pass
+
 
 func bldg_destroyed(id:int, tiles:Array, bldg:String):
 	if bldg == "wind_turbine":
@@ -135,10 +138,13 @@ func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 		tiles[id].bldg = currently_building
 		map.emit_signal("bldg_built", id, tiles, currently_building)
 	elif current_action:
-		if current_action == "chop_trees" and tiles[id].has("type") and tiles[id].type == map.TileType.FOREST:
-			tiles[id].erase("type")
+		if current_action == "chop_trees" and tiles[id].has("type"):
+			if tiles[id].type == map.TileType.FOREST:
+				map.emit_signal("trees_destroyed")
+			elif tiles[id].type == map.TileType.FIELD:
+				map.emit_signal("field_destroyed")
 			map.sprites[str(id)].queue_free()
-			map.emit_signal("trees_destroyed")
+			tiles[id].erase("type")
 		elif current_action == "destroy_bldg" and tiles[id].has("bldg"):
 			map.emit_signal("bldg_destroyed", id, tiles, tiles[id].bldg)
 			tiles[id].erase("bldg")
@@ -146,7 +152,7 @@ func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if not play:
-		remove_child($MainMenu)
+		$MainMenu.queue_free()
 		UI = preload("res://Scenes/UI.tscn").instance()
 		map = preload("res://Scenes/Map.tscn").instance()
 		$AnimationPlayer.play_backwards("Fade")
@@ -158,6 +164,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		map.connect("tile_clicked", self, "on_map_tile_click")
 		map.connect("bldg_built", self, "on_bldg_built")
 		map.connect("trees_destroyed", self, "trees_destroyed")
+		map.connect("field_destroyed", self, "field_destroyed")
 		map.connect("bldg_destroyed", self, "bldg_destroyed")
 		play = true
 		if play_tuto:
@@ -195,6 +202,7 @@ func _on_win():
 func back_to_menu():
 	map.queue_free()
 	UI.queue_free()
+	play = false
 	var menu = preload("res://Scenes/MainMenu.tscn").instance()
 	call_deferred("add_child", menu)
 	menu.name = "MainMenu"

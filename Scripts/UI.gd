@@ -164,7 +164,7 @@ func format_num(num:float):
 
 func _on_ChopTrees_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Chop trees.\nMakes more land for your buildings, but creates pollution.")
+	tooltip.show_tooltip("Destroy a zone (forest, farmland) to make land for your buildings.\nCreates pollution.")
 
 
 func _on_ChopTrees_pressed():
@@ -201,6 +201,6 @@ func _on_Timer_timeout():
 	if ScoreManager.happy_percentage > 70:
 		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Happiness.png")
 	elif ScoreManager.happy_percentage > 40:
-		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/neutral.png")
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Neutral.png")
 	else:
-		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/unhappiness.png")
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Unhappiness.png")
