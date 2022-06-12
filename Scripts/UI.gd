@@ -14,7 +14,7 @@ func _process(delta):
 	$CanvasLayer/PollutionVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.pollution)), format_num(ScoreManager.max_pollution)]
 	if (ScoreManager.pollution - ScoreManager.max_pollution)/ScoreManager.max_pollution < 0.1:
 		$CanvasLayer/PollutionVBox/Label["custom_colors/font_color"] = Color.red
-	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.energy_production)), format_num(round(ScoreManager.energy_consommation))]
+	$CanvasLayer/EnergyVBox/Label.text = "%s / %s \n %s \n %s" % [format_num(round(ScoreManager.energy_production)),format_num(round(ScoreManager.energy_consommation)),format_num(round(ScoreManager.pilotable_power)),format_num(round(ScoreManager.installed_intermittent_power))]
 	if ScoreManager.energy_production >= ScoreManager.energy_consommation:
 		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.green
 	else:

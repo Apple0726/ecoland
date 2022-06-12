@@ -22,6 +22,7 @@ var wind_power = 0
 var solar_power = 0
 var pilotable_power = 0
 var intermittent_power = 0
+var installed_intermittent_power = 0
 var coeff_prod = 0
 var base_conso = 20000
 var cycle = 0
@@ -111,6 +112,7 @@ func update_consumption():
 	
 	
 func update_intermittent_power():
+	installed_intermittent_power= solar_power + wind_power
 	intermittent_power = round(solar_power*(randf()+0.1) + wind_power*(randf()+0.1))
 	
 func update_power():
