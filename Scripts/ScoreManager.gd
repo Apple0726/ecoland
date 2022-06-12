@@ -14,7 +14,7 @@ var bldg_info = {
 >>>>>>> Stashed changes
 }
 var second = 60
-var money = 20000000
+var money = 20000
 var pollution = 0
 var happiness = 21600
 var happy_percentage = 100
@@ -55,7 +55,6 @@ func _process(delta):
 	update_happiness()
 	update_money()
 	update_pollution()
-	print(nb_nonrenewable)
 	if pollution > max_pollution or happy_percentage <= 0:
 		get_node("/root/Game")._on_game_over()
 		#emit_signal("game_over")
@@ -84,7 +83,7 @@ func update_pollution():
 	
 	pollution += nbr_thermal*2.5*coeff_prod + nbr_nuclr*1.66*coeff_prod  # CO2 rejeté par les centrales 
 	if pollution>=0:
-		pollution += nbr_city*0.05 - nbr_tree*0.008
+		pollution += nbr_city*0.05 - nbr_tree*0.01
 	if pollution< 0:
 		pollution = 0
 		#thermiques+pollution nucléaire
