@@ -173,6 +173,7 @@ func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if not play:
+		ScoreManager.init_vars()
 		$MainMenu.queue_free()
 		UI = preload("res://Scenes/UI.tscn").instance()
 		map = preload("res://Scenes/Map.tscn").instance()

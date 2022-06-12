@@ -78,6 +78,7 @@ func _ready():
 				tile = {"type":TileType.FIELD}
 				ScoreManager.nbr_field += 1
 			tiles.append(tile)
+	
 	generate_zones("sun_beams")
 	randomize()
 	generate_zones("wind")
@@ -194,3 +195,14 @@ func _input(event):
 		$Camera2D.zoom *= 1.2 
 	$Camera2D.zoom.x = clamp($Camera2D.zoom.x, 1.0/5, 5)
 	$Camera2D.zoom.y = clamp($Camera2D.zoom.y, 1.0/5, 5)
+
+onready var tween = $Tween
+
+func _on_Timer_timeout():
+	var p = range_lerp(ScoreManager.pollution, 0, ScoreManager.max_pollution, 1.0, 0.01)
+	var br = range_lerp(ScoreManager.pollution, 0, ScoreManager.max_pollution, 1.0, 0.7)
+	tween.interpolate_property($WorldEnvironment.environment, "adjustment_brightness", null, clamp(br, 0.7, 1.0), 1.0)
+	tween.interpolate_property($WorldEnvironment.environment, "adjustment_saturation", null, clamp(p, 0.01, 1.0), 1.0)
+	tween.start()
+	#$WorldEnvironment.environment.adjustment_brightness = clamp(br, 0.7, 1.0)
+	#$WorldEnvironment.environment.adjustment_saturation = clamp(p, 0.01, 1.0)
