@@ -9,24 +9,26 @@
 font_data = ExtResource( 2 )
 
 [node name="Help_menu" type="Node2D"]
+position = Vector2( 512, 300 )
 script = ExtResource( 4 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 137.0
-margin_top = 100.0
-margin_right = 852.0
-margin_bottom = 541.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -370.0
+margin_top = -228.5
+margin_right = 370.0
+margin_bottom = 228.5
 texture = ExtResource( 1 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TextureRect"]
 margin_left = 22.0
-margin_top = 8.0
+margin_top = 20.0
 margin_right = 706.0
-margin_bottom = 426.0
+margin_bottom = 438.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 custom_fonts/mono_font = SubResource( 1 )
 text = " Game rules:
@@ -52,16 +54,16 @@ text = " Game rules:
 	
 	- Trees absorb pollution.
 	
-	- You can also win the game by having only renewable sources of energy and having 100% happinness
+	- You can also win the game by having only renewable sources of energy and having 100% happiness
 	  for a few seconds
 	
-	- Finally you will get a score depending on your PP and the happinness of your citizens"
+	- Finally you will get a score depending on your PP and the happiness of your citizens"
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect"]
-margin_left = 682.594
-margin_top = 1.18921
-margin_right = 714.594
-margin_bottom = 34.1892
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -32.0
+margin_bottom = 33.0
 texture_normal = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

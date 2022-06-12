@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Graphics/Grass.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/Lake.png" type="Texture" id=2]
@@ -35,6 +35,10 @@
 1/shapes = [  ]
 1/z_index = 0
 
+[sub_resource type="Environment" id=2]
+background_mode = 4
+adjustment_enabled = true
+
 [node name="Map" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -49,3 +53,13 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 65536, 0, 0, 65537
 
 [node name="Highlight" type="Sprite" parent="."]
 texture = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

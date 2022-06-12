@@ -194,3 +194,10 @@ func _input(event):
 		$Camera2D.zoom *= 1.2 
 	$Camera2D.zoom.x = clamp($Camera2D.zoom.x, 1.0/5, 5)
 	$Camera2D.zoom.y = clamp($Camera2D.zoom.y, 1.0/5, 5)
+
+onready var tween = $Tween
+
+func _on_Timer_timeout():
+	tween.interpolate_property($WorldEnvironment.environment, "adjustment_saturation", null, clamp(range_lerp(ScoreManager.pollution, 0, ScoreManager.max_pollution, 1.0, 0.01), 0.01, 1.0), 1.0)
+	tween.interpolate_property($WorldEnvironment.environment, "adjustment_brightness", null, clamp(range_lerp(ScoreManager.pollution, 0, ScoreManager.max_pollution, 1.0, 0.7), 0.7, 1.0), 1.0)
+	tween.start()

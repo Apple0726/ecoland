@@ -78,8 +78,9 @@ func _on_Button_pressed():
 					$BuildButtons.visible = true
 					$TextureRect.texture = preload("res://Graphics/fille tuto show.png")
 					$TextureRect.flip_h = true
-				elif current_text == 8:
+				elif current_text >= 8:
 					$AnimationPlayer.play("EndTuto")
+					
 					set_process(false)
 					return
 				else:
@@ -87,7 +88,7 @@ func _on_Button_pressed():
 					$TextureRect.flip_h = false
 				$Panel/Label.bbcode_text = texts[current_text]
 			elif type == VICTORY:
-				if current_text == 4:
+				if current_text >= 4:
 					$AnimationPlayer.play("End")
 					set_process(false)
 					return
@@ -95,7 +96,7 @@ func _on_Button_pressed():
 			elif type == GAME_OVER:
 				if current_text == 3:
 					$TextureRect.texture = preload("res://Graphics/fille tuto sad.png")
-				elif current_text == 5:
+				elif current_text >= 5:
 					$AnimationPlayer.play("End")
 					set_process(false)
 					return
