@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/city.png-ca0e4dfe267d6ea4f689ca8df8b5bd9d.stex"
+path="res://.import/fond-inventaire.jpg-4314881a6376b23363806365bed40f69.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/sprite_building/city.png"
-dest_files=[ "res://.import/city.png-ca0e4dfe267d6ea4f689ca8df8b5bd9d.stex" ]
+source_file="res://Graphics/fond-inventaire.jpg"
+dest_files=[ "res://.import/fond-inventaire.jpg-4314881a6376b23363806365bed40f69.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/city.png-ca0e4dfe267d6ea4f689ca8df8b5bd9d.stex"
+path="res://.import/CloseButton.png-51d34f7b0c4805ace9cfa4ec27aa02d6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/sprite_building/city.png"
-dest_files=[ "res://.import/city.png-ca0e4dfe267d6ea4f689ca8df8b5bd9d.stex" ]
+source_file="res://Graphics/CloseButton.png"
+dest_files=[ "res://.import/CloseButton.png-51d34f7b0c4805ace9cfa4ec27aa02d6.stex" ]
 
 [params]
 
