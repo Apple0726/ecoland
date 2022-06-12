@@ -1,13 +1,13 @@
 extends Node
 
 var bldg_info = {
-	"wind_turbine":{"cost":8000, "pollution":5000, "power":2000},
-	"nuclear_plant":{"cost":100000, "pollution":15000, "power":10000},
+	"wind_turbine":{"cost":8000, "pollution":4000, "power":2000},
+	"nuclear_plant":{"cost":100000, "pollution":13000, "power":10000},
 	"solar_panel":{"cost":8000, "pollution":2000, "power":2000},
-	"centrale_charbon":{"cost":10000, "pollution":8000, "power":6000},
-	"geothermal_plant":{"cost":30000, "pollution":6000, "power":6000},
-	"hydro":{"cost":80000, "pollution":200, "power":8000},
-	"city":{"cost":2000, "pollution":2000, "power_consumption":2000},
+	"centrale_charbon":{"cost":10000, "pollution":7000, "power":6000},
+	"geothermal_plant":{"cost":30000, "pollution":5000, "power":6000},
+	"hydro":{"cost":80000, "pollution":2000, "power":8000},
+	"city":{"cost":2000, "pollution":1000, "power_consumption":2000},
 }
 var second = 60
 var money = 20000
@@ -81,9 +81,9 @@ func update_money():
 
 func update_pollution():
 	nb_nonrenewable = nbr_nuclr+nbr_thermal
-	pollution += nbr_thermal*2.5*coeff_prod + nbr_nuclr*1.66*coeff_prod  # CO2 rejeté par les centrales 
+	pollution += nbr_thermal*2.9*coeff_prod + nbr_nuclr*1.8*coeff_prod  # CO2 rejeté par les centrales 
 	if pollution>=0:
-		pollution += nbr_city*0.05 - nbr_tree*0.01
+		pollution += nbr_city*0.07 - nbr_tree*0.02
 	if pollution< 0:
 		pollution = 0
 		
