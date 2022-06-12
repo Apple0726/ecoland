@@ -35,7 +35,7 @@ func _input(event):
 
 func set_pos():
 	rect_position = mouse_pos
-	if rect_position.x > 1024 - rect_size.x:
-		rect_position.x = 1024 - rect_size.x
+	if rect_position.x > 960 - rect_size.x:
+		rect_position.x = 960 - rect_size.x
 	if rect_position.y > 600 - rect_size.y:
 		rect_position.y = 600 - rect_size.y

@@ -7,7 +7,11 @@ var bldg_info = {
 	"centrale_charbon":{"cost":12000, "pollution":8000, "power":6000},
 	"geothermal_plant":{"cost":15000, "pollution":8000, "power":6000},
 	"hydro":{"cost":40000000, "pollution":20000, "power":200000},
+<<<<<<< Updated upstream
 	
+=======
+	"city":{"cost":40000, "pollution":20000, "power":20000},
+>>>>>>> Stashed changes
 }
 var second = 60
 var money = 20000000

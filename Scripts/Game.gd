@@ -43,12 +43,11 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
 		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
-	#elif bldg == "hydrolic_central":
-	#	ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
-	#	ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
-	#	ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
-	
-		
+	elif bldg == "hydro":
+		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
+		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
+		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
+
 
 func trees_destroyed():
 	ScoreManager.nbr_tree -=1
@@ -84,14 +83,14 @@ func bldg_destroyed(id:int, tiles:Array, bldg:String):
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
 		ScoreManager.pilotable_power -= ScoreManager.bldg_info[bldg].power
 		ScoreManager.nbr_thermal -= 1
-	#elif bldg == "geothermal_plant":
-	#	ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
-	#	ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
-	#	ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
-	#elif bldg == "hydrolic_central":
-	#	ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
-	#	ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
-	#	ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
+	elif bldg == "geothermal_plant":
+		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
+		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
+		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
+	elif bldg == "hydro":
+		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
+		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
+		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
 
 func on_map_tile_over(id:int, tiles:Array):
 	if UI.on_panel:
@@ -140,14 +139,17 @@ func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 			map.sprites[str(id)] = bldg
 			tiles[id].bldg = currently_building
 			map.emit_signal("bldg_built", id, tiles, currently_building)
+			UI._on_Timer_timeout()
 	elif current_action:
 		if current_action == "chop_trees" and tiles[id].has("type"):
 			if tiles[id].type == map.TileType.FOREST:
 				map.emit_signal("trees_destroyed")
+				map.sprites[str(id)].queue_free()
+				tiles[id].erase("type")
 			elif tiles[id].type == map.TileType.FIELD:
 				map.emit_signal("field_destroyed")
-			map.sprites[str(id)].queue_free()
-			tiles[id].erase("type")
+				map.sprites[str(id)].queue_free()
+				tiles[id].erase("type")
 		elif current_action == "destroy_bldg" and tiles[id].has("bldg"):
 			map.emit_signal("bldg_destroyed", id, tiles, tiles[id].bldg)
 			tiles[id].erase("bldg")
