@@ -205,5 +205,6 @@ func back_to_menu():
 	play = false
 	var menu = preload("res://Scenes/MainMenu.tscn").instance()
 	call_deferred("add_child", menu)
+	menu.tooltip = tooltip
 	menu.name = "MainMenu"
 	menu.connect("fade_menu", self, "_on_MainMenu_fade_menu")

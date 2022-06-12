@@ -10,6 +10,8 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
+	$CanvasLayer/Progress/Label.text = "%s years left!" % (int(5 - ScoreManager.game_time / 60))
+	$CanvasLayer/Progress/Bar.rect_size.x = clamp(range_lerp(ScoreManager.game_time, 0.0, 300.0, 0.0, 1.0), 0, 1) * 104
 	$CanvasLayer/MoneyVBox/Label.text = format_num(ScoreManager.money)
 	$CanvasLayer/PollutionVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.pollution)), format_num(ScoreManager.max_pollution)]
 	if (ScoreManager.pollution - ScoreManager.max_pollution)/ScoreManager.max_pollution < 0.1:
@@ -100,6 +102,14 @@ func _on_CoalPlant_mouse_entered():
 func _on_Geothermal_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("Geothermal plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["geothermal_plant"].cost), format_num(ScoreManager.bldg_info["geothermal_plant"].power), format_num(ScoreManager.bldg_info["geothermal_plant"].pollution)])
+
+func _on_Hydro_mouse_entered():
+	on_button = true
+	tooltip.show_tooltip("Tidal turbines\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["hydro"].cost), format_num(ScoreManager.bldg_info["hydro"].power), format_num(ScoreManager.bldg_info["hydro"].pollution)])
+
+
+func _on_Hydro_pressed():
+	set_texture($CanvasLayer/Buildings/VBox/Hydro.texture_normal, "hydro")
 
 func _on_Buildings_mouse_entered():
 	on_panel = true
@@ -208,6 +218,7 @@ func _on_Timer_timeout():
 	if ScoreManager.happy_percentage > 70:
 		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Happiness.png")
 	elif ScoreManager.happy_percentage > 40:
-		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/neutral.png")
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Neutral.png")
 	else:
-		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/unhappiness.png")
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Unhappiness.png")
+

@@ -6,7 +6,7 @@ var bldg_info = {
 	"solar_panel":{"cost":8000, "pollution":2000, "power":4000},
 	"centrale_charbon":{"cost":12000, "pollution":8000, "power":6000},
 	"geothermal_plant":{"cost":15000, "pollution":8000, "power":6000},
-	"hydrolic_central":{"cost":40000000, "pollution":20000, "power":200000},
+	"hydro":{"cost":40000000, "pollution":20000, "power":200000},
 }
 var second = 60
 var money = 20000
