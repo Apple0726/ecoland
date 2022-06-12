@@ -8,6 +8,7 @@ signal bldg_destroyed
 var wid = 15
 
 var nbr_city = 0
+var nbr_field = 0
 var currently_building = ""
 var current_action = ""
 var orig_drag_pos:Vector2
@@ -49,6 +50,7 @@ func _ready():
 			var level:float = noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
 			var tree_level:float = tree_noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
 			var city_level:float = city_noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
+			var field_level:float = field_noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
 			var t_id = i % wid + j * wid
 			var tile = {}
 			if level > 0.5:
@@ -68,6 +70,12 @@ func _ready():
 				city.position = Vector2(i, j) * 64 + Vector2(32, 32)
 				tile = {"type":TileType.CITY}
 				nbr_city += 1
+			if field_level> 0.5 and city_level < 0.5 and tree_level < 0.5 and level < 0.5:
+				var field = preload("res://Scenes/Field.tscn").instance()
+				add_child(field)
+				field.position = Vector2(i, j) * 64 + Vector2(32, 32)
+				tile = {"type":TileType.FIELD}
+				nbr_field += 1
 			tiles.append(tile)
 	generate_zones("sun_beams")
 	randomize()
