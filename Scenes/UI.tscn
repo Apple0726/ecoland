@@ -68,20 +68,26 @@ margin_bottom = 40.0
 custom_styles/panel = SubResource( 4 )
 
 [node name="Pollution" type="Panel" parent="CanvasLayer"]
-margin_left = 32.0
-margin_top = 60.0
-margin_right = 140.0
-margin_bottom = 84.0
+margin_left = 209.0
+margin_top = 17.0
+margin_right = 381.0
+margin_bottom = 41.0
 custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Energy" type="Panel" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -80.0
+margin_left = -78.0
 margin_top = 16.0
-margin_right = 92.0
+margin_right = 94.0
 margin_bottom = 40.0
 custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Happiness" type="Panel" parent="CanvasLayer"]
 anchor_left = 1.0
@@ -120,10 +126,10 @@ text = "100"
 valign = 1
 
 [node name="PollutionVBox" type="HBoxContainer" parent="CanvasLayer"]
-margin_left = 32.0
-margin_top = 56.0
-margin_right = 95.0
-margin_bottom = 88.0
+margin_left = 209.0
+margin_top = 15.0
+margin_right = 278.0
+margin_bottom = 47.0
 mouse_filter = 2
 size_flags_vertical = 3
 theme = SubResource( 2 )

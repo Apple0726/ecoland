@@ -11,7 +11,7 @@ func _ready():
 
 func _process(delta):
 	$CanvasLayer/MoneyVBox/Label.text = format_num(ScoreManager.money)
-	$CanvasLayer/PollutionVBox/Label.text = format_num(round(ScoreManager.pollution))
+	$CanvasLayer/PollutionVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.pollution)), format_num(ScoreManager.max_pollution)]
 	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(ScoreManager.energy_production), format_num(ScoreManager.energy_consommation)]
 	if ScoreManager.energy_production >= ScoreManager.energy_consommation:
 		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.green
