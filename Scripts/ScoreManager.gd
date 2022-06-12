@@ -24,11 +24,15 @@ var pilotable_power = 0
 var intermittent_power = 0
 var installed_intermittent_power = 0
 var coeff_prod = 0
+var coeff_feed = 1
 var base_conso = 20000
 var cycle = 0
 var nbr_thermal = 0
 var nbr_nuclr = 0
 var nb_nonrenewable = 0
+var nbr_city = 0
+var nbr_field = 0
+var nbr_tree = 0
 var game_time = 0
 const max_pollution = 100000
 
@@ -66,14 +70,17 @@ func update_money():
 
 func update_pollution():
 	nb_nonrenewable = nbr_nuclr+nbr_thermal
-	pollution += nbr_thermal*2.5*coeff_prod + nbr_nuclr*1.66*coeff_prod # CO2 rejeté par les centrales 
+	pollution += nbr_thermal*2.5*coeff_prod + nbr_nuclr*1.66*coeff_prod + nbr_city*0.5 - nbr_tree*0.5 # CO2 rejeté par les centrales 
 	#thermiques+pollution nucléaire
 
 func update_happiness():
-	var coef_happy = 0	
+	var coef_happy = 0
+	coeff_feed = nbr_city/nbr_field
+	if coeff_feed<1:
+		coeff_feed = 1
 	happy_percentage = happiness*100/21600 
 	if energy_consommation > energy_production:
-		coef_happy=(((energy_consommation-energy_production)/energy_consommation)+1)*2
+		coef_happy=(((energy_consommation-energy_production)/energy_consommation)+1)*coeff_feed
 		if happy_percentage >= 70:
 			happiness -= 3*coef_happy
 		if happy_percentage > 10 and happy_percentage<70:

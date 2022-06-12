@@ -7,9 +7,6 @@ signal trees_destroyed
 signal field_destroyed
 signal bldg_destroyed
 var wid = 15
-
-var nbr_city = 0
-var nbr_field = 0
 var currently_building = ""
 var current_action = ""
 var orig_drag_pos:Vector2
@@ -22,7 +19,8 @@ var sprites = {}
 enum TileType {
 	LAKE,
 	FOREST,
-	CITY,FIELD,
+	CITY,
+	FIELD,
 }
 
 func rand_int(low:int, high:int):
@@ -69,19 +67,20 @@ func _ready():
 				sprites[str(t_id)] = tree
 				tree.position = Vector2(i, j) * 64 + Vector2(32, 32)
 				tile = {"type":TileType.FOREST}
+				ScoreManager.nbr_tree += 1
 			if city_level > city_threshold and tree_level < tree_threshold and level < lake_threshold:
 				var city = preload("res://Scenes/City.tscn").instance()
 				add_child(city)
 				city.position = Vector2(i, j) * 64 + Vector2(32, 32)
 				tile = {"type":TileType.CITY}
-				nbr_city += 1
+				ScoreManager.nbr_city += 1
 			if field_level> field_threshold and city_level < city_threshold and tree_level < tree_threshold and level < lake_threshold:
 				var field = preload("res://Scenes/Field.tscn").instance()
 				add_child(field)
 				field.position = Vector2(i, j) * 64 + Vector2(32, 32)
 				sprites[str(t_id)] = field
 				tile = {"type":TileType.FIELD}
-				nbr_field += 1
+				ScoreManager.nbr_field += 1
 			tiles.append(tile)
 	generate_zones("sun_beams")
 	randomize()

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/unhappiness.png-870ffe5d481a2b8dc7373dad33bdc73c.stex"
+path="res://.import/Neutral.png-a80f352c2685a7d7954b0bd7688d79ea.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/unhappiness.png"
-dest_files=[ "res://.import/unhappiness.png-870ffe5d481a2b8dc7373dad33bdc73c.stex" ]
+source_file="res://Graphics/Neutral.png"
+dest_files=[ "res://.import/Neutral.png-a80f352c2685a7d7954b0bd7688d79ea.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
