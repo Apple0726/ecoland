@@ -10,10 +10,10 @@ var texts = [
 	"Your job is to make the population rely less on fossil fuels and more on renewable sources of energy.",
 	"Most of us know by now that fossil fuels are one of the big dangers to biodiversity and pollution.",
 	"And it is a challenge to smooth the transition from fossil fuels to cleaner alternatives, because we need to keep the population happy!",
-	"I am confident that in 15 years, [color=green]Ecoland[/color] will fully make that transition. [wave amp=20 freq=7]I believe in you![/wave]",
+	"I am confident that in 5 years, [color=green]Ecoland[/color] will fully make that transition. [wave amp=20 freq=7]I believe in you![/wave]",
 	"Press one of the buttons at the right to start building.",
 	"Be careful, constructing buildings produce pollution. You will want to limit that to keep the residents happy.",
-	"See you in 15 years then!",
+	"See you in 5 years then!",
 ]
 var text_victory = [
 	"Wow! [wave amp=20 freq=7]You really did it![/wave]",
@@ -23,7 +23,7 @@ var text_victory = [
 ]
 var text_game_over = [
 	"Well, I gotta say... This isn't looking good at all.",
-	"Residents are suffocating in the thick smog of air in the cities, with little to no trees to absord the excess carbon.",
+	"Residents are suffocating in the thick smog of air in the cities, with little to no trees to absorb the excess carbon.",
 	"Animals and marine life are slowly going extinct as their habitat progressively becomes uninhabitable.",
 	"It pains me to say this, but... I guess it is true that all civilizations eventually die out.",
 	"It was nice knowing you. Let's at least enjoy our final moments on Earth before we all suffocate to death, one by one.",
