@@ -27,33 +27,29 @@ margin_left = 37.0
 margin_top = 29.0
 margin_right = 706.0
 margin_bottom = 398.0
-custom_fonts/mono_font = SubResource( 1 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = " Game rule :
+custom_fonts/mono_font = SubResource( 1 )
+text = " Game rules:
 
   You have to make it until the end of the game by managing your country. You can do so by 
-  providing energy to your citizens while polluting as less as possible.
-  There are a few things to be careful about :
+  providing energy to your citizens while polluting as least as possible.
+  There are a few things to be careful about:
   
- - When you exceed 100 000 Polution Point (PP), or if your population happiness reach 0%
-    it's a lose.
+ - When you exceed 100,000 Pollution Points (PP), or if your population happiness reaches 0%,
+   you lose the game.
 
-   - You can build energy supply that will provide energy. Be careful to the infrastructure you will build.
-     for example coal and nuclear plant will pollute a lot throughout the game so you want (and it's 
-	 the goal of the game) to avoid to keep them but it also provides a lot of energy.
+   - You can build energy facilities that will provide energy. Be careful of the infrastructure you build.
+     For example coal and nuclear plants will pollute a lot throughout the game so you want (and it's 
+	 the goal of the game) to avoid  them but they also provide a lot of energy.
 		
 	- You can also build cities to earn more money. However, the more cities you get, the more
 	  energy you have to provide and the more your cities will pollute.
 	
-	- You can also destroy the infrastructures, the forest and the fields. For the energy supply, it will
-	  cost third time less the production cost and pollute fourth time less than building it. For the 
-	  forest and the fields, it costs !!!! money and !!! PP.
+	- You can also destroy the infrastructures you built, as well as trees and farmland. This costs money (1/4th of the building's initial cost) and creates pollution (1/3rd of the building's initial pollution).
 	
-	- Be careful when you destroy the fields because it makes the population happiness going down
-	  faster and destroying forests will make the PP grow faster too."
-__meta__ = {
-"_edit_use_anchors_": false
-}
+	- Destroying farmland will make the population unhappy.
+	
+	- Trees absorb pollution."
 
 [node name="TextureButton" type="TextureButton" parent="TextureRect"]
 margin_left = 682.594
