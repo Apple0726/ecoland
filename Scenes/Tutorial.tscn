@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Arimo-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Graphics/fille tuto.png" type="Texture" id=2]
@@ -15,7 +15,7 @@ font_data = ExtResource( 1 )
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.227451, 0.141176, 0, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -27,17 +27,125 @@ expand_margin_bottom = 5.0
 shadow_size = 1
 shadow_offset = Vector2( 2, 2 )
 
-[sub_resource type="Shader" id=21]
+[sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
 
 void vertex() {
   VERTEX += vec2(0, 1.5 * sin(12.0 * TIME));
 }"
 
-[sub_resource type="ShaderMaterial" id=22]
-shader = SubResource( 21 )
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
 
 [sub_resource type="Animation" id=8]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Panel:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 480, -0.25, 0, 0.25, 0, 432.373, -0.2, -2.88312, 0.25, 0 ),
+"times": PoolRealArray( 0.5, 1 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TextureRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("TextureRect:rect_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 680, -0.25, 0, 0.1, -38.7724, 640.53, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 1, 1.5 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ColorRect:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.494118 ) ]
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Panel:rect_position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 308, -0.25, 0, 0.25, 0, 308, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.5, 1 )
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "End"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0.494118 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
 resource_name = "EndTuto"
 length = 0.4
 tracks/0/type = "value"
@@ -53,22 +161,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=12]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("BuildButtons:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:modulate")
@@ -171,7 +264,7 @@ tracks/8/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=24]
+[sub_resource type="StyleBoxFlat" id=5]
 draw_center = false
 border_width_left = 6
 border_width_top = 6
@@ -180,7 +273,7 @@ border_width_bottom = 6
 border_color = Color( 1, 1, 0, 1 )
 border_blend = true
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=6]
 resource_name = "Blink"
 length = 0.6
 loop = true
@@ -197,7 +290,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.321569 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=7]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("BuildButtons:modulate")
@@ -314,7 +407,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=27]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.4, 0.247059, 0, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -356,13 +449,13 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=28]
+[sub_resource type="DynamicFont" id=17]
 size = 30
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=29]
+[sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 0.27451, 0.168627, 0, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -432,11 +525,11 @@ margin_left = -204.0
 margin_top = -168.0
 margin_right = 204.0
 margin_bottom = -52.0
-custom_styles/panel = SubResource( 20 )
+custom_styles/panel = SubResource( 9 )
 
 [node name="Arrow" type="TextureRect" parent="Panel"]
 visible = false
-material = SubResource( 22 )
+material = SubResource( 11 )
 margin_left = 372.0
 margin_top = 88.0
 margin_right = 392.0
@@ -462,8 +555,9 @@ anchor_bottom = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Begin = SubResource( 8 )
+anims/End = SubResource( 21 )
 anims/EndTuto = SubResource( 12 )
-anims/RESET = SubResource( 23 )
+anims/RESET = SubResource( 4 )
 
 [node name="BuildButtons" type="Panel" parent="."]
 visible = false
@@ -474,12 +568,12 @@ anchor_bottom = 0.5
 margin_left = -68.0
 margin_top = -208.0
 margin_bottom = 212.0
-custom_styles/panel = SubResource( 24 )
+custom_styles/panel = SubResource( 5 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 autoplay = "Blink"
-anims/Blink = SubResource( 25 )
-anims/RESET = SubResource( 26 )
+anims/Blink = SubResource( 6 )
+anims/RESET = SubResource( 7 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="."]
 anims/MovePerson = SubResource( 13 )
@@ -499,7 +593,7 @@ margin_left = -124.0
 margin_top = -128.0
 margin_right = 122.0
 margin_bottom = -68.0
-custom_styles/panel = SubResource( 27 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Score"]
 root_node = NodePath("../..")
@@ -513,7 +607,7 @@ margin_left = 12.0
 margin_top = 12.0
 margin_right = -12.0
 margin_bottom = -12.0
-custom_fonts/font = SubResource( 28 )
+custom_fonts/font = SubResource( 17 )
 text = "Score: 2999"
 align = 1
 
@@ -522,9 +616,9 @@ margin_left = 68.0
 margin_top = 92.0
 margin_right = 176.0
 margin_bottom = 116.0
-custom_styles/hover = SubResource( 29 )
-custom_styles/pressed = SubResource( 29 )
-custom_styles/normal = SubResource( 29 )
+custom_styles/hover = SubResource( 20 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
 text = "Play again"
 
 [connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]
