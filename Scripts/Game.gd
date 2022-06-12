@@ -26,7 +26,7 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
 		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
-		ScoreManager.nb_nonrenewable += 1
+		ScoreManager.nbr_nuclr += 1
 	elif bldg == "solar_panel":
 		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
@@ -71,7 +71,7 @@ func bldg_destroyed(id:int, tiles:Array, bldg:String):
 		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
 		ScoreManager.pilotable_power -= ScoreManager.bldg_info[bldg].power
-		ScoreManager.nb_nonrenewable -= 1
+		ScoreManager.nbr_nuclr -= 1
 	elif bldg == "solar_panel":
 		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4

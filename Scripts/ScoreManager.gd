@@ -7,9 +7,10 @@ var bldg_info = {
 	"centrale_charbon":{"cost":12000, "pollution":8000, "power":6000},
 	"geothermal_plant":{"cost":15000, "pollution":8000, "power":6000},
 	"hydro":{"cost":40000000, "pollution":20000, "power":200000},
+	
 }
 var second = 60
-var money = 20000
+var money = 20000000
 var pollution = 0
 var happiness = 21600
 var happy_percentage = 100
@@ -34,6 +35,8 @@ var nbr_city = 0
 var nbr_field = 0
 var nbr_tree = 0
 var game_time = 0
+var count_victoire = 0
+const point_vicoitre = 10000
 const max_pollution = 100000
 
 func _ready():
@@ -48,16 +51,20 @@ func _process(delta):
 	update_happiness()
 	update_money()
 	update_pollution()
+	print(nb_nonrenewable)
 	if pollution > max_pollution or happy_percentage <= 0:
 		get_node("/root/Game")._on_game_over()
 		#emit_signal("game_over")
-	if nb_nonrenewable == 0 and happy_percentage> 80 and energy_consommation==energy_production:
-		get_node("/root/Game")._on_win()
+	if nb_nonrenewable == 0 and happy_percentage> 80 and energy_consommation>=energy_production:
+		count_victoire +=1
+		if count_victoire>=point_vicoitre:
+			get_node("/root/Game")._on_win()
 		#emit_signal("win")
 	if game_time >= 300:
 		get_node("/root/Game")._on_win()
 		#emit_signal("win")
-	
+	else:
+		count_victoire = 0
 	
 func update_money():
 	if cycle < second:
@@ -70,7 +77,7 @@ func update_money():
 
 func update_pollution():
 	nb_nonrenewable = nbr_nuclr+nbr_thermal
-	print(nbr_tree)
+	
 	pollution += nbr_thermal*2.5*coeff_prod + nbr_nuclr*1.66*coeff_prod  # CO2 rejeté par les centrales 
 	if pollution>=0:
 		pollution += nbr_city*0.05 - nbr_tree*0.008
