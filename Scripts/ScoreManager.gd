@@ -52,7 +52,7 @@ func _process(delta):
 	if nb_nonrenewable == 0 and happy_percentage> 80 and energy_consommation==energy_production:
 		emit_signal("win")
 		set_process(false)
-	if game_time >= 900:
+	if game_time >= 300:
 		emit_signal("win")
 		set_process(false)
 	
@@ -70,22 +70,24 @@ func update_pollution():
 	pollution += nbr_thermal*0.5*coeff_prod + nbr_nuclr*0.025*coeff_prod # CO2 rejeté par les centrales thermiques+pollution nucléaire
 
 func update_happiness():
+	var coef_happy = 0	
 	happy_percentage = happiness*100/21600 
 	if energy_consommation > energy_production:
+		coef_happy=(((energy_consommation-energy_production)/energy_consommation)+1)*2
 		if happy_percentage >= 70:
-			happiness -= 3
+			happiness -= 3*coef_happy
 		if happy_percentage > 10 and happy_percentage<70:
-			happiness -= 2
+			happiness -= 2*coef_happy
 		if happy_percentage <=10:
-			happiness -= 1
+			happiness -= 1*coef_happy
 	else :
 		if happiness < 21600:
-			if happy_percentage >= 80:
-				happiness += 1
+			if happy_percentage >= 70:
+				happiness += 2
 		if happy_percentage > 10 and happy_percentage<70:
-			happiness += 2
+			happiness += 4
 		if happy_percentage <= 10:
-			happiness += 3
+			happiness += 6
 		
 
 func update_consumption():

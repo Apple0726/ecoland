@@ -12,12 +12,14 @@ func _ready():
 func _process(delta):
 	$CanvasLayer/MoneyVBox/Label.text = format_num(ScoreManager.money)
 	$CanvasLayer/PollutionVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.pollution)), format_num(ScoreManager.max_pollution)]
-	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(ScoreManager.energy_production), format_num(ScoreManager.energy_consommation)]
+	if (ScoreManager.pollution - ScoreManager.max_pollution)/ScoreManager.max_pollution < 0.1:
+		$CanvasLayer/PollutionVBox/Label["custom_colors/font_color"] = Color.red
+	$CanvasLayer/EnergyVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.energy_production)), format_num(round(ScoreManager.energy_consommation))]
 	if ScoreManager.energy_production >= ScoreManager.energy_consommation:
 		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.green
 	else:
 		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.red
-	$CanvasLayer/HappinessVBox/Label.text = "%s%%" % str(ScoreManager.happy_percentage)
+	$CanvasLayer/HappinessVBox/Label.text = "%s%%" % str(round(ScoreManager.happy_percentage))
 	if ScoreManager.happy_percentage > 70:
 		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.green
 	elif ScoreManager.happy_percentage > 40:
