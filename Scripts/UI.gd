@@ -16,7 +16,7 @@ func _process(delta):
 	else:
 		$CanvasLayer/Progress/Label.text = "%s years left!" % (years_left)
 	$CanvasLayer/Progress/Bar.rect_size.x = clamp(range_lerp(ScoreManager.game_time, 0.0, 300.0, 0.0, 1.0), 0, 1) * 104
-	$CanvasLayer/MoneyVBox/Label.text = format_num(ScoreManager.money)
+	$CanvasLayer/MoneyVBox/Label.text = format_num(round(ScoreManager.money))
 	$CanvasLayer/PollutionVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.pollution)), format_num(ScoreManager.max_pollution)]
 	if (ScoreManager.max_pollution - ScoreManager.pollution)/ScoreManager.max_pollution < 0.1:
 		$CanvasLayer/PollutionVBox/Label["custom_colors/font_color"] = Color.red

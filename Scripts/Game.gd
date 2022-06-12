@@ -47,7 +47,11 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
 		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
-
+	elif bldg == "city":
+		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
+		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
+		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
+		ScoreManager.nbr_city += 1
 
 func trees_destroyed():
 	ScoreManager.nbr_tree -=1
@@ -91,6 +95,11 @@ func bldg_destroyed(id:int, tiles:Array, bldg:String):
 		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
 		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
+	elif bldg == "city":
+		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
+		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
+		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
+		ScoreManager.nbr_city -= 1
 
 func on_map_tile_over(id:int, tiles:Array):
 	if UI.on_panel:
