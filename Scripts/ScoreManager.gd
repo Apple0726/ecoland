@@ -4,35 +4,35 @@ signal game_over
 signal win
 
 var bldg_info = {
-	"wind_turbine":{"cost":55000, "pollution":10000, "power":10000},
-	"nuclear_plant":{"cost":260000000, "pollution":400000, "power":1000000},
-	"solar_panel":{"cost":100000, "pollution":20000, "power":10},
-	"centrale_charbon":{"cost":40000000, "pollution":20000, "power":200000},
-	"geothermal_plant":{"cost":40000000, "pollution":20000, "power":200000},
+	"wind_turbine":{"cost":4000, "pollution":5000, "power":2000},
+	"nuclear_plant":{"cost":20000, "pollution":15000, "power":10000},
+	"solar_panel":{"cost":8000, "pollution":2000, "power":4000},
+	"centrale_charbon":{"cost":12000, "pollution":8000, "power":6000},
+	"geothermal_plant":{"cost":15000, "pollution":8000, "power":6000},
 	"hydrolic_central":{"cost":40000000, "pollution":20000, "power":200000},
 }
 var second = 60
-var money = 200000000
+var money = 20000
 var pollution = 0
 var happiness = 21600
 var happy_percentage = 100
 var mean_happy = 0
 var moy_happy = 0
 var biodiversite = 0
-var energy_consommation = 0
+var energy_consommation = 20000
 var energy_production = 0
 var wind_power = 0
 var solar_power = 0
 var pilotable_power = 0
 var intermittent_power = 0
 var coeff_prod = 0
-var base_conso = 600000
+var base_conso = 20000
 var cycle = 0
 var nbr_thermal = 0
 var nbr_nuclr = 0
 var nb_nonrenewable = 0
 var game_time = 0
-const max_pollution = 100000000
+const max_pollution = 100000
 
 func _ready():
 	set_process(false)
@@ -61,7 +61,8 @@ func update_money():
 	if cycle < second:
 		mean_happy = mean_happy + happy_percentage
 	else:
-		money = money + (1000*mean_happy/second)
+		#money = money + (1000*mean_happy/second)
+		money += 1000
 		moy_happy = round(mean_happy/second)
 		mean_happy = 0
 
@@ -95,19 +96,22 @@ func update_consumption():
 		cycle = cycle +1
 	else:
 		game_time += 1
-		if moy_happy >= 99:
-			base_conso += 10
-		if moy_happy > 80 and mean_happy < 99:
-			base_conso += 5
-		if moy_happy < 50 and moy_happy > 10:
-			base_conso -= 5
-		if moy_happy <= 10:
-			base_conso -= 10
+		base_conso += 50
+		energy_consommation += 50
+#		if moy_happy >= 99:
+#			base_conso += 10
+#		if moy_happy > 80 and mean_happy < 99:
+#			base_conso += 5
+#		if moy_happy < 50 and moy_happy > 10:
+#			base_conso -= 5
+#		if moy_happy <= 10:
+#			base_conso -= 10
 		moy_happy = 0
 		cycle = 0
-	var random = RandomNumberGenerator.new()
-	random.randomize()
-	energy_consommation = base_conso + random.randi_range(-100, 100) + round(1000*sin(2*PI*cycle/3600))
+#	var random = RandomNumberGenerator.new()
+#	random.randomize()
+#	energy_consommation = base_conso + random.randi_range(-100, 100) + round(1000*sin(2*PI*cycle/3600))
+	
 	
 func update_intermittent_power():
 	intermittent_power = round(solar_power*(randf()+0.1) + wind_power*(randf()+0.1))
