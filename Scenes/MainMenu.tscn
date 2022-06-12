@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Graphics/sprite_main_menu/Start_button_hover.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/sprite_main_menu/wallpapersden.com_77215-1024x600.jpg" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Graphics/sprite_main_menu/help_button.png" type="Texture" id=7]
 [ext_resource path="res://Arimo-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Graphics/ITS.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Help_Menu.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 use_mipmaps = true
@@ -26,6 +27,9 @@ margin_top = -1.33484
 margin_right = 1025.0
 margin_bottom = 598.665
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 margin_left = 338.625
@@ -50,7 +54,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton2" type="TextureButton" parent="."]
+[node name="Help_button" type="TextureButton" parent="."]
 margin_left = 894.489
 margin_top = 533.397
 margin_right = 1022.49
@@ -58,6 +62,9 @@ margin_bottom = 597.397
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 7 )
 texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CheckBox" type="CheckBox" parent="."]
 margin_left = 440.0
@@ -77,8 +84,12 @@ texture_normal = ExtResource( 9 )
 expand = true
 stretch_mode = 5
 
+[node name="Help_menu" parent="." instance=ExtResource( 10 )]
+visible = false
+
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
-[connection signal="pressed" from="TextureButton2" to="." method="_on_TextureButton2_pressed"]
+[connection signal="pressed" from="Help_button" to="." method="_on_Help_button_pressed"]
 [connection signal="mouse_entered" from="ITS" to="." method="_on_ITS_mouse_entered"]
 [connection signal="mouse_exited" from="ITS" to="." method="_on_ITS_mouse_exited"]
 [connection signal="pressed" from="ITS" to="." method="_on_ITS_pressed"]
+[connection signal="fade_help_menu" from="Help_menu" to="." method="_on_Help_menu_fade_help_menu"]

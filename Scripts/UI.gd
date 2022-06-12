@@ -28,6 +28,11 @@ func _process(delta):
 var mouse_pos:Vector2 = Vector2.ZERO
 var mouse_in_debug = false
 
+func _on_Help_menu_fade_help_menu():
+	$CanvasLayer/Help_menu.hide()
+	if $CanvasLayer/Help_button.text == "Press to close":
+		$CanvasLayer/Help_button.text = "Help"
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_pos = event.position
@@ -255,3 +260,14 @@ func _on_PauseSimu_pressed():
 		ScoreManager.set_process(true)
 		$CanvasLayer/PauseSimu.text = "Pause simulation"
 
+
+
+func _on_Help_button_pressed():
+	if ScoreManager.is_processing() and !$CanvasLayer/Help_menu.is_visible_in_tree():
+		$CanvasLayer/Help_menu.show()
+		ScoreManager.set_process(false)
+		$CanvasLayer/Help_button.text = "Press to close"
+	else:
+		$CanvasLayer/Help_menu.hide()
+		ScoreManager.set_process(true)
+		$CanvasLayer/Help_button.text = "Help"

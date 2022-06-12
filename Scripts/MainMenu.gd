@@ -20,3 +20,17 @@ func _on_ITS_mouse_entered():
 
 func _on_ITS_mouse_exited():
 	tooltip.hide_tooltip()
+
+
+func _on_Help_button_pressed():
+	if $Help_menu.is_visible_in_tree():
+		$Help_menu.hide()
+	else:
+		$Help_menu.show()
+
+
+func _on_Help_menu_fade_help_menu():
+	if $Help_menu.is_visible_in_tree():
+		$Help_menu.hide()
+	else:
+		$Help_menu.show()

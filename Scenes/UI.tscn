@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Graphics/Money.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/Happiness.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Graphics/sprite_building/hydro.png" type="Texture" id=14]
 [ext_resource path="res://Graphics/sprite_building/city.png" type="Texture" id=15]
 [ext_resource path="res://Graphics/Trees.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/Help_Menu.tscn" type="PackedScene" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 use_mipmaps = true
@@ -25,7 +26,7 @@ font_data = ExtResource( 10 )
 [sub_resource type="Theme" id=2]
 default_font = SubResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.4, 0.247059, 0, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -37,7 +38,7 @@ expand_margin_bottom = 5.0
 shadow_size = 1
 shadow_offset = Vector2( 2, 2 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.270588, 0.12549, 0, 1 )
 border_width_left = 4
 border_width_top = 4
@@ -46,7 +47,7 @@ border_blend = true
 shadow_size = 2
 shadow_offset = Vector2( 1, 1 )
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.27451, 0.168627, 0, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -58,7 +59,7 @@ expand_margin_bottom = 5.0
 shadow_size = 1
 shadow_offset = Vector2( 2, 2 )
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=6]
 resource_name = "MoveDebug"
 length = 0.2
 tracks/0/type = "value"
@@ -74,7 +75,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 76 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=7]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
@@ -100,12 +101,15 @@ __meta__ = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Help_menu" parent="CanvasLayer" instance=ExtResource( 17 )]
+visible = false
+
 [node name="Money" type="Panel" parent="CanvasLayer"]
 margin_left = 32.0
 margin_top = 16.0
 margin_right = 182.0
 margin_bottom = 40.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -115,7 +119,7 @@ margin_left = 220.0
 margin_top = 16.0
 margin_right = 396.0
 margin_bottom = 40.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Energy" type="Panel" parent="CanvasLayer"]
 anchor_left = 0.5
@@ -124,7 +128,7 @@ margin_left = -78.0
 margin_top = 16.0
 margin_right = 94.0
 margin_bottom = 52.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Happiness" type="Panel" parent="CanvasLayer"]
 anchor_left = 1.0
@@ -133,7 +137,7 @@ margin_left = -116.0
 margin_top = 16.0
 margin_right = -28.0
 margin_bottom = 40.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="MoneyVBox" type="HBoxContainer" parent="CanvasLayer"]
 margin_left = 32.0
@@ -256,7 +260,7 @@ margin_left = -64.0
 margin_top = -209.5
 margin_bottom = 209.5
 theme = SubResource( 2 )
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/Buildings"]
 anchor_right = 1.0
@@ -348,7 +352,7 @@ margin_top = -100.0
 margin_right = 64.0
 margin_bottom = 108.0
 theme = SubResource( 2 )
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/Actions"]
 anchor_right = 1.0
@@ -413,7 +417,7 @@ margin_left = -64.0
 margin_top = -44.0
 margin_right = 64.0
 theme = SubResource( 2 )
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 4 )
 
 [node name="Label" type="Label" parent="CanvasLayer/Progress"]
 anchor_left = 0.5
@@ -439,17 +443,35 @@ margin_right = 44.0
 margin_bottom = 32.0
 color = Color( 0, 0.631373, 0.854902, 1 )
 
-[node name="PauseSimu" type="Button" parent="CanvasLayer"]
-margin_left = 892.0
-margin_top = 572.0
-margin_right = 1017.0
-margin_bottom = 593.0
+[node name="Help_button" type="Button" parent="CanvasLayer"]
+margin_left = 893.0
+margin_top = 539.0
+margin_right = 1018.0
+margin_bottom = 560.0
 grow_horizontal = 0
 theme = SubResource( 2 )
-custom_styles/hover = SubResource( 20 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/normal = SubResource( 20 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+text = "Help"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseSimu" type="Button" parent="CanvasLayer"]
+margin_left = 892.0
+margin_top = 571.0
+margin_right = 1017.0
+margin_bottom = 592.0
+grow_horizontal = 0
+theme = SubResource( 2 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
 text = "Pause simulation"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MouseIn" type="Polygon2D" parent="CanvasLayer"]
 position = Vector2( 0, 76 )
@@ -488,12 +510,13 @@ margin_bottom = 522.0
 text = "Debug"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Debug"]
-anims/MoveDebug = SubResource( 21 )
-anims/RESET = SubResource( 22 )
+anims/MoveDebug = SubResource( 6 )
+anims/RESET = SubResource( 7 )
 
 [node name="UpdateTexture" type="Timer" parent="."]
 autostart = true
 
+[connection signal="fade_help_menu" from="CanvasLayer/Help_menu" to="." method="_on_Help_menu_fade_help_menu"]
 [connection signal="mouse_entered" from="CanvasLayer/Money" to="." method="_on_Money_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Money" to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Pollution" to="." method="_on_Pollution_mouse_entered"]
@@ -536,6 +559,7 @@ autostart = true
 [connection signal="mouse_entered" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_DestroyBldg_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_DestroyBldg_pressed"]
+[connection signal="pressed" from="CanvasLayer/Help_button" to="." method="_on_Help_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseSimu" to="." method="_on_PauseSimu_pressed"]
 [connection signal="pressed" from="CanvasLayer/Debug/Victory" to="." method="_on_Victory_pressed"]
 [connection signal="pressed" from="CanvasLayer/Debug/GameOver" to="." method="_on_GameOver_pressed"]
