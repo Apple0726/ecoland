@@ -116,11 +116,12 @@ func update_pollution():
 		
 func update_happiness():
 	var coef_happy = 0
+	var coef_enrj = (energy_consommation - energy_production)/energy_consommation
 	coeff_feed = nbr_city/nbr_field
 	if coeff_feed<1:
 		coeff_feed = 1
 	happy_percentage = happiness*100/21600 
-	if energy_consommation > energy_production:
+	if coef_enrj > 0.3 :
 		coef_happy=(((energy_consommation-energy_production)/energy_consommation)+1)*coeff_feed
 		if happy_percentage >= 70:
 			happiness -= 3*coef_happy
@@ -128,7 +129,7 @@ func update_happiness():
 			happiness -= 2*coef_happy
 		if happy_percentage <=10:
 			happiness -= 1*coef_happy
-	else :
+	if  coef_enrj < 0.01:
 		if happiness < 21600:
 			if happy_percentage >= 70:
 				happiness += 2
