@@ -70,8 +70,13 @@ func update_money():
 
 func update_pollution():
 	nb_nonrenewable = nbr_nuclr+nbr_thermal
-	pollution += nbr_thermal*2.5*coeff_prod + nbr_nuclr*1.66*coeff_prod + nbr_city*0.5 - nbr_tree*0.5 # CO2 rejeté par les centrales 
-	#thermiques+pollution nucléaire
+	print(nbr_tree)
+	pollution += nbr_thermal*2.5*coeff_prod + nbr_nuclr*1.66*coeff_prod  # CO2 rejeté par les centrales 
+	if pollution>=0:
+		pollution += nbr_city*0.05 - nbr_tree*0.008
+	if pollution< 0:
+		pollution = 0
+		#thermiques+pollution nucléaire
 
 func update_happiness():
 	var coef_happy = 0

@@ -51,10 +51,12 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 		
 
 func trees_destroyed():
-	pass
+	ScoreManager.nbr_tree -=1
+	ScoreManager.money -= 1000
 
 func field_destroyed():
-	pass
+	ScoreManager.nbr_field -=1
+	ScoreManager.money -=  1000
 
 
 func bldg_destroyed(id:int, tiles:Array, bldg:String):
