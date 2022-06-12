@@ -33,11 +33,12 @@ func _input(event):
 		mouse_pos = event.position
 		if building.visible:
 			building.rect_position = mouse_pos - Vector2(32, 32)
-		if Geometry.is_point_in_polygon(mouse_pos, $CanvasLayer/MouseIn.polygon):
-			$CanvasLayer/Debug/AnimationPlayer.play("MoveDebug")
-			mouse_in_debug = true
 		if mouse_in_debug and not Geometry.is_point_in_polygon(mouse_pos, $CanvasLayer/MouseOut.polygon):
 			$CanvasLayer/Debug/AnimationPlayer.play_backwards("MoveDebug")
+			mouse_in_debug = false
+		if not mouse_in_debug and Geometry.is_point_in_polygon(mouse_pos, $CanvasLayer/MouseIn.polygon):
+			$CanvasLayer/Debug/AnimationPlayer.play("MoveDebug")
+			mouse_in_debug = true
 	if Input.is_action_just_released("esc"):
 		building.visible = false
 		building.texture = null
@@ -115,7 +116,7 @@ func _on_Hydro_mouse_entered():
 
 func _on_City_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("City\nConstruct buildings where residents live their lives.\nCannot be destroyed once placed.\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["city"].cost), format_num(ScoreManager.bldg_info["city"].power), format_num(ScoreManager.bldg_info["city"].pollution)])
+	tooltip.show_tooltip("City\nConstruct buildings where residents live their lives.\nCannot be destroyed once placed.\nCost: € %s\n+%s power consumption of population\n+%s pollution" % [format_num(ScoreManager.bldg_info["city"].cost), format_num(ScoreManager.bldg_info["city"].power_consumption), format_num(ScoreManager.bldg_info["city"].pollution)])
 
 
 func _on_Hydro_pressed():
@@ -135,11 +136,11 @@ func _on_Money_mouse_entered():
 
 func _on_Pollution_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Pollution")
+	tooltip.show_tooltip("Pollution\nOnce pollution exceeds %s, it's game over!" % format_num(ScoreManager.max_pollution))
 
 func _on_Energy_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Energy production / energy consumption of population\nControllable power / continuous power")
+	tooltip.show_tooltip("Power production / power consumption of population\nControllable power / continuous power\nPower production is equal to controllable power + continuous power")
 
 
 func _on_Happiness_mouse_entered():

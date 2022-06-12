@@ -7,7 +7,7 @@ var bldg_info = {
 	"centrale_charbon":{"cost":12000, "pollution":8000, "power":6000},
 	"geothermal_plant":{"cost":15000, "pollution":8000, "power":6000},
 	"hydro":{"cost":4000, "pollution":200, "power":200000},
-	"city":{"cost":1000, "pollution":2000, "power":0},
+	"city":{"cost":1000, "pollution":2000, "power_consumption":1500},
 }
 var second = 60
 var money = 20000
@@ -109,7 +109,7 @@ func update_happiness():
 		
 
 func update_consumption():
-	conso_city = nbr_city*1500
+	conso_city = nbr_city*bldg_info.city.power_consumption
 	if cycle < second :
 		cycle = cycle +1
 	else:

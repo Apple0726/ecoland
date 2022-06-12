@@ -406,10 +406,11 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 308.0
-margin_top = 432.0
-margin_right = 716.0
-margin_bottom = 548.0
+margin_left = -204.0
+margin_top = -168.0
+margin_right = 204.0
+margin_bottom = -52.0
+custom_styles/panel = SubResource( 9 )
 
 [node name="Arrow" type="TextureRect" parent="Panel"]
 visible = false
@@ -442,6 +443,7 @@ anims/EndTuto = SubResource( 12 )
 anims/RESET = SubResource( 20 )
 
 [node name="BuildButtons" type="Panel" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0

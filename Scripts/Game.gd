@@ -98,6 +98,10 @@ func bldg_destroyed(id:int, tiles:Array, bldg:String):
 		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
 		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
+	elif bldg == "city":
+		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution/3
+		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost/4
+		ScoreManager.nbr_city -= 1
 
 
 func on_map_tile_over(id:int, tiles:Array):
@@ -138,8 +142,8 @@ func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 		return
 	var currently_building:String = map.currently_building
 	var current_action:String = map.current_action
-	if currently_building and not tiles[id].has("type") and not tiles[id].has("bldg") and ScoreManager.money >= ScoreManager.bldg_info[currently_building].cost:
-		if currently_building == "hydro" and tiles[id].type == map.TileType.LAKE or currently_building != "hydro":
+	if currently_building and not tiles[id].has("bldg") and ScoreManager.money >= ScoreManager.bldg_info[currently_building].cost:
+		if currently_building == "hydro" and tiles[id].has("type") and tiles[id].type == map.TileType.LAKE or currently_building != "hydro" and not tiles[id].has("type"):
 			var bldg = Sprite.new()
 			bldg.texture = load("res://Graphics/sprite_building/%s.png" % currently_building)
 			add_child(bldg)
@@ -192,6 +196,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			tuto.connect("tree_exiting", self, "on_tuto_done")
 		else:
 			ScoreManager.set_process(true)
+			UI._on_Timer_timeout()
 
 func on_tuto_done():
 	map.tuto = false
