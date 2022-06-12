@@ -10,11 +10,8 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	var years_left:int = 5 - ScoreManager.game_time / 60
-	if years_left == 1:
-		$CanvasLayer/Progress/Label.text = "%s year left!" % (years_left)
-	else:
-		$CanvasLayer/Progress/Label.text = "%s years left!" % (years_left)
+	var years_left:float = 15 - ScoreManager.game_time / 60.0 * 3
+	$CanvasLayer/Progress/Label.text = "%.1f years left!" % (years_left)
 	$CanvasLayer/Progress/Bar.rect_size.x = clamp(range_lerp(ScoreManager.game_time, 0.0, 300.0, 0.0, 1.0), 0, 1) * 104
 	$CanvasLayer/MoneyVBox/Label.text = format_num(round(ScoreManager.money))
 	$CanvasLayer/PollutionVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.pollution)), format_num(ScoreManager.max_pollution)]
@@ -29,12 +26,18 @@ func _process(delta):
 		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.red
 
 var mouse_pos:Vector2 = Vector2.ZERO
+var mouse_in_debug = false
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_pos = event.position
 		if building.visible:
 			building.rect_position = mouse_pos - Vector2(32, 32)
+		if Geometry.is_point_in_polygon(mouse_pos, $CanvasLayer/MouseIn.polygon):
+			$CanvasLayer/Debug/AnimationPlayer.play("MoveDebug")
+			mouse_in_debug = true
+		if mouse_in_debug and not Geometry.is_point_in_polygon(mouse_pos, $CanvasLayer/MouseOut.polygon):
+			$CanvasLayer/Debug/AnimationPlayer.play_backwards("MoveDebug")
 	if Input.is_action_just_released("esc"):
 		building.visible = false
 		building.texture = null
@@ -112,7 +115,7 @@ func _on_Hydro_mouse_entered():
 
 func _on_City_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("City\nConstruct buildings where residents live their lives.\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["city"].cost), format_num(ScoreManager.bldg_info["city"].power), format_num(ScoreManager.bldg_info["city"].pollution)])
+	tooltip.show_tooltip("City\nConstruct buildings where residents live their lives.\nCannot be destroyed once placed.\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["city"].cost), format_num(ScoreManager.bldg_info["city"].power), format_num(ScoreManager.bldg_info["city"].pollution)])
 
 
 func _on_Hydro_pressed():
@@ -136,7 +139,7 @@ func _on_Pollution_mouse_entered():
 
 func _on_Energy_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Energy production / consumption\nControllable power / continuous power")
+	tooltip.show_tooltip("Energy production / energy consumption of population\nControllable power / continuous power")
 
 
 func _on_Happiness_mouse_entered():
@@ -203,6 +206,14 @@ func _on_DestroyBldg_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("Destroy a building.\nCosts money and creates pollution.")
 
+func _on_PlantTrees_pressed():
+	set_texture($CanvasLayer/Actions/VBox/PlantTrees.texture_normal, "plant_trees", false)
+
+
+func _on_PlantTrees_mouse_entered():
+	on_button = true
+	tooltip.show_tooltip("Plant trees!")
+
 
 func _on_Actions_mouse_entered():
 	on_panel = true
@@ -243,3 +254,4 @@ func _on_PauseSimu_pressed():
 	else:
 		ScoreManager.set_process(true)
 		$CanvasLayer/PauseSimu.text = "Pause simulation"
+

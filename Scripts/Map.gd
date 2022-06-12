@@ -62,12 +62,8 @@ func _ready():
 			else:
 				$TileMap.set_cell(i, j, 0)
 			if tree_level > tree_threshold and level < lake_threshold:
-				var tree = preload("res://Scenes/Trees.tscn").instance()
-				add_child(tree)
-				sprites[str(t_id)] = tree
-				tree.position = Vector2(i, j) * 64 + Vector2(32, 32)
+				place_tree(i, j, t_id)
 				tile = {"type":TileType.FOREST}
-				ScoreManager.nbr_tree += 1
 			if city_level > city_threshold and tree_level < tree_threshold and level < lake_threshold:
 				var city = preload("res://Scenes/City.tscn").instance()
 				add_child(city)
@@ -86,6 +82,13 @@ func _ready():
 	randomize()
 	generate_zones("wind")
 	$Camera2D.position = Vector2.ONE * wid * 64 / 2.0
+
+func place_tree(i:int, j:int, t_id:int):
+	var tree = preload("res://Scenes/Trees.tscn").instance()
+	add_child(tree)
+	sprites[str(t_id)] = tree
+	tree.position = Vector2(i, j) * 64 + Vector2(32, 32)
+	ScoreManager.nbr_tree += 1
 
 func generate_zones(st:String):
 	var diff:int = 0

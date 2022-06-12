@@ -8,7 +8,6 @@ var bldg_info = {
 	"geothermal_plant":{"cost":15000, "pollution":8000, "power":6000},
 	"hydro":{"cost":4000, "pollution":200, "power":200000},
 	"city":{"cost":1000, "pollution":2000, "power":0},
-
 }
 var second = 60
 var money = 20000

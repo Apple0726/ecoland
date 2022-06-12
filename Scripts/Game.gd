@@ -160,10 +160,13 @@ func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 				map.emit_signal("field_destroyed")
 				map.sprites[str(id)].queue_free()
 				tiles[id].erase("type")
-		elif current_action == "destroy_bldg" and tiles[id].has("bldg"):
+		elif current_action == "destroy_bldg" and tiles[id].has("bldg") and tiles[id].bldg != "city":
 			map.emit_signal("bldg_destroyed", id, tiles, tiles[id].bldg)
 			tiles[id].erase("bldg")
 			map.sprites[str(id)].queue_free()
+		elif current_action == "plant_trees" and not tiles[id].has("type"):
+			tiles[id].type = map.TileType.FOREST
+			map.place_tree(id % map.wid, id / map.wid, id)
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if not play:

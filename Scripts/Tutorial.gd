@@ -10,10 +10,10 @@ var texts = [
 	"Your job is to make the population rely less on fossil fuels and more on renewable sources of energy.",
 	"Most of us know by now that fossil fuels are one of the big dangers to biodiversity and pollution.",
 	"And it is a challenge to smooth the transition from fossil fuels to cleaner alternatives, because we need to keep the population happy!",
-	"I am confident that in 5 years, [color=green]Ecoland[/color] will fully make that transition. [wave amp=20 freq=7]I believe in you![/wave]",
+	"I am confident that in 15 years, [color=green]Ecoland[/color] will fully make that transition. [wave amp=20 freq=7]I believe in you![/wave]",
 	"Press one of the buttons at the right to start building.",
 	"Be careful, constructing buildings produce pollution. You will want to limit that to keep the residents happy.",
-	"See you in 5 years then!",
+	"See you in 15 years then!",
 ]
 var text_victory = [
 	"Wow! [wave amp=20 freq=7]You really did it![/wave]",
