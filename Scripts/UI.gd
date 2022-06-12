@@ -56,6 +56,9 @@ func _on_WindTurbine_pressed():
 func _on_SolarPanel_pressed():
 	set_texture($CanvasLayer/Buildings/VBox/SolarPanel.texture_normal, "solar_panel")
 
+func _on_Geothermal_pressed():
+	set_texture($CanvasLayer/Buildings/VBox/Geothermal.texture_normal, "geothermal_plant")
+
 func set_texture(t, st:String, bldg = true):
 	if building.visible and get_parent().map.currently_building == st:
 		building.visible = false
@@ -93,6 +96,10 @@ func _on_WindTurbine_mouse_entered():
 func _on_CoalPlant_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("Coal plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["centrale_charbon"].cost), format_num(ScoreManager.bldg_info["centrale_charbon"].power), format_num(ScoreManager.bldg_info["centrale_charbon"].pollution)])
+
+func _on_Geothermal_mouse_entered():
+	on_button = true
+	tooltip.show_tooltip("Geothermal plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["geothermal_plant"].cost), format_num(ScoreManager.bldg_info["geothermal_plant"].power), format_num(ScoreManager.bldg_info["geothermal_plant"].pollution)])
 
 func _on_Buildings_mouse_entered():
 	on_panel = true
@@ -201,6 +208,6 @@ func _on_Timer_timeout():
 	if ScoreManager.happy_percentage > 70:
 		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Happiness.png")
 	elif ScoreManager.happy_percentage > 40:
-		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Neutral.png")
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/neutral.png")
 	else:
-		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Unhappiness.png")
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/unhappiness.png")

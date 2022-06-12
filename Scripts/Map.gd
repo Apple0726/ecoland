@@ -49,7 +49,7 @@ func _ready():
 	var lake_threshold = 0.5# Threshold values between -1 and 1.
 	var tree_threshold = 0.2# Closer to -1: more of that zone. Closer to 1: less of it
 	var city_threshold = 0.5
-	var field_threshold = 0.55
+	var field_threshold = 0.3
 	for j in wid:
 		for i in wid:
 			var level:float = noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)

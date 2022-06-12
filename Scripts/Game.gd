@@ -39,10 +39,10 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
 		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
 		ScoreManager.nbr_thermal += 1
-	#elif bldg == "geothermal_plant":
-	#	ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
-	#	ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
-	#	ScoreManager.pilotable_power += 100
+	elif bldg == "geothermal_plant":
+		ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
+		ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
+		ScoreManager.pilotable_power += ScoreManager.bldg_info[bldg].power
 	#elif bldg == "hydrolic_central":
 	#	ScoreManager.pollution += ScoreManager.bldg_info[bldg].pollution
 	#	ScoreManager.money -= ScoreManager.bldg_info[bldg].cost
