@@ -5,7 +5,7 @@ signal tile_clicked
 signal bldg_built
 signal trees_destroyed
 signal bldg_destroyed
-var wid = 25
+var wid = 15
 
 var nbr_city = 0
 var currently_building = ""
@@ -20,7 +20,7 @@ var sprites = {}
 enum TileType {
 	LAKE,
 	FOREST,
-	CITY,
+	CITY,FIELD,
 }
 
 func rand_int(low:int, high:int):
@@ -40,6 +40,10 @@ func _ready():
 	city_noise.seed = randi()
 	city_noise.octaves = 1
 	city_noise.period = 150
+	var field_noise = OpenSimplexNoise.new()
+	field_noise.seed = randi()
+	field_noise.octaves = 1
+	field_noise.period = 150
 	for j in wid:
 		for i in wid:
 			var level:float = noise.get_noise_2d(i / float(wid) * 512, j / float(wid) * 512)
