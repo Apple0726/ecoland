@@ -2,12 +2,12 @@ extends Node
 
 var bldg_info = {
 	"wind_turbine":{"cost":8000, "pollution":5000, "power":2000},
-	"nuclear_plant":{"cost":20000, "pollution":15000, "power":10000},
-	"solar_panel":{"cost":8000, "pollution":2000, "power":4000},
+	"nuclear_plant":{"cost":100000, "pollution":15000, "power":10000},
+	"solar_panel":{"cost":8000, "pollution":2000, "power":2000},
 	"centrale_charbon":{"cost":10000, "pollution":8000, "power":6000},
-	"geothermal_plant":{"cost":30000, "pollution":8000, "power":6000},
-	"hydro":{"cost":40000, "pollution":200, "power":200000},
-	"city":{"cost":2000, "pollution":2000, "power_consumption":1500},
+	"geothermal_plant":{"cost":30000, "pollution":6000, "power":6000},
+	"hydro":{"cost":80000, "pollution":200, "power":8000},
+	"city":{"cost":2000, "pollution":2000, "power_consumption":2000},
 }
 var second = 60
 var money = 20000
