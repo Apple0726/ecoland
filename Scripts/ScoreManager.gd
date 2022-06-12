@@ -65,8 +65,9 @@ func update_money():
 		mean_happy = 0
 
 func update_pollution():
-	nb_nonrenewable = nbr_nuclr+nbr_thermal	
-	pollution += nbr_thermal*0.5*coeff_prod + nbr_nuclr*0.025*coeff_prod # CO2 rejeté par les centrales thermiques+pollution nucléaire
+	nb_nonrenewable = nbr_nuclr+nbr_thermal
+	pollution += nbr_thermal*2.5*coeff_prod + nbr_nuclr*1.66*coeff_prod # CO2 rejeté par les centrales 
+	#thermiques+pollution nucléaire
 
 func update_happiness():
 	var coef_happy = 0	
@@ -119,7 +120,7 @@ func update_power():
 	var diff
 	energy_production = intermittent_power
 	if energy_consommation < energy_production:
-		energy_production = energy_consommation
+		energy_production = energy_consommation + 1
 	else:
 		diff = energy_consommation - energy_production
 		if diff>pilotable_power:
