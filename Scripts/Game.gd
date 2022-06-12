@@ -120,9 +120,28 @@ func on_map_tile_over(id:int, tiles:Array):
 func on_map_tile_out():
 	tooltip.hide_tooltip()
 
-func on_map_tile_click(id:int, tiles:Array):
-	pass
-
+func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
+	if UI.on_panel or UI.on_button:
+		return
+	var currently_building = map.currently_building
+	var current_action = map.current_action
+	if currently_building and not tiles[id].has("type") and not tiles[id].has("bldg") and ScoreManager.money >= ScoreManager.bldg_info[currently_building].cost:
+		var bldg = Sprite.new()
+		bldg.texture = load("res://Graphics/sprite_building/%s.png" % currently_building)
+		add_child(bldg)
+		bldg.position = pos
+		map.sprites[str(id)] = bldg
+		tiles[id].bldg = currently_building
+		map.emit_signal("bldg_built", id, tiles, currently_building)
+	elif current_action:
+		if current_action == "chop_trees" and tiles[id].has("type") and tiles[id].type == map.TileType.FOREST:
+			tiles[id].erase("type")
+			map.sprites[str(id)].queue_free()
+			map.emit_signal("trees_destroyed")
+		elif current_action == "destroy_bldg" and tiles[id].has("bldg"):
+			map.emit_signal("bldg_destroyed", id, tiles, tiles[id].bldg)
+			tiles[id].erase("bldg")
+			map.sprites[str(id)].queue_free()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if not play:
@@ -153,20 +172,27 @@ func on_tuto_done():
 	ScoreManager.set_process(true)
 
 func _on_game_over():
+	tooltip.hide_tooltip()
 	map.tuto = true
 	ScoreManager.set_process(false)
 	var tuto = preload("res://Scenes/Tutorial.tscn").instance()
 	tuto.type = tuto.GAME_OVER
 	UI.get_node("CanvasLayer").add_child(tuto)
-	tuto.connect("tree_exiting", self, "back_to_menu")
+	tuto.connect("tree_exited", self, "back_to_menu")
 
 func _on_win():
+	tooltip.hide_tooltip()
 	map.tuto = true
 	ScoreManager.set_process(false)
 	var tuto = preload("res://Scenes/Tutorial.tscn").instance()
 	tuto.type = tuto.VICTORY
 	UI.get_node("CanvasLayer").add_child(tuto)
-	tuto.connect("tree_exiting", self, "back_to_menu")
+	tuto.connect("tree_exited", self, "back_to_menu")
 
 func back_to_menu():
-	pass
+	map.queue_free()
+	UI.queue_free()
+	var menu = preload("res://Scenes/MainMenu.tscn").instance()
+	call_deferred("add_child", menu)
+	menu.name = "MainMenu"
+	menu.connect("fade_menu", self, "_on_MainMenu_fade_menu")

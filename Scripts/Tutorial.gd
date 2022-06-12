@@ -36,6 +36,7 @@ func _ready():
 	elif type == VICTORY:
 		$AnimationPlayer4.play("FadeBG")
 		$BGWin.visible = true
+		$Score.visible = true
 		$TextureRect.texture = preload("res://Graphics/fille tuto happy.png")
 		$Panel/Label.bbcode_text = text_victory[0]
 	elif type == GAME_OVER:
@@ -59,8 +60,10 @@ func _process(delta):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Begin":
 		set_process(true)
+	elif anim_name == "EndTuto":
+			queue_free()
 	elif anim_name == "End":
-		queue_free()
+		$Score/AnimationPlayer.play("FadeScore")
 
 func _on_Button_pressed():
 	if not $AnimationPlayer.is_playing():
@@ -72,7 +75,7 @@ func _on_Button_pressed():
 				if current_text == 5:
 					$BuildButtons.visible = true
 				elif current_text == 8:
-					$AnimationPlayer.play("End")
+					$AnimationPlayer.play("EndTuto")
 					set_process(false)
 					return
 				$Panel/Label.bbcode_text = texts[current_text]
@@ -94,3 +97,7 @@ func _on_Button_pressed():
 
 func _on_AnimationPlayer4_animation_finished(anim_name):
 	$AnimationPlayer.play("Begin")
+
+
+func _on_PlayAgain_pressed():
+	queue_free()

@@ -232,14 +232,11 @@ custom_styles/panel = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
-margin_top = 16.0
+margin_top = 24.0
 margin_right = -8.0
-margin_bottom = -16.0
+margin_bottom = -8.0
 custom_constants/separation = 15
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CoalPlant" type="TextureButton" parent="CanvasLayer/Buildings/VBox"]
 margin_top = 21.0
@@ -291,9 +288,9 @@ align = 1
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 8.0
-margin_top = -140.0
+margin_top = -100.0
 margin_right = 64.0
-margin_bottom = 140.0
+margin_bottom = 76.0
 theme = SubResource( 2 )
 custom_styles/panel = SubResource( 3 )
 
@@ -301,25 +298,25 @@ custom_styles/panel = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
-margin_top = 16.0
+margin_top = 24.0
 margin_right = -8.0
-margin_bottom = -16.0
+margin_bottom = -8.0
 custom_constants/separation = 15
 alignment = 1
 
 [node name="ChopTrees" type="TextureButton" parent="CanvasLayer/Actions/VBox"]
-margin_top = 76.0
+margin_top = 24.0
 margin_right = 40.0
-margin_bottom = 116.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 0, 40 )
 texture_normal = ExtResource( 9 )
 expand = true
 stretch_mode = 5
 
 [node name="DestroyBldg" type="TextureButton" parent="CanvasLayer/Actions/VBox"]
-margin_top = 131.0
+margin_top = 79.0
 margin_right = 40.0
-margin_bottom = 171.0
+margin_bottom = 119.0
 rect_min_size = Vector2( 0, 40 )
 texture_normal = ExtResource( 11 )
 expand = true
@@ -356,6 +353,9 @@ margin_right = 96.0
 margin_bottom = 584.0
 text = "game over"
 
+[node name="UpdateTexture" type="Timer" parent="."]
+autostart = true
+
 [connection signal="mouse_entered" from="CanvasLayer/Money" to="." method="_on_Money_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Money" to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Pollution" to="." method="_on_Pollution_mouse_entered"]
@@ -388,3 +388,4 @@ text = "game over"
 [connection signal="pressed" from="CanvasLayer/Actions/VBox/DestroyBldg" to="." method="_on_DestroyBldg_pressed"]
 [connection signal="pressed" from="CanvasLayer/Victory" to="." method="_on_Victory_pressed"]
 [connection signal="pressed" from="CanvasLayer/GameOver" to="." method="_on_GameOver_pressed"]
+[connection signal="timeout" from="UpdateTexture" to="." method="_on_Timer_timeout"]

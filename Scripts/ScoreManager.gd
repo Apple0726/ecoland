@@ -46,15 +46,15 @@ func _process(delta):
 	update_happiness()
 	update_money()
 	update_pollution()
-	if pollution > max_pollution or happy_percentage == 0:
-		emit_signal("game_over")
-		set_process(false)
+	if pollution > max_pollution or happy_percentage <= 0:
+		get_node("/root/Game")._on_game_over()
+		#emit_signal("game_over")
 	if nb_nonrenewable == 0 and happy_percentage> 80 and energy_consommation==energy_production:
-		emit_signal("win")
-		set_process(false)
+		get_node("/root/Game")._on_win()
+		#emit_signal("win")
 	if game_time >= 300:
-		emit_signal("win")
-		set_process(false)
+		get_node("/root/Game")._on_win()
+		#emit_signal("win")
 	
 	
 func update_money():
