@@ -407,6 +407,18 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.27451, 0.168627, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_color = Color( 0.384314, 0.25098, 0, 1 )
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+shadow_size = 1
+shadow_offset = Vector2( 2, 2 )
+
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.4, 0.247059, 0, 1 )
 border_width_left = 2
@@ -433,6 +445,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayAgain:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=19]
 length = 0.001
@@ -448,24 +472,24 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayAgain:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="DynamicFont" id=17]
 size = 30
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=20]
-bg_color = Color( 0.27451, 0.168627, 0, 1 )
-border_width_left = 2
-border_width_top = 2
-border_color = Color( 0.384314, 0.25098, 0, 1 )
-expand_margin_left = 5.0
-expand_margin_right = 5.0
-expand_margin_top = 5.0
-expand_margin_bottom = 5.0
-shadow_size = 1
-shadow_offset = Vector2( 2, 2 )
 
 [node name="Tutorial" type="Control"]
 margin_right = 1024.0
@@ -583,6 +607,17 @@ anims/RESET = SubResource( 14 )
 anims/FadeBG = SubResource( 15 )
 anims/RESET = SubResource( 16 )
 
+[node name="PlayAgain" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 456.0
+margin_top = 328.0
+margin_right = 564.0
+margin_bottom = 352.0
+custom_styles/hover = SubResource( 20 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+text = "Play again"
+
 [node name="Score" type="Panel" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
@@ -590,9 +625,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -124.0
-margin_top = -128.0
+margin_top = -100.0
 margin_right = 122.0
-margin_bottom = -68.0
+margin_bottom = -40.0
 custom_styles/panel = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Score"]
@@ -611,17 +646,7 @@ custom_fonts/font = SubResource( 17 )
 text = "Score: 2999"
 align = 1
 
-[node name="PlayAgain" type="Button" parent="Score"]
-margin_left = 68.0
-margin_top = 92.0
-margin_right = 176.0
-margin_bottom = 116.0
-custom_styles/hover = SubResource( 20 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/normal = SubResource( 20 )
-text = "Play again"
-
 [connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer4" to="." method="_on_AnimationPlayer4_animation_finished"]
-[connection signal="pressed" from="Score/PlayAgain" to="." method="_on_PlayAgain_pressed"]
+[connection signal="pressed" from="PlayAgain" to="." method="_on_PlayAgain_pressed"]

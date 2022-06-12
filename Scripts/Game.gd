@@ -153,20 +153,20 @@ func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 			map.emit_signal("bldg_built", id, tiles, currently_building)
 			UI._on_Timer_timeout()
 	elif current_action:
-		if current_action == "chop_trees" and tiles[id].has("type"):
+		if current_action == "chop_trees" and tiles[id].has("type") and ScoreManager.money >= 1000:
 			if tiles[id].type == map.TileType.FOREST:
 				map.emit_signal("trees_destroyed")
 				map.sprites[str(id)].queue_free()
 				tiles[id].erase("type")
-			elif tiles[id].type == map.TileType.FIELD:
+			elif tiles[id].type == map.TileType.FIELD and ScoreManager.money >= 1000:
 				map.emit_signal("field_destroyed")
 				map.sprites[str(id)].queue_free()
 				tiles[id].erase("type")
-		elif current_action == "destroy_bldg" and tiles[id].has("bldg") and tiles[id].bldg != "city":
+		elif current_action == "destroy_bldg" and tiles[id].has("bldg") and tiles[id].bldg != "city" and ScoreManager.money >= ScoreManager.bldg_info[tiles[id].bldg].cost/4.0:
 			map.emit_signal("bldg_destroyed", id, tiles, tiles[id].bldg)
 			tiles[id].erase("bldg")
 			map.sprites[str(id)].queue_free()
-		elif current_action == "plant_trees" and not tiles[id].has("type"):
+		elif current_action == "plant_trees" and not tiles[id].has("type") and ScoreManager.money >= 10000:
 			plant_tree()
 			tiles[id].type = map.TileType.FOREST
 			map.place_tree(id % map.wid, id / map.wid, id)
@@ -174,6 +174,7 @@ func on_map_tile_click(id:int, tiles:Array, pos:Vector2):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if not play:
 		$MainMenu.queue_free()
+		ScoreManager.init_vars()
 		UI = preload("res://Scenes/UI.tscn").instance()
 		map = preload("res://Scenes/Map.tscn").instance()
 		$AnimationPlayer.play_backwards("Fade")

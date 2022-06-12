@@ -43,7 +43,34 @@ const max_pollution = 100000
 func _ready():
 	set_process(false)
 
-
+func init_vars():
+	money = 20000
+	pollution = 0
+	happiness = 10800
+	happy_percentage = 100
+	mean_happy = 0
+	moy_happy = 0
+	energy_consommation = 0
+	energy_production = 0
+	wind_power = 0
+	solar_power = 0
+	pilotable_power = 0
+	intermittent_power = 0
+	installed_intermittent_power = 0
+	coeff_prod = 0
+	coeff_feed = 1
+	base_conso = 2500
+	conso_city = 0
+	cycle = 0
+	nbr_thermal = 0
+	nbr_nuclr = 0
+	nb_nonrenewable = 0
+	nbr_city = 0
+	nbr_field = 0
+	nbr_tree = 0
+	game_time = 0
+	count_victoire = 0
+	score = 0
 
 func _process(delta):
 	update_consumption()
@@ -153,3 +180,44 @@ func update_power():
 func update_score():
 	score +=  (max_pollution - pollution)/1000000  + happy_percentage/100000 
 
+
+func format_num(num:float):
+	if num < pow(10, 6):
+		var string = str(num)
+		var arr = string.split(".")
+		if len(arr) == 1:
+			arr.append("")
+		else:
+			arr[1] = "." + arr[1]
+		var mod = arr[0].length() % 3
+		var res = ""
+		for i in range(0, arr[0].length()):
+			if i != 0 and i % 3 == mod:
+				res += ","
+			res += string[i]
+		return res + arr[1]
+	else:
+		var suff:String = ""
+		var p:float = log(num) / log(10)
+		if is_equal_approx(p, ceil(p)):
+			p = ceil(p)
+		else:
+			p = int(p)
+		var div = max(pow(10, stepify(p - 1, 3)), 1)
+		if p >= 3 and p < 6:
+			suff = "k"
+		elif p < 9:
+			suff = "M"
+		elif p < 12:
+			suff = "G"
+		elif p < 15:
+			suff = "T"
+		elif p < 18:
+			suff = "P"
+		elif p < 21:
+			suff = "E"
+		elif p < 24:
+			suff = "Z"
+		elif p < 27:
+			suff = "Y"
+		return "%.2f%s" % [num / div, suff]

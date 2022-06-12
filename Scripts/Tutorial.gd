@@ -19,7 +19,7 @@ var text_victory = [
 	"Wow! [wave amp=20 freq=7]You really did it![/wave]",
 	"The residents of [color=green]Ecoland[/color], now using 100% renewable energy, seem to be very happy about how you handled the situation.",
 	"All the wildlife in the nearby forests and lakes seem to be thankful for your actions.",
-	"We are now one step closer to becoming a truly sustainable society!",
+	"We are now one step closer to becoming a truly sustainable society. Great work!",
 ]
 var text_game_over = [
 	"Well, I gotta say... This isn't looking good at all.",
@@ -39,8 +39,10 @@ func _ready():
 		$Score.visible = true
 		$TextureRect.texture = preload("res://Graphics/fille tuto happy.png")
 		$Panel/Label.bbcode_text = text_victory[0]
+		$Score/Label.text = "Score: %s" % ScoreManager.format_num(round(ScoreManager.score))
 	elif type == GAME_OVER:
 		$BGLose.visible = true
+		$Score.visible = false
 		$AnimationPlayer4.play("FadeBG")
 		$TextureRect.texture = preload("res://Graphics/fille tuto unhappy.png")
 		$Panel/Label.bbcode_text = text_game_over[0]
@@ -74,12 +76,16 @@ func _on_Button_pressed():
 			if type == TUTORIAL:
 				if current_text == 5:
 					$BuildButtons.visible = true
+					$TextureRect.texture = preload("res://Graphics/fille tuto show.png")
+					$TextureRect.flip_h = true
 				elif current_text == 8:
 					$AnimationPlayer.play("EndTuto")
 					set_process(false)
 					return
+				else:
+					$TextureRect.texture = preload("res://Graphics/fille tuto.png")
+					$TextureRect.flip_h = false
 				$Panel/Label.bbcode_text = texts[current_text]
-				$TextureRect.texture = preload("res://Graphics/fille tuto.png")
 			elif type == VICTORY:
 				if current_text == 4:
 					$AnimationPlayer.play("End")
