@@ -218,7 +218,7 @@ func _on_PlantTrees_pressed():
 
 func _on_PlantTrees_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Plant trees!")
+	tooltip.show_tooltip("Plant trees!\nTrees absorb pollution.")
 
 
 func _on_Actions_mouse_entered():
