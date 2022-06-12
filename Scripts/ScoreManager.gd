@@ -6,11 +6,11 @@ var bldg_info = {
 	"solar_panel":{"cost":8000, "pollution":2000, "power":4000},
 	"centrale_charbon":{"cost":12000, "pollution":8000, "power":6000},
 	"geothermal_plant":{"cost":15000, "pollution":8000, "power":6000},
-	"hydro":{"cost":40000000, "pollution":20000, "power":200000},
-	
+	"hydro":{"cost":4000, "pollution":200, "power":200000},
+	"city":{"cost":1000, "pollution":2000, "power":0},
 }
 var second = 60
-var money = 20000000
+var money = 20000
 var pollution = 0
 var happiness = 21600
 var happy_percentage = 100
@@ -26,7 +26,8 @@ var intermittent_power = 0
 var installed_intermittent_power = 0
 var coeff_prod = 0
 var coeff_feed = 1
-var base_conso = 20000
+var base_conso = 2000
+var conso_city = 0
 var cycle = 0
 var nbr_thermal = 0
 var nbr_nuclr = 0
@@ -51,7 +52,6 @@ func _process(delta):
 	update_happiness()
 	update_money()
 	update_pollution()
-	print(nb_nonrenewable)
 	if pollution > max_pollution or happy_percentage <= 0:
 		get_node("/root/Game")._on_game_over()
 		#emit_signal("game_over")
@@ -70,8 +70,7 @@ func update_money():
 	if cycle < second:
 		mean_happy = mean_happy + happy_percentage
 	else:
-		#money = money + (1000*mean_happy/second)
-		money += 1000
+		money += 1000 + (200*mean_happy/second)*nbr_city
 		moy_happy = round(mean_happy/second)
 		mean_happy = 0
 
@@ -80,7 +79,7 @@ func update_pollution():
 	
 	pollution += nbr_thermal*2.5*coeff_prod + nbr_nuclr*1.66*coeff_prod  # CO2 rejeté par les centrales 
 	if pollution>=0:
-		pollution += nbr_city*0.05 - nbr_tree*0.008
+		pollution += nbr_city*0.05 - nbr_tree*0.01
 	if pollution< 0:
 		pollution = 0
 		#thermiques+pollution nucléaire
@@ -110,12 +109,12 @@ func update_happiness():
 		
 
 func update_consumption():
+	conso_city = nbr_city*1500
 	if cycle < second :
 		cycle = cycle +1
 	else:
 		game_time += 1
 		base_conso += 50
-		energy_consommation += 50
 #		if moy_happy >= 99:
 #			base_conso += 10
 #		if moy_happy > 80 and mean_happy < 99:
@@ -126,9 +125,9 @@ func update_consumption():
 #			base_conso -= 10
 		moy_happy = 0
 		cycle = 0
-#	var random = RandomNumberGenerator.new()
-#	random.randomize()
-#	energy_consommation = base_conso + random.randi_range(-100, 100) + round(1000*sin(2*PI*cycle/3600))
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	energy_consommation = base_conso + conso_city + random.randi_range(-100, 100) + round(1000*sin(2*PI*cycle/3600))
 	
 	
 func update_intermittent_power():
