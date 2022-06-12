@@ -10,15 +10,13 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	$CanvasLayer/MoneyVBox/Label.text = format_num(ScoreManager.money)
+	var years_left:float = 15 - ScoreManager.game_time / 60.0 * 3
+	$CanvasLayer/Progress/Label.text = "%.1f years left!" % (years_left)
+	$CanvasLayer/Progress/Bar.rect_size.x = clamp(range_lerp(ScoreManager.game_time, 0.0, 300.0, 0.0, 1.0), 0, 1) * 104
+	$CanvasLayer/MoneyVBox/Label.text = format_num(round(ScoreManager.money))
 	$CanvasLayer/PollutionVBox/Label.text = "%s / %s" % [format_num(round(ScoreManager.pollution)), format_num(ScoreManager.max_pollution)]
-	if (ScoreManager.pollution - ScoreManager.max_pollution)/ScoreManager.max_pollution < 0.1:
+	if (ScoreManager.max_pollution - ScoreManager.pollution)/ScoreManager.max_pollution < 0.1:
 		$CanvasLayer/PollutionVBox/Label["custom_colors/font_color"] = Color.red
-	$CanvasLayer/EnergyVBox/Label.text = "%s / %s \n %s \n %s" % [format_num(round(ScoreManager.energy_production)),format_num(round(ScoreManager.energy_consommation)),format_num(round(ScoreManager.pilotable_power)),format_num(round(ScoreManager.installed_intermittent_power))]
-	if ScoreManager.energy_production >= ScoreManager.energy_consommation:
-		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.green
-	else:
-		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.red
 	$CanvasLayer/HappinessVBox/Label.text = "%s%%" % str(round(ScoreManager.happy_percentage))
 	if ScoreManager.happy_percentage > 70:
 		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.green
@@ -28,12 +26,18 @@ func _process(delta):
 		$CanvasLayer/HappinessVBox/Label["custom_colors/font_color"] = Color.red
 
 var mouse_pos:Vector2 = Vector2.ZERO
+var mouse_in_debug = false
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_pos = event.position
 		if building.visible:
 			building.rect_position = mouse_pos - Vector2(32, 32)
+		if Geometry.is_point_in_polygon(mouse_pos, $CanvasLayer/MouseIn.polygon):
+			$CanvasLayer/Debug/AnimationPlayer.play("MoveDebug")
+			mouse_in_debug = true
+		if mouse_in_debug and not Geometry.is_point_in_polygon(mouse_pos, $CanvasLayer/MouseOut.polygon):
+			$CanvasLayer/Debug/AnimationPlayer.play_backwards("MoveDebug")
 	if Input.is_action_just_released("esc"):
 		building.visible = false
 		building.texture = null
@@ -59,6 +63,9 @@ func _on_SolarPanel_pressed():
 func _on_Geothermal_pressed():
 	set_texture($CanvasLayer/Buildings/VBox/Geothermal.texture_normal, "geothermal_plant")
 
+func _on_City_pressed():
+	set_texture($CanvasLayer/Buildings/VBox/City.texture_normal, "city")
+
 func set_texture(t, st:String, bldg = true):
 	if building.visible and get_parent().map.currently_building == st:
 		building.visible = false
@@ -81,25 +88,38 @@ func set_texture(t, st:String, bldg = true):
 
 func _on_Nuclear_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Nuclear power plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info.nuclear_plant.cost), format_num(ScoreManager.bldg_info.nuclear_plant.power), format_num(ScoreManager.bldg_info.nuclear_plant.pollution)])
+	tooltip.show_tooltip("Nuclear power plant\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info.nuclear_plant.cost), format_num(ScoreManager.bldg_info.nuclear_plant.power), format_num(ScoreManager.bldg_info.nuclear_plant.pollution)])
 
 
 func _on_SolarPanel_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Solar panels\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info.solar_panel.cost), format_num(ScoreManager.bldg_info.solar_panel.power), format_num(ScoreManager.bldg_info.solar_panel.pollution)])
+	tooltip.show_tooltip("Solar panels\nProduces continuous power that fluctuates with time.\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info.solar_panel.cost), format_num(ScoreManager.bldg_info.solar_panel.power), format_num(ScoreManager.bldg_info.solar_panel.pollution)])
 
 
 func _on_WindTurbine_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Wind turbines\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info.wind_turbine.cost), format_num(ScoreManager.bldg_info.wind_turbine.power), format_num(ScoreManager.bldg_info.wind_turbine.pollution)])
+	tooltip.show_tooltip("Wind turbines\nProduces continuous power that fluctuates with time.\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info.wind_turbine.cost), format_num(ScoreManager.bldg_info.wind_turbine.power), format_num(ScoreManager.bldg_info.wind_turbine.pollution)])
 
 func _on_CoalPlant_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Coal plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["centrale_charbon"].cost), format_num(ScoreManager.bldg_info["centrale_charbon"].power), format_num(ScoreManager.bldg_info["centrale_charbon"].pollution)])
+	tooltip.show_tooltip("Coal plant\nProduces cheap, dirty but controllable power that adapts to demand.\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["centrale_charbon"].cost), format_num(ScoreManager.bldg_info["centrale_charbon"].power), format_num(ScoreManager.bldg_info["centrale_charbon"].pollution)])
 
 func _on_Geothermal_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Geothermal plant\nCost: %s money\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["geothermal_plant"].cost), format_num(ScoreManager.bldg_info["geothermal_plant"].power), format_num(ScoreManager.bldg_info["geothermal_plant"].pollution)])
+	tooltip.show_tooltip("Geothermal plant\nAn expensive, cleaner alternative for controllable power.\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["geothermal_plant"].cost), format_num(ScoreManager.bldg_info["geothermal_plant"].power), format_num(ScoreManager.bldg_info["geothermal_plant"].pollution)])
+
+func _on_Hydro_mouse_entered():
+	on_button = true
+	tooltip.show_tooltip("Tidal turbines\nProduces clean controllable power. Must be built on water.\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["hydro"].cost), format_num(ScoreManager.bldg_info["hydro"].power), format_num(ScoreManager.bldg_info["hydro"].pollution)])
+
+
+func _on_City_mouse_entered():
+	on_button = true
+	tooltip.show_tooltip("City\nConstruct buildings where residents live their lives.\nCannot be destroyed once placed.\nCost: € %s\n+%s controllable power\n+%s pollution" % [format_num(ScoreManager.bldg_info["city"].cost), format_num(ScoreManager.bldg_info["city"].power), format_num(ScoreManager.bldg_info["city"].pollution)])
+
+
+func _on_Hydro_pressed():
+	set_texture($CanvasLayer/Buildings/VBox/Hydro.texture_normal, "hydro")
 
 func _on_Buildings_mouse_entered():
 	on_panel = true
@@ -119,7 +139,7 @@ func _on_Pollution_mouse_entered():
 
 func _on_Energy_mouse_entered():
 	on_button = true
-	tooltip.show_tooltip("Energy production / consumption")
+	tooltip.show_tooltip("Energy production / energy consumption of population\nControllable power / continuous power")
 
 
 func _on_Happiness_mouse_entered():
@@ -186,6 +206,14 @@ func _on_DestroyBldg_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("Destroy a building.\nCosts money and creates pollution.")
 
+func _on_PlantTrees_pressed():
+	set_texture($CanvasLayer/Actions/VBox/PlantTrees.texture_normal, "plant_trees", false)
+
+
+func _on_PlantTrees_mouse_entered():
+	on_button = true
+	tooltip.show_tooltip("Plant trees!")
+
 
 func _on_Actions_mouse_entered():
 	on_panel = true
@@ -208,6 +236,22 @@ func _on_Timer_timeout():
 	if ScoreManager.happy_percentage > 70:
 		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Happiness.png")
 	elif ScoreManager.happy_percentage > 40:
-		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/neutral.png")
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Neutral.png")
 	else:
-		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/unhappiness.png")
+		$CanvasLayer/HappinessVBox/Happiness.texture = preload("res://Graphics/Unhappiness.png")
+	$CanvasLayer/EnergyVBox/Label.text = "%s / %s \n%s / %s" % [format_num(round(ScoreManager.energy_production)),format_num(round(ScoreManager.energy_consommation)),format_num(round(ScoreManager.pilotable_power)),format_num(round(ScoreManager.installed_intermittent_power))]
+	if ScoreManager.energy_production >= ScoreManager.energy_consommation:
+		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.green
+	else:
+		$CanvasLayer/EnergyVBox/Label["custom_colors/font_color"] = Color.red
+
+
+
+func _on_PauseSimu_pressed():
+	if ScoreManager.is_processing():
+		ScoreManager.set_process(false)
+		$CanvasLayer/PauseSimu.text = "Resume simulation"
+	else:
+		ScoreManager.set_process(true)
+		$CanvasLayer/PauseSimu.text = "Pause simulation"
+
