@@ -40,34 +40,6 @@ var count_victoire = 0
 const point_vicoitre = 360
 const max_pollution = 100000
 
-func init_vars():
-	money = 20000
-	pollution = 0
-	happiness = 21600
-	happy_percentage = 100
-	mean_happy = 0
-	moy_happy = 0
-	energy_consommation = 20000
-	energy_production = 0
-	wind_power = 0
-	solar_power = 0
-	pilotable_power = 0
-	intermittent_power = 0
-	installed_intermittent_power = 0
-	coeff_prod = 0
-	coeff_feed = 1
-	base_conso = 2000
-	conso_city = 0
-	cycle = 0
-	nbr_thermal = 0
-	nbr_nuclr = 0
-	nb_nonrenewable = 0
-	nbr_city = 0
-	nbr_field = 0
-	nbr_tree = 0
-	game_time = 0
-	count_victoire = 0
-
 func _ready():
 	set_process(false)
 
