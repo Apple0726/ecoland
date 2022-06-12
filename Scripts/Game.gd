@@ -53,17 +53,17 @@ func on_bldg_built(id:int, tiles:Array, bldg:String):
 		ScoreManager.nbr_city += 1
 func plant_tree():
 	ScoreManager.nbr_tree +=1
-	ScoreManager.money -= 1000
-	ScoreManager.pollution +=100
+	ScoreManager.money -= 10000
+	ScoreManager.pollution +=10
 func trees_destroyed():
 	ScoreManager.nbr_tree -=1
 	ScoreManager.money -= 1000
-	ScoreManager.pollution +=100
+	ScoreManager.pollution +=1000
 
 func field_destroyed():
 	ScoreManager.nbr_field -=1
 	ScoreManager.money -=  1000
-	ScoreManager.pollution +=100
+	ScoreManager.pollution +=1000
 
 func bldg_destroyed(id:int, tiles:Array, bldg:String):
 	if bldg == "wind_turbine":
