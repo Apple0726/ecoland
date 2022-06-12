@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/unhappiness.png-870ffe5d481a2b8dc7373dad33bdc73c.stex"
+path="res://.import/Unhappiness.png-557fdfe29c741acb741a9ecf9c08f752.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/unhappiness.png"
-dest_files=[ "res://.import/unhappiness.png-870ffe5d481a2b8dc7373dad33bdc73c.stex" ]
+source_file="res://Graphics/Unhappiness.png"
+dest_files=[ "res://.import/Unhappiness.png-557fdfe29c741acb741a9ecf9c08f752.stex" ]
 
 [params]
 
