@@ -192,3 +192,5 @@ func _input(event):
 		$Camera2D.zoom /= 1.2
 	if Input.is_action_just_pressed("scroll_down"):
 		$Camera2D.zoom *= 1.2 
+	$Camera2D.zoom.x = clamp($Camera2D.zoom.x, 1.0/5, 5)
+	$Camera2D.zoom.y = clamp($Camera2D.zoom.y, 1.0/5, 5)

@@ -474,14 +474,12 @@ __meta__ = {
 }
 
 [node name="MouseIn" type="Polygon2D" parent="CanvasLayer"]
-position = Vector2( 0, 76 )
 color = Color( 1, 1, 1, 0 )
-polygon = PoolVector2Array( 0, 500, 104, 500, 104, 524, 0, 524 )
+polygon = PoolVector2Array( 0, 576, 104, 576, 104, 600, 0, 600 )
 
 [node name="MouseOut" type="Polygon2D" parent="CanvasLayer"]
-position = Vector2( 0, 76 )
 color = Color( 1, 1, 1, 0 )
-polygon = PoolVector2Array( 0, 444, 104, 444, 104, 524, 0, 524 )
+polygon = PoolVector2Array( 0, 500, 104, 500, 104, 600, 0, 600 )
 
 [node name="Debug" type="Control" parent="CanvasLayer"]
 margin_top = 76.0
