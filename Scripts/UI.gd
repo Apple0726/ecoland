@@ -3,11 +3,8 @@ extends Control
 var on_button = false
 var on_panel = false
 onready var tooltip = get_parent().tooltip
-
 onready var building = $CanvasLayer/Building
 
-func _ready():
-	pass # Replace with function body.
 
 func _process(delta):
 	var years_left:float = 15 - ScoreManager.game_time / 60.0 * 3
@@ -72,6 +69,9 @@ func _on_Geothermal_pressed():
 func _on_City_pressed():
 	set_texture($CanvasLayer/Buildings/VBox/City.texture_normal, "city")
 
+func _on_Hydro_pressed():
+	set_texture($CanvasLayer/Buildings/VBox/Hydro.texture_normal, "hydro")
+
 func set_texture(t, st:String, bldg = true):
 	if building.visible and get_parent().map.currently_building == st:
 		building.visible = false
@@ -123,9 +123,6 @@ func _on_City_mouse_entered():
 	on_button = true
 	tooltip.show_tooltip("City\nConstruct buildings where residents live their lives.\nCannot be destroyed once placed.\nCost: € %s\n+%s power consumption of population\n+%s PP" % [ScoreManager.format_num(ScoreManager.bldg_info["city"].cost), ScoreManager.format_num(ScoreManager.bldg_info["city"].power_consumption), ScoreManager.format_num(ScoreManager.bldg_info["city"].pollution)])
 
-
-func _on_Hydro_pressed():
-	set_texture($CanvasLayer/Buildings/VBox/Hydro.texture_normal, "hydro")
 
 func _on_Buildings_mouse_entered():
 	on_panel = true
