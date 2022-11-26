@@ -1,3 +1,4 @@
+
 extends Control
 
 var on_button = false
@@ -228,3 +229,4 @@ func _on_Help_button_pressed():
 		$CanvasLayer/Help_menu.hide()
 		ScoreManager.set_process(true)
 		$CanvasLayer/Help_button.text = "Help"
+
